@@ -1,3 +1,5 @@
+#Copyright @ISmartCoder 2026-Present
+#Updates Channel @abirxdhackz 
 import subprocess, os
 
 tex_content = r"""
