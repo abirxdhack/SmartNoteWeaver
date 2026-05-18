@@ -752,6 +752,247 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
     \item \textbf{\B{আফটার শেভ নমুনা:}} \B{ডি ন্যাচার্ড অ্যালকোহল-৪০, অলিভ অয়েল, কমলা লেবুর খোসা, দারুচিনি, লবঙ্গ}
 \end{itemize}
 
+
+\end{multicols}
+
+\newpage
+
+\noindent\colorbox{black}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\centering\bfseries\large\color{white}\B{রসায়ন দ্বিতীয় পত্র — প্রয়োজনীয় সূত্রাবলী ও তথ্যসমূহ}}}
+\vspace{2pt}\par
+
+\begin{multicols}{2}
+
+\chsec{অধ্যায়-১: গ্যাসের ধর্ম}
+
+\chsub{}{প্রয়োজনীয় সূত্রাবলি}
+
+\itm{1} \textbf{\B{বয়েলের সূত্র,}} {\lat $P_1 V_1 = P_2 V_2$}
+\begin{itemize}
+    \item[] {\lat $P_1$} = \B{প্রাথমিক অবস্থায় চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $P_2$} = \B{পরিবর্তিত অবস্থায় চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $V_1$} = \B{প্রাথমিক অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$]}
+    \item[] {\lat $V_2$} = \B{পরিবর্তিত অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$]}
+\end{itemize}
+
+\itm{2} \textbf{\B{চার্লসের সূত্র,}} {\lat $\dfrac{V_1}{T_1} = \dfrac{V_2}{T_2}$}
+\begin{itemize}
+    \item[] {\lat $V_1$} = \B{প্রাথমিক অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $V_2$} = \B{পরিবর্তিত অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $T_1$} = \B{প্রাথমিক অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
+    \item[] {\lat $T_2$} = \B{পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
+\end{itemize}
+
+\itm{3} \textbf{\B{গে-লুস্যাকের চাপের সূত্র,}} {\lat $\dfrac{P_1}{T_1} = \dfrac{P_2}{T_2}$}
+\begin{itemize}
+    \item[] {\lat $P_1$} = \B{প্রাথমিক অবস্থায় চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $P_2$} = \B{পরিবর্তিত অবস্থায় চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $T_1$} = \B{প্রাথমিক অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
+    \item[] {\lat $T_2$} = \B{পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
+\end{itemize}
+
+\itm{4} \textbf{\B{বয়েল ও চার্লসের সমন্বয় সূত্র,}} {\lat $\dfrac{P_1 V_1}{T_1} = \dfrac{P_2 V_2}{T_2}$}
+\begin{itemize}
+    \item[] {\lat $P_1, P_2$} = \B{প্রাথমিক/পরিবর্তিত অবস্থায় চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $V_1, V_2$} = \B{প্রাথমিক/পরিবর্তিত অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $T_1, T_2$} = \B{প্রাথমিক/পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
+\end{itemize}
+
+\itm{5} \textbf{\B{গ্যাসের ঘনত্ব, তাপ ও চাপের মধ্যে সম্পর্ক,}} {\lat $\dfrac{d_1 T_1}{P_1} = \dfrac{d_2 T_2}{P_2}$}
+\begin{itemize}
+    \item[] {\lat $d_1$} = \B{প্রাথমিক অবস্থায় গ্যাসের ঘনত্ব} {\lat [gL$^{-1}$, kgm$^{-3}$, gcm$^{-3}$, gdm$^{-3}$]}
+    \item[] {\lat $d_2$} = \B{পরিবর্তিত অবস্থায় গ্যাসের ঘনত্ব} {\lat [gL$^{-1}$, kgm$^{-3}$, gcm$^{-3}$, gdm$^{-3}$]}
+    \item[] {\lat $P_1, P_2$} = \B{চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $T_1, T_2$} = \B{তাপমাত্রা} {\lat [K (কেলভিন)]}
+\end{itemize}
+
+\itm{6} \textbf{\B{অ্যাভোগেড্রো সূত্র,}} {\lat $\dfrac{V_1}{V_2} = \dfrac{n_1}{n_2}$}
+\begin{itemize}
+    \item[] {\lat $V_1$} = \B{প্রাথমিক অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $V_2$} = \B{পরিবর্তিত অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $n_1$} = \B{প্রাথমিক অবস্থায় মোলসংখ্যা} {\lat [mol]}
+    \item[] {\lat $n_2$} = \B{পরিবর্তিত অবস্থায় মোলসংখ্যা} {\lat [mol]}
+\end{itemize}
+
+\itm{7} \textbf{\B{আদর্শ গ্যাসের সমীকরণ:}}
+\begin{itemize}
+    \item[] \textbf{(i)} {\lat $PV = nRT$}
+    \item[] \textbf{(ii)} {\lat $PV = \dfrac{W}{M}\,RT$}
+    \item[] \textbf{(iii)} {\lat $PV = \dfrac{N}{N_A}\,RT$}
+    \item[] \textbf{(iv)} {\lat $d = \dfrac{PM}{RT}$}
+    \item[] {\lat $P$} = \B{গ্যাসের চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $V$} = \B{গ্যাসের আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $n$} = \B{গ্যাসের মোলসংখ্যা} {\lat [mol]}
+    \item[] {\lat $W$} = \B{গ্যাসের ভর} {\lat [g]}
+    \item[] {\lat $M$} = \B{গ্যাসের আণবিক ভর} {\lat [gmol$^{-1}$]}
+    \item[] {\lat $N$} = \B{মোট অণুর সংখ্যা}
+    \item[] {\lat $N_A$} = \B{আভোগেড্রো সংখ্যা}
+    \item[] {\lat $d$} = \B{গ্যাসের ঘনত্ব} {\lat [gL$^{-1}$, kgm$^{-3}$, gcm$^{-3}$, gdm$^{-3}$]}
+    \item[] {\lat $R$} = \B{মোলার গ্যাস ধ্রুবক} {\lat [L-atmK$^{-1}$mol$^{-1}$, JK$^{-1}$mol$^{-1}$]}
+    \item[] {\lat $T$} = \B{তাপমাত্রা} {\lat [K]}
+\end{itemize}
+
+\itm{8} \textbf{\B{সংকোচনশীল গুণাঙ্ক,}} {\lat $Z = \dfrac{PV}{nRT}$}
+\begin{itemize}
+    \item[] {\lat $P$} = \B{গ্যাসের চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $V$} = \B{গ্যাসের আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $n$} = \B{গ্যাসের মোলসংখ্যা} {\lat [mol]}
+    \item[] {\lat $R$} = \B{মোলার গ্যাস ধ্রুবক} {\lat [L-atmK$^{-1}$mol$^{-1}$, JK$^{-1}$mol$^{-1}$]}
+    \item[] {\lat $T$} = \B{তাপমাত্রা} {\lat [K]}
+\end{itemize}
+
+\itm{9} \textbf{\B{ভ্যানডারওয়ালস সমীকরণ,}} {\lat $\left(P + \dfrac{n^2 a}{V^2}\right)(V - nb) = nRT$}
+\begin{itemize}
+    \item[] {\lat $P$} = \B{গ্যাসের চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $V$} = \B{গ্যাসের আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $a, b$} = \B{ভ্যানডারওয়ালস ধ্রুবক}
+    \item[] {\lat $n$} = \B{গ্যাসের মোলসংখ্যা} {\lat [mol]}
+    \item[] {\lat $R$} = \B{মোলার গ্যাস ধ্রুবক} {\lat [L-atmK$^{-1}$mol$^{-1}$, JK$^{-1}$mol$^{-1}$]}
+    \item[] {\lat $T$} = \B{তাপমাত্রা} {\lat [K]}
+\end{itemize}
+
+\itm{10} \textbf{\B{গ্রাহামের ব্যাপন সূত্র,}}\\[2pt]
+{\lat $\dfrac{r_1}{r_2} = \dfrac{t_2}{t_1} = \sqrt{\dfrac{M_2}{M_1}} = \dfrac{V_1}{V_2} = \sqrt{\dfrac{d_2}{d_1}}$}
+\begin{itemize}
+    \item[] {\lat $r_1, r_2$} = \B{১ম/২য় গ্যাসের ব্যাপন হার} {\lat [Ls$^{-1}$]}
+    \item[] {\lat $t_1, t_2$} = \B{১ম/২য় গ্যাসের ব্যাপন সময়} {\lat [s (সেকেন্ড)]}
+    \item[] {\lat $M_1, M_2$} = \B{১ম/২য় গ্যাসের আণবিক ভর} {\lat [gmol$^{-1}$]}
+    \item[] {\lat $V_1, V_2$} = \B{১ম/২য় গ্যাসের বেগ} {\lat [ms$^{-1}$, cms$^{-1}$]}
+    \item[] {\lat $d_1, d_2$} = \B{১ম/২য় গ্যাসের ঘনত্ব} {\lat [gL$^{-1}$, kgm$^{-3}$, gcm$^{-3}$, gdm$^{-3}$]}
+\end{itemize}
+
+\itm{11} \textbf{\B{ডালটনের আংশিক চাপ সূত্র,}} {\lat $P = P_A + P_B + \dots + P_n$}\\[2pt]
+\textbf{\B{আংশিক চাপ,}} {\lat $P_A = n_A \times P$}
+\begin{itemize}
+    \item[] {\lat $P$} = \B{গ্যাস মিশ্রণের মোট চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $P_A, P_B, \dots P_n$} = \B{A, B,.. গ্যাসের আংশিক চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $n_A$} = \B{A গ্যাসের মোল ভগ্নাংশ}
+    \item[] {\lat $P_1, P_2$} = \B{১ম/২য় গ্যাসের চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+\end{itemize}
+
+\itm{12} \textbf{\B{আদর্শ গ্যাসের গতীয় সমীকরণ,}} {\lat $PV = \dfrac{1}{3} mNC^2$}
+\begin{itemize}
+    \item[] {\lat $P$} = \B{গ্যাসের চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $V$} = \B{গ্যাসের আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
+    \item[] {\lat $m$} = \B{একটি অণুর ভর} {\lat [g]}
+    \item[] {\lat $N$} = \B{মোট অণুসংখ্যা}
+    \item[] {\lat $C$} = \B{বর্গমূল গড় বর্গ গতিবেগ} {\lat [m/s]}
+    \item[] {\lat $C_{rms}$} = \B{বর্গমূল গড় বর্গ গতিবেগ} {\lat [m/s]}
+    \item[] {\lat $C_{mp}$} = \B{সম্ভাব্যতম বেগ} {\lat [m/s]}
+\end{itemize}
+
+\itm{13} \textbf{\B{বর্গমূল গড় বর্গ গতিবেগ,}}\\[2pt]
+{\lat $C_{rms} = \sqrt{\dfrac{3RT}{M}} = \sqrt{\dfrac{3PV}{M}} = \sqrt{\dfrac{3P}{d}}$}
+\begin{itemize}
+    \item[] {\lat $R$} = \B{মোলার গ্যাস ধ্রুবক} {\lat [L-atmK$^{-1}$mol$^{-1}$, JK$^{-1}$mol$^{-1}$]}
+    \item[] {\lat $T$} = \B{তাপমাত্রা} {\lat [K]}
+    \item[] {\lat $M$} = \B{গ্যাসের আণবিক ভর} {\lat [kg/m$^3$]}
+    \item[] {\lat $P$} = \B{গ্যাসের চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $d$} = \B{গ্যাসের ঘনত্ব} {\lat [gL$^{-1}$, kgm$^{-3}$, gcm$^{-3}$, gdm$^{-3}$]}
+\end{itemize}
+
+\itm{14} \textbf{\B{সম্ভাব্যতম বেগ,}} {\lat $C_{mp} = \sqrt{\dfrac{2RT}{M}}$}
+
+\itm{15} \textbf{\B{গড় গতিবেগ,}} {\lat $\bar{C} = \sqrt{\dfrac{8RT}{\pi M}}$}
+\begin{itemize}
+    \item[] {\lat $R$} = \B{মোলার গ্যাস ধ্রুবক} {\lat [L-atmK$^{-1}$mol$^{-1}$, JK$^{-1}$mol$^{-1}$]}
+    \item[] {\lat $T$} = \B{তাপমাত্রা} {\lat [K]}
+    \item[] {\lat $M$} = \B{গ্যাসের আণবিক ভর} {\lat [kg/m$^3$]}
+\end{itemize}
+
+\itm{16} \textbf{\B{আদর্শ গ্যাসের গতিশক্তির সমীকরণ:}}
+\begin{itemize}
+    \item[] \textbf{(i)} \B{প্রতিটি অণুর গড় গতিশক্তি} {\lat $= \dfrac{3RT}{2N}$}
+    \item[] \textbf{(ii)} \B{মোলার গতিশক্তি} {\lat $= \dfrac{3}{2}\,nRT$}
+    \item[] {\lat $R$} = \B{মোলার গ্যাস ধ্রুবক} {\lat [JK$^{-1}$mol$^{-1}$]}
+    \item[] {\lat $T$} = \B{তাপমাত্রা} {\lat [K]}
+    \item[] {\lat $N$} = \B{মোট অণু সংখ্যা}
+    \item[] {\lat $n$} = \B{মোল সংখ্যা} {\lat [mol]}
+\end{itemize}
+
+
+\chsec{অধ্যায়-৩: দ্রবণের ঘনমাত্রা}
+
+\chsub{}{প্রয়োজনীয় সূত্রাবলি}
+
+\itm{1} \textbf{\B{মোলসংখ্যা,}} {\lat $n = \dfrac{W}{M} = \dfrac{V'}{V} = \dfrac{N}{N_A} = SV' = \dfrac{PV'}{RT}$}
+\begin{itemize}
+    \item[] {\lat $W$} = \B{প্রদত্ত ভর} {\lat [g]}
+    \item[] {\lat $M$} = \B{পারমাণবিক/আণবিক ভর}
+    \item[] {\lat $V'$} = \B{প্রদত্ত আয়তন (STP তে প্রকাশিত)} {\lat [L]}
+    \item[] {\lat $V = 22.4$} \B{L (STP তে)}
+    \item[] {\lat $N$} = \B{প্রদত্ত অণু/পরমাণুর সংখ্যা}
+    \item[] {\lat $N_A$} = \B{আভোগেড্রো সংখ্যা}
+    \item[] {\lat $S$} = \B{ঘনমাত্রা} {\lat [mol/L]}
+\end{itemize}
+
+\itm{2} \textbf{\B{মোলারিটি,}} {\lat $S = \dfrac{W \times 1000}{M \times V}$}\\[3pt]
+{\lat $S = \dfrac{S_{mo}}{1 + S_m \cdot M \times 10^{-3}}$}
+\begin{itemize}
+    \item[] {\lat $W$} = \B{দ্রবের ভর} {\lat [g]}
+    \item[] {\lat $M$} = \B{পারমাণবিক/আণবিক ভর}
+    \item[] {\lat $V$} = \B{আয়তন} {\lat [mL]}
+    \item[] {\lat $S_{mo}$} = \B{মোলালিটি}; {\lat $S_m$} = \B{মোলারিটি}
+\end{itemize}
+
+\itm{3} \textbf{\B{মোলালিটি,}} {\lat $m = \dfrac{W \times 1000}{M \times W'}$}\\[3pt]
+{\lat $S_m = \dfrac{S}{\rho \times SM \times 10^{-3}}$}
+\begin{itemize}
+    \item[] {\lat $W$} = \B{দ্রবের ভর} {\lat [g]}
+    \item[] {\lat $M$} = \B{পারমাণবিক/আণবিক ভর}
+    \item[] {\lat $W'$} = \B{দ্রাবকের ভর} {\lat [g]}
+    \item[] {\lat $\rho$} = \B{দ্রবণের ঘনত্ব}; {\lat $S$} = \B{মোলারিটি} {\lat [mol/L]}
+\end{itemize}
+
+\itm{4} \textbf{\B{নরমালিটি,}}\\[2pt]
+{\lat $N = \dfrac{W \times 1000}{E \times V} = \dfrac{W \times 1000}{\frac{M}{e} \times V} = \left(\dfrac{W \times 1000}{M \times V}\right) \times e = S \times e$}
+\begin{itemize}
+    \item[] {\lat $W$} = \B{দ্রবের ভর} {\lat [g]}
+    \item[] {\lat $E$} = \B{তুল্য ভর}
+    \item[] {\lat $M$} = \B{পারমাণবিক/আণবিক ভর}
+    \item[] {\lat $e$} = \B{তুল্য সংখ্যা}
+    \item[] {\lat $V$} = \B{দ্রবণের আয়তন} {\lat [mL]}
+    \item[] {\lat $S$} = \B{মোলারিটি} {\lat [mol/L]}
+\end{itemize}
+
+\itm{5} \textbf{\B{শতকরা মাত্রা থেকে মোলারিটি:}}
+\begin{itemize}
+    \item[] {\lat $x\%\!\left(\tfrac{w}{v}\right)$}\B{:} {\lat $S = \dfrac{10 \times x}{M}$}
+    \item[] {\lat $x\%\!\left(\tfrac{w}{w}\right)$}\B{:} {\lat $S = \dfrac{10 \times \rho \times x}{M}$}
+    \item[] {\lat $x\%\!\left(\tfrac{V}{V}\right)$}\B{:} {\lat $S = \dfrac{10 \times \rho' \times x}{M}$}
+    \item[] {\lat $x\%\!\left(\tfrac{V}{w}\right)$}\B{:} {\lat $S = \dfrac{10 \times \rho \times \rho' \times x}{M}$}
+    \item[] {\lat $\rho$} = \B{দ্রবণের ঘনত্ব} {\lat [g/L]}; {\lat $\rho'$} = \B{দ্রবের ঘনত্ব} {\lat [g/L]}
+    \item[] {\lat $M$} = \B{পারমাণবিক/আণবিক ভর} {\lat [g]}; {\lat $S$} = \B{মোলারিটি} {\lat [mol/L]}
+\end{itemize}
+
+\itm{6} \textbf{\B{ppm ও অন্যান্য ঘনমাত্রা:}}
+\begin{itemize}
+    \item[] {\lat $x$} \B{মোলার দ্রবণ} {\lat $= \dfrac{x \times M \times 10^6}{1000 \times \rho}$ ppm}
+    \item[] {\lat $x\%\!\left(\tfrac{w}{v}\right)$} \B{দ্রবণ} {\lat $= \dfrac{x \times 10^6}{100 \times \rho}$ ppm}
+    \item[] {\lat $x\%\!\left(\tfrac{w}{w}\right)$} \B{দ্রবণ} {\lat $= \dfrac{x}{100} \times 10^6$ ppm}
+    \item[] {\lat $x\%\!\left(\tfrac{V}{V}\right)$} \B{দ্রবণ} {\lat $= \dfrac{x \times \rho}{100} \times 10^6$ ppm}
+    \item[] {\lat $x$} \B{মোলাল দ্রবণ} {\lat $= \dfrac{x \times M \times 10^6}{1000 + (x \times \rho)}$ ppm}
+    \item[] {\lat $M$} = \B{পারমাণবিক/আণবিক ভর} {\lat [g]}; {\lat $\rho$} = \B{আপেক্ষিক গুরুত্ব} {\lat [g/L]}
+\end{itemize}
+
+\itm{7} \textbf{\B{দ্রবণের ঘনমাত্রা লঘুকরণ,}} {\lat $V_1 S_1 = V_2 S_2$}
+\begin{itemize}
+    \item[] {\lat $V_1$} = \B{দ্রবণের প্রাথমিক আয়তন} {\lat [mL, L]}
+    \item[] {\lat $V_2$} = \B{দ্রবণের পরিবর্তিত আয়তন} {\lat [mL, L]}
+    \item[] {\lat $S_1$} = \B{দ্রবণের প্রাথমিক ঘনমাত্রা} {\lat [mol/L]}
+    \item[] {\lat $S_2$} = \B{দ্রবণের পরিবর্তিত ঘনমাত্রা} {\lat [mol/L]}
+\end{itemize}
+
+\itm{8} \textbf{\B{এসিড-ক্ষারক প্রশমন,}} {\lat $b \times V_A \times S_A = a \times V_B \times S_B$}
+\begin{itemize}
+    \item[] {\lat $V_A$} = \B{এসিডের আয়তন} {\lat [mL, L]}
+    \item[] {\lat $V_B$} = \B{ক্ষারকের আয়তন} {\lat [mL, L]}
+    \item[] {\lat $S_A$} = \B{এসিডের ঘনমাত্রা} {\lat [mol/L]}
+    \item[] {\lat $S_B$} = \B{ক্ষারকের ঘনমাত্রা} {\lat [mol/L]}
+    \item[] {\lat $a$} = \B{এসিডের মোলসংখ্যা} {\lat [mol]}
+    \item[] {\lat $b$} = \B{ক্ষারকের মোলসংখ্যা} {\lat [mol]}
+\end{itemize}
+
+
 \end{multicols}
 \end{document}"""
 
