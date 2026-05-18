@@ -480,6 +480,31 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \end{itemize}
 
 
+\chsub{}{সংকরায়ন সূত্র ও আকৃতি}
+
+\itm{1} \textbf{\B{সংকরায়ন সংখ্যা নির্ণয়ের সূত্র,}} {\lat $H = \dfrac{1}{2}[V + M - C + A]$}
+\begin{itemize}
+    \item[] {\lat $H$} = \B{সংকরায়ন সংখ্যা}
+    \item[] {\lat $V$} = \B{কেন্দ্রীয় পরমাণুর যোজ্যতা ইলেকট্রন সংখ্যা}
+    \item[] {\lat $M$} = \B{কেন্দ্রীয় পরমাণুর সাথে যুক্ত একযোজী পরমাণুর সংখ্যা}
+    \item[] {\lat $C$} = \B{কেন্দ্রীয় পরমাণুর ধনাত্মক আধান (ক্যাটায়নের ক্ষেত্রে বিয়োগ করতে হয়)}
+    \item[] {\lat $A$} = \B{কেন্দ্রীয় পরমাণুর ঋণাত্মক আধান (অ্যানায়নের ক্ষেত্রে যোগ করতে হয়)}
+\end{itemize}
+
+\B{প্রত্যেক মুক্তজোড় ইলেকট্রন যুগলের জন্য বন্ধন কোণ {\lat 2--2.5}$^{\circ}$ হ্রাস পায়।}
+
+\itm{2} \textbf{\B{সংকরায়নের প্রকারভেদ, আকৃতি ও বন্ধন কোণ:}}
+\begin{itemize}
+    \item \textbf{{\lat sp}} \B{সংকরায়ন — রৈখিক ({\lat Linear}); বন্ধন কোণ {\lat 180}$^{\circ}$; উদাহরণ:} {\lat BeCl$_2$, C$_2$H$_2$, CO$_2$}
+    \item \textbf{{\lat sp$^2$}} \B{সংকরায়ন — সমতলীয় ত্রিভুজাকার ({\lat Trigonal Planar}); বন্ধন কোণ {\lat 120}$^{\circ}$; উদাহরণ:} {\lat BF$_3$, C$_2$H$_4$, SO$_3$}
+    \item \textbf{{\lat sp$^3$}} \B{সংকরায়ন — চতুস্তলকীয় ({\lat Tetrahedral}); বন্ধন কোণ {\lat 109.5}$^{\circ}$; উদাহরণ:} {\lat CH$_4$, CCl$_4$, NH$_3$, H$_2$O}
+    \item \textbf{{\lat sp$^2$d / dsp$^2$}} \B{সংকরায়ন — বর্গাকার সমতলীয় ({\lat Square Planar}); বন্ধন কোণ {\lat 90}$^{\circ}$; উদাহরণ:} {\lat [Ni(CN)$_4$]$^{2-}$, [PtCl$_4$]$^{2-}$}
+    \item \textbf{{\lat sp$^3$d}} \B{সংকরায়ন — ত্রিকোণীয় দ্বিপিরামিডাল ({\lat Trigonal Bipyramidal}); বন্ধন কোণ {\lat 90}$^{\circ}$/{\lat 120}$^{\circ}$; উদাহরণ:} {\lat PCl$_5$, PF$_5$}
+    \item \textbf{{\lat sp$^3$d$^2$}} \B{সংকরায়ন — অষ্টতলকীয় ({\lat Octahedral}); বন্ধন কোণ {\lat 90}$^{\circ}$; উদাহরণ:} {\lat SF$_6$, PCl$_6^-$, [Co(NH$_3$)$_6$]$^{3+}$}
+    \item \textbf{{\lat sp$^3$d$^3$}} \B{সংকরায়ন — পঞ্চকোণীয় দ্বিপিরামিডাল ({\lat Pentagonal Bipyramidal}); বন্ধন কোণ {\lat 72}$^{\circ}$/{\lat 90}$^{\circ}$; উদাহরণ:} {\lat IF$_7$, XeF$_6$}
+    \item \textbf{{\lat d$^2$sp$^3$}} \B{সংকরায়ন — অষ্টতলকীয় ({\lat Octahedral}); বন্ধন কোণ {\lat 90}$^{\circ}$ (অন্তর্বর্তী d-অরবিটাল ব্যবহার); উদাহরণ:} {\lat [Fe(CN)$_6$]$^{3-}$, [Co(NH$_3$)$_6$]$^{3+}$}
+\end{itemize}
+
 \chsec{অধ্যায়-৪: রাসায়নিক পরিবর্তন}
 
 \chsub{}{প্রয়োজনীয় সূত্রাবলি}
@@ -562,13 +587,39 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \end{itemize}
 \textbf{\B{সমীকরণের ঢাল}} {\lat $= \dfrac{-\Delta H}{2.303 R}$}
 
-\itm{15} {\lat $aA + bB + \dots \rightleftharpoons lL + mM + \dots$} \textbf{\B{ঘনমাত্রা প্রকাশক সাম্যধ্রুবক,}}
-{\lat $K_c = \dfrac{[L]^l [M]^m \dots}{[A]^a [B]^b \dots}$}
+\itm{15} \textbf{\B{সাম্যধ্রুবকের সংজ্ঞা — সাধারণ উভমুখী বিক্রিয়া:}}\\[2pt]
+{\lat $aA + bB \rightleftharpoons cC + dD$}\\[3pt]
+\textbf{\B{ঘনমাত্রা প্রকাশক সাম্যধ্রুবক ($K_c$):}}\\[1pt]
+{\lat $K_c = \dfrac{\text{\B{উৎপাদসমূহের সাম্যাবস্থার মোলার ঘনমাত্রার গুণফল}}}{\text{\B{বিক্রিয়কসমূহের সাম্যাবস্থার মোলার ঘনমাত্রার গুণফল}}}$}\\[4pt]
+{\lat $K_c = \dfrac{[C]^c\,[D]^d}{[A]^a\,[B]^b}$}
 \begin{itemize}
-    \item[] {\lat $[L]$} = {\lat $L$} \B{উৎপাদকের ঘনমাত্রা} {\lat [mol L$^{-1}$]}
-    \item[] {\lat $[M]$} = {\lat $M$} \B{উৎপাদকের ঘনমাত্রা}
-    \item[] {\lat $[A]$} = {\lat $A$} \B{বিক্রিয়কের ঘনমাত্রা}
-    \item[] {\lat $[B]$} = {\lat $B$} \B{বিক্রিয়কের ঘনমাত্রা}
+    \item[] \B{নোট: তৃতীয় বন্ধনী {\lat [ ]} দ্বারা সাম্যাবস্থায় বিক্রিয়ক ও উৎপাদের মোলার ঘনমাত্রা বোঝায়।}
+    \item[] {\lat $[A], [B]$} = \B{বিক্রিয়কের ঘনমাত্রা} {\lat [mol L$^{-1}$]}
+    \item[] {\lat $[C], [D]$} = \B{উৎপাদের ঘনমাত্রা} {\lat [mol L$^{-1}$]}
+    \item[] {\lat $a, b$} = \B{বিক্রিয়কের মোল সংখ্যা (সূচক)}; {\lat $c, d$} = \B{উৎপাদের মোল সংখ্যা (সূচক)}
+\end{itemize}
+
+\vspace{2pt}
+\textbf{\B{আংশিক চাপ প্রকাশক সাম্যধ্রুবক ($K_p$):}}\\[1pt]
+{\lat $K_p = \dfrac{\text{\B{উৎপাদসমূহের সাম্যাবস্থার আংশিক চাপের গুণফল}}}{\text{\B{বিক্রিয়কসমূহের সাম্যাবস্থার আংশিক চাপের গুণফল}}}$}\\[4pt]
+{\lat $K_p = \dfrac{(P_C)^c\,(P_D)^d}{(P_A)^a\,(P_B)^b}$}
+\begin{itemize}
+    \item[] \B{নোট: {\lat $P$} দ্বারা সাম্যাবস্থায় প্রতিটি গ্যাসের নিজস্ব আংশিক চাপ বোঝায়।}
+    \item[] {\lat $P_A, P_B$} = \B{বিক্রিয়কের আংশিক চাপ} {\lat [atm]}
+    \item[] {\lat $P_C, P_D$} = \B{উৎপাদের আংশিক চাপ} {\lat [atm]}
+\end{itemize}
+
+\vspace{2pt}
+\textbf{\B{বিস্তারিত আকার:}}\\[1pt]
+{\lat $K_p = \dfrac{(P_{\text{\B{১ম উৎপাদ}}})^{\text{\B{মোল সংখ্যা}}} \times (P_{\text{\B{২য় উৎপাদ}}})^{\text{\B{মোল সংখ্যা}}}}{(P_{\text{\B{১ম বিক্রিয়ক}}})^{\text{\B{মোল সংখ্যা}}} \times (P_{\text{\B{২য় বিক্রিয়ক}}})^{\text{\B{মোল সংখ্যা}}}}$}\\[4pt]
+{\lat $K_c = \dfrac{[\text{\B{১ম উৎপাদ}}]^{\text{\B{মোল সংখ্যা}}} \times [\text{\B{২য় উৎপাদ}}]^{\text{\B{মোল সংখ্যা}}}}{[\text{\B{১ম বিক্রিয়ক}}]^{\text{\B{মোল সংখ্যা}}} \times [\text{\B{২য় বিক্রিয়ক}}]^{\text{\B{মোল সংখ্যা}}}}$}
+
+\vspace{2pt}\textbf{\B{সাধারণ রূপ (একাধিক উৎপাদ ও বিক্রিয়ক):}}\\[1pt]
+{\lat $aA + bB + \dots \rightleftharpoons lL + mM + \dots$}\\[2pt]
+{\lat $K_c = \dfrac{[L]^l\,[M]^m\,\dots}{[A]^a\,[B]^b\,\dots}$}
+\begin{itemize}
+    \item[] {\lat $[L], [M]$} = \B{উৎপাদকের ঘনমাত্রা} {\lat [mol L$^{-1}$]}
+    \item[] {\lat $[A], [B]$} = \B{বিক্রিয়কের ঘনমাত্রা}
 \end{itemize}
 
 \itm{16} {\lat $\alpha = \dfrac{x}{n}$}
