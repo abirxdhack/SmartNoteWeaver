@@ -10,6 +10,7 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \usepackage[protrusion=false]{microtype}
+\usepackage{balance}
 \usepackage{graphicx}
 \pagestyle{empty}
 \setlength{\emergencystretch}{25pt}
@@ -20,11 +21,10 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \tolerance=9999
 \emergencystretch=25pt
 
+\defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Latin Modern Roman}
-\newfontfamily\lat{Latin Modern Roman}
-\newfontfamily\bn{Noto Serif Bengali}[Script=Bengali, BoldFont=Noto Serif Bengali Bold, ItalicFont=Noto Serif Bengali]
-
-\defaultfontfeatures{}
+\newfontfamily\lat{Latin Modern Roman}[Ligatures=TeX]
+\newfontfamily\bn{Noto Serif Bengali}[Script=Bengali, BoldFont=Noto Serif Bengali Bold, ItalicFont=Noto Serif Bengali, BoldItalicFont=Noto Serif Bengali Bold, Renderer=HarfBuzz]
 
 \definecolor{sectionbg}{RGB}{65,65,65}
 \definecolor{subsecbg}{RGB}{85,85,85}
@@ -135,7 +135,7 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \begin{itemize}
     \item \textbf{\B{বিশ্লেষণ} $\rightarrow$ \B{আয়তনিক যন্ত্রপাতি:}} \B{মেজারিং সিলিন্ডার, মেজারিং ফ্লাস্ক, ব্যুরেট, পিপেট।}
     \item \textbf{\B{পদ্ধতি:}} \B{ম্যাক্রো, সেমি মাইক্রো, মাইক্রো} $\rightarrow$ \B{যৌগের পৃথকীকরণ, পরমাণুগত বিশ্লেষণ, গাঠনিক কাঠামো।}
-    \item \textbf{\B{উচ্চ ক্ষমতাসম্পন্ন যন্ত্রপাতি:}} \B{ক্রোমাটোগ্রাফি:} {\lat HPLC, GPLC}; \B{স্পেক্ট্রোমেট্রিতে:} {\lat IR, UV-NMR}; \B{থার্মো অ্যানালাইসিসে:} {\lat DSC}; \B{পারমাণবিক শোষণ বর্ণালিতে:} {\lat AAS}; {\lat X-ray} \B{ব্যতিচার যন্ত্র।}
+    \item \textbf{\B{উচ্চ ক্ষমতাসম্পন্ন যন্ত্রপাতি:}} \B{ক্রোমাটোগ্রাফি:} {\lat HPLC, GPLC}; \B{স্পেক্ট্রোমেট্রিতে:} {\lat IR, UV-NMR}; \B{থার্মো অ্যানালাইসিসে:} {\lat DSC}; \B{পারমাণবিক শোষণ বর্ণালিতে:} {\lat AAS}; {\lat X}-\B{রশ্মি ব্যতিচার যন্ত্র।}
 \end{itemize}
 
 \textbf{{\lat 9.} \B{রাসায়নিক নিক্তি:}}
@@ -408,6 +408,41 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \textbf{\B{দ্রাব্যতা গুণফল,}} {\lat $K_{SP} = [A^{n+}]^m \times [B^{m-}]^n = m^m n^n (S)^{m+n}$}
 
 
+
+\itm{21} \textbf{\B{বোহর মডেলে ইলেকট্রনের শক্তি:}}\\[2pt]
+{\lat $E_n = -\dfrac{2\pi^2 m e^4 Z^2}{n^2 h^2} = -13.6\dfrac{Z^2}{n^2}$} {\lat (eV} \B{তে)}
+\begin{itemize}
+    \item[] {\lat $Z$} = \B{পারমাণবিক সংখ্যা}; {\lat $n$} = \B{কক্ষপথ নম্বর}
+    \item[] \B{একক: {\lat eV} (ইলেকট্রন ভোল্ট)}; {\lat $1\,eV = 1.6 \times 10^{-19}\,J$}
+\end{itemize}
+
+\itm{22} \textbf{\B{কক্ষপথের শক্তি পার্থক্য:}}\\[2pt]
+{\lat $\Delta E = E_{n_2} - E_{n_1} = 13.6\,Z^2\left(\dfrac{1}{n_1^2} - \dfrac{1}{n_2^2}\right)$} {\lat eV}
+
+\itm{23} \textbf{\B{সর্বাধিক ইলেকট্রন ধারণ ক্ষমতা:}} {\lat $= 2n^2$}\\[2pt]
+\textbf{\B{উপশক্তিস্তরে:}} {\lat s=2, p=6, d=10, f=14}
+
+\itm{24} \textbf{\B{কোয়ান্টাম সংখ্যা:}}
+\begin{itemize}
+    \item \textbf{\B{প্রধান কোয়ান্টাম সংখ্যা} (n):} {\lat $n = 1, 2, 3, \dots$}
+    \item \textbf{\B{দিগংশীয়} (l):} {\lat $l = 0, 1, 2, \dots, (n-1)$}
+    \item \textbf{\B{চৌম্বক} ($m_l$):} {\lat $m_l = -l, \dots, 0, \dots, +l$}
+    \item \textbf{\B{স্পিন} ($m_s$):} {\lat $m_s = +\dfrac{1}{2}$} \B{বা} {\lat $-\dfrac{1}{2}$}
+\end{itemize}
+
+\itm{25} \textbf{\B{পলির বর্জন নীতি:}} \B{একই পরমাণুতে দুটি ইলেকট্রনের চারটি কোয়ান্টাম সংখ্যা অভিন্ন হতে পারে না।}
+
+\itm{26} \textbf{\B{হুন্ডের নিয়ম:}} \B{সমশক্তির অরবিটালে ইলেকট্রন একে একে সর্বোচ্চ স্পিন বজায় রেখে প্রবেশ করে।}
+
+\itm{27} \textbf{\B{আউফবাউ নীতি:}} \B{ইলেকট্রন সর্বনিম্ন শক্তির অরবিটালে আগে প্রবেশ করে।}\\[2pt]
+\B{ক্রম:} {\lat $1s < 2s < 2p < 3s < 3p < 4s < 3d < 4p < 5s < 4d \dots$}
+
+\itm{28} \textbf{\B{তেজস্ক্রিয় ক্ষয়ের সূত্র:}} {\lat $N = N_0 e^{-\lambda t}$}
+\begin{itemize}
+    \item[] {\lat $N_0$} = \B{আদি পরমাণু সংখ্যা}; {\lat $N$} = {\lat $t$} \B{সময়ে পরমাণু সংখ্যা}
+    \item[] {\lat $\lambda$} = \B{ক্ষয় ধ্রুবক}; {\lat $t_{1/2} = \dfrac{0.693}{\lambda}$}
+\end{itemize}
+
 \chsec{অধ্যায়-৩: মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন}
 
 \chsub{Concept Map: The Chapter at a Glance }{(এক নজরে অধ্যায়টি)}
@@ -502,7 +537,7 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
     \item \textbf{{\lat sp$^3$d}} \B{সংকরায়ন — ত্রিকোণীয় দ্বিপিরামিডাল ({\lat Trigonal Bipyramidal}); বন্ধন কোণ {\lat 90}$^{\circ}$/{\lat 120}$^{\circ}$; উদাহরণ:} {\lat PCl$_5$, PF$_5$}
     \item \textbf{{\lat sp$^3$d$^2$}} \B{সংকরায়ন — অষ্টতলকীয় ({\lat Octahedral}); বন্ধন কোণ {\lat 90}$^{\circ}$; উদাহরণ:} {\lat SF$_6$, PCl$_6^-$, [Co(NH$_3$)$_6$]$^{3+}$}
     \item \textbf{{\lat sp$^3$d$^3$}} \B{সংকরায়ন — পঞ্চকোণীয় দ্বিপিরামিডাল ({\lat Pentagonal Bipyramidal}); বন্ধন কোণ {\lat 72}$^{\circ}$/{\lat 90}$^{\circ}$; উদাহরণ:} {\lat IF$_7$, XeF$_6$}
-    \item \textbf{{\lat d$^2$sp$^3$}} \B{সংকরায়ন — অষ্টতলকীয় ({\lat Octahedral}); বন্ধন কোণ {\lat 90}$^{\circ}$ (অন্তর্বর্তী d-অরবিটাল ব্যবহার); উদাহরণ:} {\lat [Fe(CN)$_6$]$^{3-}$, [Co(NH$_3$)$_6$]$^{3+}$}
+    \item \textbf{{\lat d$^2$sp$^3$}} \B{সংকরায়ন — অষ্টতলকীয় ({\lat Octahedral}); বন্ধন কোণ {\lat 90}$^{\circ}$ (অন্তর্বর্তী {\lat d}-অরবিটাল ব্যবহার); উদাহরণ:} {\lat [Fe(CN)$_6$]$^{3-}$, [Co(NH$_3$)$_6$]$^{3+}$}
 \end{itemize}
 
 \chsec{অধ্যায়-৪: রাসায়নিক পরিবর্তন}
@@ -699,6 +734,79 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \itm{33} \textbf{\B{ক্ষারীয় বাফার দ্রবণের}} {\lat $pH = 14 - pK_b - \log \dfrac{[\text{\B{লবণ}}]}{[\text{\B{ক্ষারক}}]}$} \quad [{\lat $K_b$} = \B{ক্ষারকের বিয়োজন ধ্রুবক}]
 
 
+
+\itm{34} \textbf{\B{স্বল্পদ্রাব্য লবণের দ্রাব্যতা গুণফল:}} {\lat $A_m B_n \rightleftharpoons mA^{n+} + nB^{m-}$}\\[2pt]
+{\lat $K_{SP} = [A^{n+}]^m \times [B^{m-}]^n = m^m \cdot n^n \cdot S^{m+n}$}
+\begin{itemize}
+    \item[] \B{যেখানে} {\lat $S$} = \B{দ্রাব্যতা} {\lat [mol\,L$^{-1}$]}; \B{এই সূত্রটিই} {\lat $x^x y^y S^{(x+y)}$} \B{রূপে লেখা হয়}
+    \item[] \textbf{\B{উদাহরণ:}} {\lat $Ca_3(PO_4)_2$}: {\lat $K_{SP} = 108\,S^5$}; {\lat $BaSO_4$}: {\lat $K_{SP} = S^2$}
+\end{itemize}
+
+\itm{35} \textbf{\B{দ্রাব্যতা ও দ্রাব্যতা গুণফলের সম্পর্ক:}}
+\begin{itemize}
+    \item[] {\lat $AB \rightarrow K_{SP} = S^2$} \quad {\lat $A_2B \rightarrow K_{SP} = 4S^3$}
+    \item[] {\lat $AB_2 \rightarrow K_{SP} = 4S^3$} \quad {\lat $A_2B_3 \rightarrow K_{SP} = 108\,S^5$}
+    \item[] {\lat $A_3B \rightarrow K_{SP} = 27\,S^4$} \quad {\lat $AB_3 \rightarrow K_{SP} = 27\,S^4$}
+\end{itemize}
+
+\itm{36} \textbf{\B{তাপগতিবিদ্যার সূত্রসমূহ:}}\\[2pt]
+{\lat $\Delta G = \Delta H - T\Delta S$} \quad \B{(গিবস মুক্ত শক্তি)}
+\begin{itemize}
+    \item[] {\lat $\Delta G = -nFE_{cell}$} \quad {\lat $\Delta G^\circ = -RT\ln K$}
+    \item[] {\lat $\Delta G^\circ = -2.303\,RT\log K$}
+    \item[] {\lat $\Delta H = \Delta U + \Delta n_g RT$} \quad \B{(কির্শহফের সূত্র)}
+    \item[] {\lat $\Delta G < 0$} = \B{স্বতঃস্ফূর্ত}; {\lat $\Delta G > 0$} = \B{অস্বতঃস্ফূর্ত}; {\lat $\Delta G = 0$} = \B{সাম্যাবস্থা}
+\end{itemize}
+
+\itm{37} \textbf{\B{হেস সূত্র:}} \B{একটি বিক্রিয়ার তাপের পরিমাণ বিক্রিয়াটি সরাসরি বা ধাপে ধাপে সম্পন্ন হোক সমান।}\\[2pt]
+{\lat $\Delta H_{rxn} = \sum \Delta H_f^\circ(\text{\B{উৎপাদ}}) - \sum \Delta H_f^\circ(\text{\B{বিক্রিয়ক}})$}
+
+\itm{38} \textbf{\B{বন্ড শক্তি থেকে এনথালপি:}}\\[2pt]
+{\lat $\Delta H = \sum$} \B{(ভাঙা বন্ধনের শক্তি)} $-$ {\lat $\sum$} \B{(তৈরি বন্ধনের শক্তি)}
+
+\itm{39} \textbf{\B{এনট্রপি পরিবর্তন:}}\\[2pt]
+{\lat $\Delta S = \dfrac{q_{rev}}{T}$} \quad [\B{প্রত্যাবর্তী প্রক্রিয়ায়}]; \quad {\lat $\Delta S_{univ} = \Delta S_{sys} + \Delta S_{surr} \geq 0$}
+
+\itm{40} \textbf{\B{সমতাপীয় প্রসারণে কাজ:}} {\lat $w = -nRT\ln\dfrac{V_2}{V_1} = -2.303\,nRT\log\dfrac{V_2}{V_1}$}
+
+\itm{41} \textbf{\B{তড়িৎ রাসায়নিক কোষের বিভব — নার্নস্ট সমীকরণ:}}\\[2pt]
+{\lat $E_{cell} = E^\circ_{cell} - \dfrac{RT}{nF}\ln Q = E^\circ_{cell} - \dfrac{0.0592}{n}\log Q$} \B{(২৫}{\lat °C} \B{তাপমাত্রায়)}
+
+\itm{42} \textbf{\B{বাষ্পচাপ হ্রাস (রাউল্টের সূত্র):}}\\[2pt]
+{\lat $\dfrac{\Delta P}{P^\circ} = X_B = \dfrac{n_B}{n_A + n_B}$}
+\begin{itemize}
+    \item[] {\lat $\Delta P = P^\circ - P_s$} = \B{বাষ্পচাপ হ্রাস}; {\lat $P^\circ$} = \B{বিশুদ্ধ দ্রাবকের বাষ্পচাপ}
+    \item[] {\lat $P_s$} = \B{দ্রবণের বাষ্পচাপ}; {\lat $X_B$} = \B{দ্রবের মোল ভগ্নাংশ}
+\end{itemize}
+
+\itm{43} \textbf{\B{স্ফুটনাঙ্ক উন্নয়ন:}} {\lat $\Delta T_b = K_b \times m$}\\[2pt]
+\textbf{\B{হিমাঙ্ক অবনমন:}} {\lat $\Delta T_f = K_f \times m$}
+\begin{itemize}
+    \item[] {\lat $m$} = \B{মোলালিটি} {\lat [mol\,kg$^{-1}$]}; {\lat $K_b$} = \B{স্ফুটনাঙ্ক উন্নয়ন ধ্রুবক}; {\lat $K_f$} = \B{হিমাঙ্ক অবনমন ধ্রুবক}
+\end{itemize}
+
+\itm{44} \textbf{\B{অভিস্রবণ চাপ:}} {\lat $\pi = CRT = \dfrac{n}{V}RT$}
+\begin{itemize}
+    \item[] {\lat $\pi$} = \B{অভিস্রবণ চাপ} {\lat [atm]}; {\lat $C$} = \B{মোলার ঘনমাত্রা} {\lat [mol\,L$^{-1}$]}
+    \item[] {\lat $R$} = \B{গ্যাস ধ্রুবক}; {\lat $T$} = \B{তাপমাত্রা} {\lat [K]}
+\end{itemize}
+
+\itm{45} \textbf{\B{আণবিক ভর নির্ণয় (হিমাঙ্ক অবনমন থেকে):}}\\[2pt]
+{\lat $M_B = \dfrac{K_f \times W_B \times 1000}{\Delta T_f \times W_A}$}
+\begin{itemize}
+    \item[] {\lat $W_B$} = \B{দ্রবের ভর} {\lat [g]}; {\lat $W_A$} = \B{দ্রাবকের ভর} {\lat [g]}
+\end{itemize}
+
+\itm{46} \textbf{\B{ভ্যান্ট হফ গুণক:}} {\lat $i = \dfrac{\text{\B{পরিমাপকৃত সংখ্যা}}}{\text{\B{প্রত্যাশিত সংখ্যা}}} = 1 + \alpha(n-1)$}
+\begin{itemize}
+    \item[] {\lat $\alpha$} = \B{বিয়োজন মাত্রা}; {\lat $n$} = \B{আয়নের সংখ্যা}
+    \item[] \B{সংশোধিত সূত্র:} {\lat $\Delta T_b = i\,K_b\,m$}; {\lat $\Delta T_f = i\,K_f\,m$}; {\lat $\pi = i\,CRT$}
+\end{itemize}
+
+\itm{47} \textbf{\B{রেডক্স বিক্রিয়ায় ইলেকট্রন সংখ্যা:}}\\[2pt]
+{\lat $E^\circ_{cell} = E^\circ_{cathode} - E^\circ_{anode}$}\\[2pt]
+{\lat $\Delta G^\circ = -nFE^\circ_{cell}$} \quad \B{এবং} \quad {\lat $\log K = \dfrac{nE^\circ}{0.0592}$} \B{(২৫}{\lat °C} \B{তে)}
+
 \chsec{অধ্যায়-৫: কর্মমুখী রসায়ন}
 
 \chsub{Concept Map: The Chapter at a Glance }{(এক নজরে অধ্যায়টি)}
@@ -753,14 +861,65 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \end{itemize}
 
 
-\end{multicols}
 
-\newpage
+\chsec{অধ্যায়-১৩: গুরুত্বপূর্ণ প্রভাবকসমূহ}
+
+\chsub{}{গুরুত্বপূর্ণ বিক্রিয়া ও প্রভাবক}
+
+\textbf{\B{জৈব বিক্রিয়া ও প্রভাবক:}}
+\begin{itemize}
+    \item \B{ডিকার্বক্সিলেশন বিক্রিয়া} $\rightarrow$ {\lat NaOH + CaO} \B{বা ইথার}
+    \item \B{ডাইজো বিক্রিয়া} $\rightarrow$ \B{তুষার}
+    \item \B{উইটিক-ফিটিক বিক্রিয়া} $\rightarrow$ \B{অনার্দ্র} {\lat AlCl$_3$}
+    \item \B{ফ্রিডেল-ক্রাফটস অ্যালকাইলেশন} $\rightarrow$ \B{অ্যালকোহলীয় কস্টিক সোডা বা পটাশ}
+    \item \B{কার্বাইল অ্যামিন বিক্রিয়া} $\rightarrow$ \B{অ্যালকোহলীয় কস্টিক সোডা বা পটাশ}
+    \item \B{ক্যানিজারো বিক্রিয়া} $\rightarrow$ \B{অ্যালকোহল ঘুঁটি}
+    \item \B{জট গঠন} $\rightarrow$ \B{হিম শীতল কার}
+    \item \B{মুলডালেন বা অ্যাসিডিক অর্ধ বিশ্লেষণ} $\rightarrow$ \B{প্রথমে ও পরে এসিডীয় অর্ধ বিশ্লেষণ}
+    \item \B{নিরুদয়ন পরীক্ষা} $\rightarrow$ \B{গাঢ় সালফিউরিক এসিড}
+    \item \B{হ্যালজান সংযোজন বিক্রিয়া} $\rightarrow$ \B{জারীয় মাধ্যম}
+    \item \B{মূলধাম বিক্রিয়া} $\rightarrow$ \B{হিম শীতল কার}
+    \item \B{ক্যানিজারো বিক্রিয়া} $\rightarrow$ \B{গাঢ়} {\lat NaOH, K$_2$CO$_3$} \B{বা গাঢ়} {\lat KOH} \B{দ্রবণ}
+    \item \B{আলড়ল ঘনীভবন বিক্রিয়া} $\rightarrow$ \B{লঘু} {\lat K$_2$CO$_3$} \B{বা} {\lat NaOH}
+    \item \B{হ্যালোফর্ম বিক্রিয়া} $\rightarrow$ {\lat NaOH/KOH} \B{(তাপ)}
+    \item \B{উইলিয়ামসন বিক্রিয়া} $\rightarrow$ \B{নিরুদক পদার্থ (গাঢ় সালফিউরিক এসিড)}
+    \item \B{গ্রিগনার্ড বিক্রিয়া} $\rightarrow$ {\lat Mg/BsSO$_4$}
+\end{itemize}
+
+\chsec{অধ্যায়-১৪: কার্যকরী মূলক, এর সক্রিয়তা ও শনাক্তকরণ}
+
+\chsub{}{কার্যকরী মূলকের তালিকা}
+
+\begin{itemize}
+    \item \textbf{\B{আলকিন}} $\rightarrow$ \B{আলকিন বা অলিফিন মূলক;} {\lat $>\text{C}{=}\text{C}<$}
+    \item \textbf{\B{আলকাইন}} $\rightarrow$ \B{অ্যাসিটিলিন মূলক;} {\lat $-\text{C}{\equiv}\text{C}-$}
+    \item \textbf{\B{আলকোহল (১{\lat $^\circ$}):}} {\lat $-\text{CH}_2\text{OH}$}; \textbf{\B{(২{\lat $^\circ$}):}} {\lat $=\text{CHOH}$}; \textbf{\B{(৩{\lat $^\circ$}):}} {\lat $\equiv\text{COH}$}
+    \item \textbf{\B{কিটোন}} $\rightarrow$ \B{কার্বোনিল মূলক;} {\lat $>\text{C}{=}\text{O}$}
+    \item \textbf{\B{আলডিহাইড}} $\rightarrow$ {\lat $-\text{CHO}$}
+    \item \textbf{\B{কার্বক্সিলিক এসিড}} $\rightarrow$ {\lat $-\text{COOH}$}
+    \item \textbf{\B{এস্টার}} $\rightarrow$ {\lat $-\text{COOR}$}
+    \item \textbf{\B{আনহাইড্রাইড}} $\rightarrow$ {\lat $-\text{CO{-}O{-}CO}-$}
+    \item \textbf{\B{ইথার}} $\rightarrow$ {\lat $\text{R{-}O{-}R}$}
+    \item \textbf{\B{আমিন (আমিনো মূলক)}} $\rightarrow$ {\lat $-\text{NH}_2$}
+    \item \textbf{\B{এসিড আমাইড (আমাইডো মূলক)}} $\rightarrow$ {\lat $-\text{CONH}_2$}
+    \item \textbf{\B{এসিড হ্যালাইড}} $\rightarrow$ {\lat $-\text{COX}$}
+    \item \textbf{\B{সালফোনিক এসিড}} $\rightarrow$ {\lat $-\text{SO}_3\text{H}$}
+    \item \textbf{\B{নাইট্রো যৌগ (নাইট্রো মূলক)}} $\rightarrow$ {\lat $-\text{NO}_2$}
+    \item \textbf{\B{সায়ানাইড}} $\rightarrow$ {\lat $-\text{CN}$}
+    \item \textbf{\B{আইসোসায়ানাইড}} $\rightarrow$ {\lat $-\text{NC}$}
+    \item \textbf{\B{আইসো-থায়োসায়ানেট}} $\rightarrow$ {\lat $-\text{NCS}$} \B{বা} {\lat $-\text{N}{=}\text{C}{=}\text{S}$}
+    \item \textbf{\B{নাইট্রোসো মূলক}} $\rightarrow$ {\lat $-\text{NO}$} \B{বা} {\lat $-\text{N}{=}\text{O}$}
+    \item \textbf{\B{ফেনল (ফেনলিক মূলক)}} $\rightarrow$ {\lat Ar{-}OH} \B{বা} {\lat $=\text{C{-}OH}$}
+    \item \textbf{\B{থায়ো যৌগ (থায়ল মূলক)}} $\rightarrow$ {\lat R{-}SH} \B{বা} {\lat $-\text{S{-}H}$}
+\end{itemize}
+
+\balance
+\end{multicols}
 
 \noindent\colorbox{black}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\centering\bfseries\large\color{white}\B{রসায়ন দ্বিতীয় পত্র — প্রয়োজনীয় সূত্রাবলী ও তথ্যসমূহ}}}
 \vspace{2pt}\par
 
-\begin{multicols}{2}
+\begin{multicols*}{2}
 
 \chsec{অধ্যায়-১: গ্যাসের ধর্ম}
 
@@ -778,23 +937,23 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \begin{itemize}
     \item[] {\lat $V_1$} = \B{প্রাথমিক অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
     \item[] {\lat $V_2$} = \B{পরিবর্তিত অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
-    \item[] {\lat $T_1$} = \B{প্রাথমিক অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
-    \item[] {\lat $T_2$} = \B{পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
+    \item[] {\lat $T_1$} = \B{প্রাথমিক অবস্থায় তাপমাত্রা} {\lat [K} \B{(কেলভিন)}{\lat ]}
+    \item[] {\lat $T_2$} = \B{পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K} \B{(কেলভিন)}{\lat ]}
 \end{itemize}
 
 \itm{3} \textbf{\B{গে-লুস্যাকের চাপের সূত্র,}} {\lat $\dfrac{P_1}{T_1} = \dfrac{P_2}{T_2}$}
 \begin{itemize}
     \item[] {\lat $P_1$} = \B{প্রাথমিক অবস্থায় চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
     \item[] {\lat $P_2$} = \B{পরিবর্তিত অবস্থায় চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
-    \item[] {\lat $T_1$} = \B{প্রাথমিক অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
-    \item[] {\lat $T_2$} = \B{পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
+    \item[] {\lat $T_1$} = \B{প্রাথমিক অবস্থায় তাপমাত্রা} {\lat [K} \B{(কেলভিন)}{\lat ]}
+    \item[] {\lat $T_2$} = \B{পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K} \B{(কেলভিন)}{\lat ]}
 \end{itemize}
 
 \itm{4} \textbf{\B{বয়েল ও চার্লসের সমন্বয় সূত্র,}} {\lat $\dfrac{P_1 V_1}{T_1} = \dfrac{P_2 V_2}{T_2}$}
 \begin{itemize}
     \item[] {\lat $P_1, P_2$} = \B{প্রাথমিক/পরিবর্তিত অবস্থায় চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
     \item[] {\lat $V_1, V_2$} = \B{প্রাথমিক/পরিবর্তিত অবস্থায় আয়তন} {\lat [mL, L, dm$^3$, cm$^3$, m$^3$]}
-    \item[] {\lat $T_1, T_2$} = \B{প্রাথমিক/পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K (কেলভিন)]}
+    \item[] {\lat $T_1, T_2$} = \B{প্রাথমিক/পরিবর্তিত অবস্থায় তাপমাত্রা} {\lat [K} \B{(কেলভিন)}{\lat ]}
 \end{itemize}
 
 \itm{5} \textbf{\B{গ্যাসের ঘনত্ব, তাপ ও চাপের মধ্যে সম্পর্ক,}} {\lat $\dfrac{d_1 T_1}{P_1} = \dfrac{d_2 T_2}{P_2}$}
@@ -802,7 +961,7 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
     \item[] {\lat $d_1$} = \B{প্রাথমিক অবস্থায় গ্যাসের ঘনত্ব} {\lat [gL$^{-1}$, kgm$^{-3}$, gcm$^{-3}$, gdm$^{-3}$]}
     \item[] {\lat $d_2$} = \B{পরিবর্তিত অবস্থায় গ্যাসের ঘনত্ব} {\lat [gL$^{-1}$, kgm$^{-3}$, gcm$^{-3}$, gdm$^{-3}$]}
     \item[] {\lat $P_1, P_2$} = \B{চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
-    \item[] {\lat $T_1, T_2$} = \B{তাপমাত্রা} {\lat [K (কেলভিন)]}
+    \item[] {\lat $T_1, T_2$} = \B{তাপমাত্রা} {\lat [K} \B{(কেলভিন)}{\lat ]}
 \end{itemize}
 
 \itm{6} \textbf{\B{অ্যাভোগেড্রো সূত্র,}} {\lat $\dfrac{V_1}{V_2} = \dfrac{n_1}{n_2}$}
@@ -854,7 +1013,7 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 {\lat $\dfrac{r_1}{r_2} = \dfrac{t_2}{t_1} = \sqrt{\dfrac{M_2}{M_1}} = \dfrac{V_1}{V_2} = \sqrt{\dfrac{d_2}{d_1}}$}
 \begin{itemize}
     \item[] {\lat $r_1, r_2$} = \B{১ম/২য় গ্যাসের ব্যাপন হার} {\lat [Ls$^{-1}$]}
-    \item[] {\lat $t_1, t_2$} = \B{১ম/২য় গ্যাসের ব্যাপন সময়} {\lat [s (সেকেন্ড)]}
+    \item[] {\lat $t_1, t_2$} = \B{১ম/২য় গ্যাসের ব্যাপন সময়} {\lat [s]} \B{(সেকেন্ড)}
     \item[] {\lat $M_1, M_2$} = \B{১ম/২য় গ্যাসের আণবিক ভর} {\lat [gmol$^{-1}$]}
     \item[] {\lat $V_1, V_2$} = \B{১ম/২য় গ্যাসের বেগ} {\lat [ms$^{-1}$, cms$^{-1}$]}
     \item[] {\lat $d_1, d_2$} = \B{১ম/২য় গ্যাসের ঘনত্ব} {\lat [gL$^{-1}$, kgm$^{-3}$, gcm$^{-3}$, gdm$^{-3}$]}
@@ -864,8 +1023,8 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \textbf{\B{আংশিক চাপ,}} {\lat $P_A = n_A \times P$}
 \begin{itemize}
     \item[] {\lat $P$} = \B{গ্যাস মিশ্রণের মোট চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
-    \item[] {\lat $P_A, P_B, \dots P_n$} = \B{A, B,.. গ্যাসের আংশিক চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
-    \item[] {\lat $n_A$} = \B{A গ্যাসের মোল ভগ্নাংশ}
+    \item[] {\lat $P_A, P_B, \dots P_n$} = \B{গ্যাসের আংশিক চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
+    \item[] {\lat $n_A$} = \B{গ্যাসের মোল ভগ্নাংশ}
     \item[] {\lat $P_1, P_2$} = \B{১ম/২য় গ্যাসের চাপ} {\lat [atm, Pa, kPa, Nm$^{-2}$, mm(Hg), cm(Hg)]}
 \end{itemize}
 
@@ -918,8 +1077,8 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \begin{itemize}
     \item[] {\lat $W$} = \B{প্রদত্ত ভর} {\lat [g]}
     \item[] {\lat $M$} = \B{পারমাণবিক/আণবিক ভর}
-    \item[] {\lat $V'$} = \B{প্রদত্ত আয়তন (STP তে প্রকাশিত)} {\lat [L]}
-    \item[] {\lat $V = 22.4$} \B{L (STP তে)}
+    \item[] {\lat $V'$} = \B{প্রদত্ত আয়তন (}{\lat STP}\B{ তে প্রকাশিত)} {\lat [L]}
+    \item[] {\lat $V = 22.4$} {\lat L} \B{(}{\lat STP}\B{ তে)}
     \item[] {\lat $N$} = \B{প্রদত্ত অণু/পরমাণুর সংখ্যা}
     \item[] {\lat $N_A$} = \B{আভোগেড্রো সংখ্যা}
     \item[] {\lat $S$} = \B{ঘনমাত্রা} {\lat [mol/L]}
@@ -964,7 +1123,7 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
     \item[] {\lat $M$} = \B{পারমাণবিক/আণবিক ভর} {\lat [g]}; {\lat $S$} = \B{মোলারিটি} {\lat [mol/L]}
 \end{itemize}
 
-\itm{6} \textbf{\B{ppm ও অন্যান্য ঘনমাত্রা:}}
+\itm{6} \textbf{{\lat ppm} \B{ও অন্যান্য ঘনমাত্রা:}}
 \begin{itemize}
     \item[] {\lat $x$} \B{মোলার দ্রবণ} {\lat $= \dfrac{x \times M \times 10^6}{1000 \times \rho}$ ppm}
     \item[] {\lat $x\%\!\left(\tfrac{w}{v}\right)$} \B{দ্রবণ} {\lat $= \dfrac{x \times 10^6}{100 \times \rho}$ ppm}
@@ -993,7 +1152,330 @@ tex_content = r"""\documentclass[9pt,a4paper]{extarticle}
 \end{itemize}
 
 
-\end{multicols}
+
+\itm{8} \textbf{\B{নর্মালিটি থেকে মোলারিটি:}} {\lat $M = \dfrac{N}{n}$}\\[2pt]
+\textbf{\B{মোলারিটি থেকে মোলালিটি:}} {\lat $m = \dfrac{M \times 1000}{\rho \times 1000 - M \times M_B}$}
+\begin{itemize}
+    \item[] {\lat $\rho$} = \B{দ্রবণের ঘনত্ব} {\lat [g\,mL$^{-1}$]}; {\lat $M_B$} = \B{দ্রবের আণবিক ভর}
+\end{itemize}
+
+\itm{9} \textbf{\B{মোল ভগ্নাংশ:}} {\lat $X_A = \dfrac{n_A}{n_A + n_B}$}; \quad {\lat $X_A + X_B = 1$}
+
+\itm{10} \textbf{\B{ভরের ভাগ} {\lat (mass fraction)}\B{:}} {\lat $w_A = \dfrac{m_A}{m_{solution}}$}
+
+\itm{11} \textbf{\B{দ্রবণের ঘনত্ব থেকে মোলারিটি:}}\\[2pt]
+{\lat $M = \dfrac{10 \times \rho \times \%}{M_B}$}
+\begin{itemize}
+    \item[] {\lat $\rho$} = \B{দ্রবণের ঘনত্ব} {\lat [g/mL]}; {\lat \%} = \B{ভর শতাংশ}; {\lat $M_B$} = \B{আণবিক ভর}
+\end{itemize}
+
+\chsec{অধ্যায়-৪: তড়িৎ রসায়ন}
+
+\chsub{}{প্রয়োজনীয় সূত্রাবলি}
+
+\itm{1} \textbf{\B{আপেক্ষিক পরিবাহিতা,}} {\lat $\kappa = \dfrac{1}{\rho} = \dfrac{1}{R} \times \dfrac{l}{A} = L \times \dfrac{l}{A}$}
+\begin{itemize}
+    \item[] {\lat $\kappa$ (Kappa)} = \B{আপেক্ষিক পরিবাহিতা} {\lat [ohm$^{-1}$cm$^{-1}$, Sm$^{-1}$]}
+    \item[] {\lat $L$} = \B{পরিবাহিতা} {\lat [ohm$^{-1}$]}
+    \item[] {\lat $\Lambda$ (Lambda)} = \B{তুল্য পরিবাহিতা} {\lat [ohm$^{-1}$cm$^2$(g.eqv)$^{-1}$; Sm$^2$(g.eqv)$^{-1}$]}
+    \item[] {\lat $\Lambda_m$} = \B{মোলার পরিবাহিতা} {\lat [ohm$^{-1}$cm$^2$mol$^{-1}$; Sm$^2$mol$^{-1}$]}
+    \item[] {\lat $C$} = \B{দ্রবণের ঘনমাত্রা} {\lat [g.eqv]}
+    \item[] {\lat $M$} = \B{দ্রবণের ঘনমাত্রা} {\lat [molL$^{-1}$, M]}
+    \item[] {\lat $V$} = \B{দ্রবণের আয়তন} {\lat [cm$^3$]}
+    \item[] {\lat $A$} = \B{দুইটি তড়িৎদ্বারের প্রস্থচ্ছেদ} {\lat [cm$^2$]}
+    \item[] {\lat $l$} = \B{দৈর্ঘ্য} {\lat [cm]}
+    \item[] {\lat $N$} = \B{দ্রবণের ঘনমাত্রা} {\lat [g.eqv, N]}
+\end{itemize}
+
+\itm{2} \textbf{\B{কোষ ধ্রুবক} {\lat $= \dfrac{l}{A}$}}
+
+\itm{3} \textbf{\B{তুল্য পরিবাহিতা,}} {\lat $\Lambda = \kappa V$}
+
+\itm{4} \textbf{\B{তুল্য পরিবাহিতা,}} {\lat $\Lambda = \kappa \times \dfrac{1000}{C}$}
+
+\itm{5} \textbf{\B{মোলার পরিবাহিতা,}} {\lat $\Lambda_m = \kappa \times \dfrac{1000}{M}$}
+
+\itm{6} \textbf{\B{তুল্য পরিবাহিতা,}} {\lat $\Lambda = \kappa \times \dfrac{1000}{N}$}
+
+\itm{7} \textbf{\B{মৌলের তড়িৎ রাসায়নিক তুলনাঙ্ক,}}\\[2pt]
+{\lat $Z = \dfrac{\text{\B{মৌলের পারমাণবিক ভর}}}{F \times \text{\B{মৌলের যোজ্যতা}}}$}
+\begin{itemize}
+    \item[] {\lat $Z$} = \B{তড়িৎ রাসায়নিক তুল্যাঙ্ক} {\lat [gC$^{-1}$]}
+\end{itemize}
+
+\itm{8} \textbf{\B{যৌগের তড়িৎ রাসায়নিক তুলনাঙ্ক,}}\\[2pt]
+{\lat $Z = \dfrac{\text{\B{যৌগের পারমাণবিক ভর}}}{F \times \text{\B{যৌগের ধনাত্মক অংশের যোজ্যতা}}}$}
+
+\itm{9} \textbf{\B{ফ্যারাডের ১ম সূত্র:}}
+\begin{itemize}
+    \item \textbf{(i)} {\lat $W = ZQ$}
+    \item \textbf{(ii)} {\lat $Q = It$}
+    \item \textbf{(iii)} {\lat $W = ZIt$}
+    \item \textbf{(iv)} {\lat $W = \dfrac{MIt}{nF}$}
+\end{itemize}
+\begin{itemize}
+    \item[] {\lat $Z$} = \B{তড়িৎ রাসায়নিক তুল্যাঙ্ক} {\lat [g/C]}
+    \item[] {\lat $w$} = \B{সঞ্চিত বা দ্রবীভূত পদার্থের ভর} {\lat [g]}
+    \item[] {\lat $E$} = \B{রাসায়নিক তুল্যাঙ্ক বা তুল্য ভর} {\lat [g]}
+    \item[] {\lat $I$} = \B{তড়িৎ প্রবাহ} {\lat [A]} \B{(অ্যাম্পিয়ার)}
+    \item[] {\lat $t$} = \B{সময়} {\lat [s]} \B{(সেকেন্ড)}
+    \item[] {\lat $n$} = \B{যোজ্যতা}
+    \item[] {\lat $Q$} = \B{চার্জ} {\lat [C]} \B{(কুলম্ব)}
+    \item[] {\lat $F$} = \B{ফ্যারাডে ধ্রুবক} {\lat = 96500 C}
+\end{itemize}
+
+\itm{10} \textbf{\B{ফ্যারাডের ১ম সূত্র,}} {\lat $\dfrac{W_A}{W_B} = \dfrac{E_1}{E_2}$}
+
+\itm{11} \textbf{\B{কোষ বিভব,}} {\lat $E^\circ_{\text{cell}} = E^\circ_{\text{ox(anode)}} + E^\circ_{\text{red(cathode)}}$}\\[2pt]
+{\lat $= E^\circ_{\text{ox(anode)}} - E^\circ_{\text{ox(cathode)}}$}\\[2pt]
+{\lat $= E^\circ_{\text{red(cathode)}} - E^\circ_{\text{red(anode)}}$}
+\begin{itemize}
+    \item[] {\lat $E^\circ_{\text{ox(cathode)}}$} = \B{ক্যাথোডের প্রমাণ জারণ বিভব}
+    \item[] {\lat $E^\circ_{\text{ox(anode)}}$} = \B{অ্যানোডের প্রমাণ জারণ বিভব}
+    \item[] {\lat $E^\circ_{\text{red(cathode)}}$} = \B{ক্যাথোডের প্রমাণ বিজারণ বিভব}
+    \item[] {\lat $E^\circ_{\text{red(anode)}}$} = \B{অ্যানোডের প্রমাণ বিজারণ বিভব}
+\end{itemize}
+
+\itm{12} \textbf{\B{নার্নস্ট সমীকরণ} — {\lat xA + yB$^+$ $\rightleftharpoons$ xA$^+$ + yB} \B{বিক্রিয়ার ক্ষেত্রে:}}
+\begin{itemize}
+    \item \textbf{(i)} {\lat $E_{A/A^+} = E^\circ_{A/A^+} - \dfrac{RT}{nF} \ln [A^+]^x$}
+    \item \textbf{(ii)} {\lat $E_{B^+/B} = E^\circ_{B^+/B} + \dfrac{RT}{nF} \ln [B^+]^y$}
+    \item \textbf{(iii)} {\lat $E_{\text{cell}} = E^\circ_{\text{cell}} - \dfrac{RT}{nF} \ln \dfrac{[A^+]^x}{[B^+]^y}$}
+    \item \textbf{(iv)} {\lat $E_{\text{cell}} = [E^\circ_{\text{ox(Anode)}} + E^\circ_{\text{red(cathode)}}] - \dfrac{RT}{nF} \ln \dfrac{[A^+]^x}{[B^+]^y}$}
+\end{itemize}
+\begin{itemize}
+    \item[] {\lat $[A^+]$} = {\lat $A^+$} \B{এর ঘনমাত্রা} {\lat [molL$^{-1}$]}
+    \item[] {\lat $[B^+]$} = {\lat $B^+$} \B{এর ঘনমাত্রা} {\lat [molL$^{-1}$]}
+    \item[] {\lat $F = 96500$} \B{কুলম্ব} {\lat [C} \B{(কুলম্ব)}{\lat ]}
+    \item[] {\lat $E_{\text{cell}}$} = \B{নির্দিষ্ট তাপমাত্রায় কোষটির তড়িৎচালক বল} {\lat [V]}
+    \item[] {\lat $E^\circ_{\text{cell}}$} = \B{প্রমাণ তাপমাত্রায় কোষটির তড়িৎচালক বল} {\lat [V]}
+\end{itemize}
+
+\itm{13} \textbf{\B{{\lat EMF} ও মুক্ত শক্তির পরিবর্তন সম্পর্কিত:}}
+\begin{itemize}
+    \item \textbf{(i)} {\lat $\Delta G = -nFE_{\text{cell}}$}
+    \item \textbf{(ii)} {\lat $\Delta G^\circ = -nFE^\circ_{\text{cell}}$}
+    \item \textbf{(iii)} {\lat $\Delta G = -RT\ln K$}
+    \item \textbf{(iv)} {\lat $RT\ln K = nFE_{\text{cell}}$}
+\end{itemize}
+\begin{itemize}
+    \item[] {\lat $E_{\text{cell}}$} = \B{তাপমাত্রায় কোষটির তড়িৎচালক বল} {\lat [V]}
+    \item[] {\lat $E^\circ_{\text{cell}}$} = \B{প্রমাণ তাপমাত্রায় কোষটির তড়িৎচালক বল} {\lat [V]}
+    \item[] {\lat $\Delta G$} = \B{মুক্ত শক্তির পরিবর্তন} {\lat [J]}
+\end{itemize}
+
+
+\itm{12} \textbf{\B{পরিবাহিতার সম্পর্ক:}} {\lat $\kappa = \dfrac{1}{\rho}$} \quad [\B{আপেক্ষিক পরিবাহিতা = আপেক্ষিক রোধের বিপরীত}]\\[2pt]
+{\lat $\Lambda_m = \dfrac{\kappa \times 1000}{C}$} \quad [\B{মোলার পরিবাহিতা}; {\lat $C$} = \B{মোলার ঘনমাত্রা}]
+
+\itm{13} \textbf{\B{কোলরাউশের সূত্র:}} {\lat $\Lambda_m^\infty = \nu_+ \lambda_+^\infty + \nu_- \lambda_-^\infty$}
+\begin{itemize}
+    \item[] {\lat $\lambda_+^\infty, \lambda_-^\infty$} = \B{অসীম লঘুতায় আয়নিক পরিবাহিতা}
+    \item[] {\lat $\nu_+, \nu_-$} = \B{ক্যাটায়ন ও অ্যানায়নের সংখ্যা}
+\end{itemize}
+
+\itm{14} \textbf{\B{তড়িৎ বিশ্লেষণে সঞ্চিত/দ্রবীভূত ভর:}}\\[2pt]
+{\lat $W = \dfrac{M \times I \times t}{n \times F} = Z \times I \times t$}
+\begin{itemize}
+    \item[] {\lat $M$} = \B{আণবিক ভর}; {\lat $n$} = \B{যোজনী}; {\lat $F = 96500\,C$}
+    \item[] {\lat $Z$} = \B{তড়িৎ রাসায়নিক তুল্যাঙ্ক} {\lat $= \dfrac{E}{96500}$}
+\end{itemize}
+
+\itm{15} \textbf{\B{প্রমাণ হাইড্রোজেন ইলেকট্রোড} {\lat (SHE)}\B{:}} {\lat $E^\circ = 0.00\,V$}\\[2pt]
+\textbf{\B{কোষের প্রমাণ বিভব:}} {\lat $E^\circ_{cell} = E^\circ_{cathode} - E^\circ_{anode}$}\\[2pt]
+\textbf{\B{কোষের বিভব ধনাত্মক হলে বিক্রিয়া স্বতঃস্ফূর্ত।}}
+
+\chsec{অধ্যায়-১: গ্যাস সূত্রসমূহ — {\lat At a Glance}}
+
+\chsub{}{গ্যাস সূত্রের তালিকা}
+
+\itm{1} \textbf{\B{বয়েলের সূত্র} ({\lat 1662} \B{সাল, ইংল্যান্ড}):} \B{স্থির তাপমাত্রায় কোন নির্দিষ্ট ভরের যেকোন গ্যাসের আয়তন তার চাপের বিপরীত অনুপাতে পরিবর্তিত হয়।}\\[1pt]
+{\lat $P_1V_1 = P_2V_2$}
+
+\itm{2} \textbf{\B{চার্লসের সূত্র} ({\lat 1787} \B{সাল, ফ্রান্স; গে-লুস্যাক, ১৮০২ সাল):}} \B{স্থির চাপে কোন নির্দিষ্ট ভরের যেকোন গ্যাসের আয়তন তার তাপমাত্রার সমানুপাতিক।}\\[1pt]
+{\lat $V \propto T$} \quad \B{বা,} {\lat $\dfrac{V_1}{T_1} = \dfrac{V_2}{T_2}$}
+
+\itm{3} \textbf{\B{চাপের সূত্র বা গে-লুস্যাকের চাপের সূত্র} ({\lat 1802} \B{সাল):}} \B{স্থির আয়তনে গ্যাসের চাপ তার পরম তাপমাত্রার সমানুপাতিক।}\\[1pt]
+{\lat $P \propto T$}
+
+\itm{4} \textbf{\B{অ্যাভোগেড্রোর সূত্র} ({\lat 1811} \B{সাল, ইতালী):}} \B{নির্দিষ্ট আয়তনের গ্যাসে সমান সংখ্যক অণু থাকে।}\\[1pt]
+{\lat $V \propto n$}
+
+\itm{5} \textbf{\B{ডালটনের আংশিক চাপ সূত্র} (\B{জন ডালটন, ১৮০২ সাল, ইংল্যান্ড}):} \B{স্থির তাপমাত্রা ও চাপে বিভিন্ন গ্যাস মিশ্রণের মোট চাপ ও তাদের আংশিক চাপের সমষ্টির সমান।}\\[1pt]
+{\lat $P = P_1 + P_2 + P_3 + \dots + P_n$}
+
+\itm{6} \textbf{\B{গ্রাহামের ব্যাপন সূত্র} ({\lat 1829} \B{বা ১৮৩৩ সাল):}} \B{স্থির তাপমাত্রা ও চাপে যেকোন গ্যাসের ব্যাপনের হার তার ঘনত্বের বর্গমূলের বিপরীত অনুপাতে পরিবর্তিত হয়।}\\[1pt]
+{\lat $r \propto \sqrt{\dfrac{1}{d}}$}
+
+\itm{7} \textbf{\B{গে-লুস্যাকের আয়তন সূত্র} ({\lat 1808} \B{সাল, ইংল্যান্ড):}} \B{রাসায়নিক বিক্রিয়ার সময় ও গ্যাসের আয়তনের সম্পর্ক। যখন বিভিন্ন গ্যাস পরস্পর রাসায়নিক বিক্রিয়ার অংশগ্রহণ করে তখন বিক্রিয়ক গ্যাসগুলোর আয়তন সরল অনুপাতিক থাকে।}
+
+\chsec{অধ্যায়-৫: শিল্প কারখানায় সাম্যাবস্থার প্রয়োগ}
+
+\chsub{}{শিল্প কারখানায় সাম্যাবস্থার প্রয়োগ এবং ব্যবহৃত অনুঘটক}
+
+\begin{itemize}
+    \item \textbf{\B{১. অ্যামোনিয়া}} — \B{পদ্ধতি: হেবার বস; তাপমাত্রা: ৪৫০–৫৫০}{\lat °C}\B{; চাপ: ২০০ }{\lat atm}\B{; প্রভাবক:} {\lat Fe/MO}
+    \item \textbf{{\lat H$_2$SO$_4$}} \B{(২.)} — \B{পদ্ধতি: স্পর্শ প্রণালী; তাপমাত্রা: ৪০০–৫০০}{\lat °C}\B{; চাপ: ১.৭ }{\lat atm}\B{; প্রভাবক:} {\lat V$_2$O$_5$} \B{বা} {\lat Pt}
+    \item \textbf{\B{৩. মিথানল}} — \B{পদ্ধতি: বাণিজ্যিক; তাপমাত্রা: ৩০০–৪০০}{\lat °C}\B{; চাপ: ২০০–৩০০ }{\lat atm}\B{; প্রভাবক:} {\lat ZnO + Cr$_2$O$_3$}
+    \item \textbf{\B{৪. ইউরিয়া}} — \B{পদ্ধতি: রাসায়নিক; তাপমাত্রা: ১৭০–২০০}{\lat °C}\B{; চাপ: ১০০–৩০০ }{\lat atm}
+\end{itemize}
+
+\chsec{অধ্যায়-৫: শিল্পক্ষেত্রে অনুঘটকের ব্যবহার}
+
+\chsub{}{শিল্পক্ষেত্রে বিক্রিয়া ও অনুঘটক}
+
+\begin{itemize}
+    \item \textbf{\B{১. অ্যামোনিয়া উৎপাদন:}} {\lat $N_2 + 3H_2 \rightleftharpoons 2NH_3$}\\
+    \B{অনুঘটক:} {\lat Fe} \B{(অনুঘটক সহায়ক} {\lat Mo, Al$_2$O$_3$} \B{বা} {\lat K$_2$O)}
+    \item \textbf{{\lat H$_2$SO$_4$} \B{উৎপাদন:}} {\lat $2SO_2 + O_2 \rightleftharpoons 2SO_3$}; \B{অনুঘটক:} {\lat Pt} \B{বা} {\lat V$_2$O$_5$}
+    \item \textbf{{\lat HNO$_3$} \B{উৎপাদন:}} {\lat $4NH_3 + 5O_2 \rightleftharpoons 4NO + 6H_2O$}; \B{অনুঘটক:} {\lat Pt}
+    \item \textbf{\B{৪. তেলের হাইড্রোজিনেশন:}} {\lat $\text{R}_2\text{C}{=}\text{CR}_2 + \text{H}_2 \rightarrow \text{R}_2\text{CH{-}CHR}_2$}; \B{অনুঘটক:} {\lat Ni}
+    \item \textbf{\B{৫. মিথানল উৎপাদন:}} {\lat $CO + 2H_2O \rightarrow CH_3OH$}; \B{অনুঘটক:} {\lat ZnO + Cr$_2$O$_3$}
+    \item \textbf{\B{৬. তরল জ্বালানি উৎপাদন:}} {\lat $CO + H_2O \rightarrow C_nH_{2n+2} + H_2O$}; \B{অনুঘটক:} {\lat Co{-}Fe{-}Ni}
+    \item \textbf{\B{৭. পেট্রোলিয়াম (ক্র্যাকিং):}} {\lat \scalebox{0.82}{$C_nH_{2n+2} \rightarrow CH_3{-}C(CH_3){-}CH_2{-}CH_3$}}; \B{অনুঘটক:} {\lat Pt+Cr+}\B{বক্সাইট}
+    \item \textbf{\B{৮. ভিনেগার উৎপাদন:}} {\lat $CH_3{-}CH_2{-}OH + O_2 \rightarrow CH_3{-}COOH + H_2O$}; \B{অনুঘটক:} \B{মাইকোডার্মা অ্যাসিটি}
+    \item \textbf{\B{৯. ইথানল উৎপাদন:}} {\lat $C_6H_{12}O_6 \rightarrow 2CH_3{-}CH_2{-}OH + 2CO_2$}; \B{অনুঘটক:} \B{জাইমেজ এনজাইম}
+    \item \textbf{\B{১০. অ্যালকিনের পলিমারকরণ:}} \B{প্রভাবক:} {\lat Al $(C_2H_5)_3$TiCl$_3$} (\B{জিপলার-নেটা প্রভাবক})
+\end{itemize}
+
+
+\chsec{অধ্যায়-১২: বিভিন্ন পলিমারের বৈশিষ্ট্য ও ব্যবহার}
+
+\chsub{}{পলিমারের তালিকা}
+
+\itm{1} \textbf{\B{পলিইথিলিন (পলিথিন):}} {\lat CH$_2${=}CH$_2$} $\rightarrow$ {\lat $(-\text{CH}_2{-}\text{CH}_2-)_n$}
+\begin{itemize}
+    \item \B{বৈশিষ্ট্য: নমনীয় কিন্তু শক্ত প্রকৃতির; এটা এসিড, ক্ষার ও বিভিন্ন দ্রাবক দ্বারা আক্রান্ত হয় না; উত্তম তড়িৎ অন্তরক।}
+    \item \B{ব্যবহার: ওষুধ প্যাকেট; মগ, বালতি, টেবিল, রুথ; বৈদ্যুতিক তারের অন্তরক; বোতল তৈরিতে।}
+\end{itemize}
+
+\itm{2} \textbf{\B{পলিপ্রোপিলিন:}} {\lat CH$_3$CH{=}CH$_2$} $\rightarrow$ {\lat $(-\text{CH}_2{-}\text{CH}-)_n$}
+\begin{itemize}
+    \item \B{বৈশিষ্ট্য: সবচেয়ে হালকা পলিমার।}
+    \item \B{ব্যবহার: দড়ি তৈরিতে, মালপত্র প্যাকেজিং; মোটরজু, কার্পেট তৈরিতে।}
+\end{itemize}
+
+\itm{3} \textbf{\B{পলিভিনাইল ক্লোরাইড (}} {\lat PVC} \textbf{\B{):}} {\lat CH$_2${=}CHCl} $\rightarrow$ {\lat $(-\text{CH}_2{-}\text{CH}-)_n$}
+\begin{itemize}
+    \item \B{ব্যবহার: কৃত্রিম চামড়া; ঘরের ছাদ তৈরি; রেইন কোট, গ্রামোফোন রেকর্ড।}
+\end{itemize}
+
+\itm{4} \textbf{\B{পলিটেট্রাফ্লোরো ইথিন (}} {\lat PTFE} \B{— টেফলন):} {\lat CF$_2${=}CF$_2$} $\rightarrow$ {\lat $(-\text{CF}_2{-}\text{CF}_2-)_n$}
+\begin{itemize}
+    \item \B{বৈশিষ্ট্য: ফুয়েরো কার্বন হিসেবে খুবই নিষ্ক্রিয়; বিদ্যুৎ ও তাপ অপরিবাহী।}
+    \item \B{ব্যবহার: নন-স্টিক রান্নার প্যান; জাহাজের রঙে।}
+\end{itemize}
+
+\itm{5} \textbf{\B{পলিস্টাইরিন (পলিফিনাইল ইথিন):}}
+\begin{itemize}
+    \item \B{ব্যবহার: খাবার পাত্র, কসমেটিকের বোতল; টেলিভিশন ক্যাবিনেট; শিশুর খেলনা।}
+\end{itemize}
+
+\itm{6} \textbf{\B{নিওপ্রিন (পলি-২-ক্লোরোবিউটা-ডাই-ইন):}}
+\begin{itemize}
+    \item \B{ব্যবহার: সিনথেটিক রাবার তৈরিতে।}
+\end{itemize}
+
+\itm{7} \textbf{\B{পলিভিনাইল অ্যাসিটেট (}} {\lat PVA} \textbf{):} {\lat CH$_3$COO{-}CH{=}CH$_2$} $\rightarrow$ {\lat $(-\text{CH{-}CH}_2-)_n$}
+\begin{itemize}
+    \item \B{বৈশিষ্ট্য:} {\lat PVC} \B{থেকে নমনীয়।}
+    \item \B{ব্যবহার: ইমালসন পেইন্ট; গ্রামোফোন রেকর্ড।}
+\end{itemize}
+
+\itm{8} \textbf{\B{নাইলন ৬:৬:}} {\lat HOOC(CH$_2$)$_4$CONH(CH$_2$)$_6$NH$_2$} $\rightarrow$ {\lat $[-\text{OC(CH}_2)_4\text{CONH(CH}_2)_6\text{NH}-]_n$}
+\begin{itemize}
+    \item \B{বৈশিষ্ট্য: তন্তুময়।}
+    \item \B{ব্যবহার: সুতা তৈরিতে।}
+\end{itemize}
+
+\itm{9} \textbf{\B{নাইলন ৬:}}
+\begin{itemize}
+    \item \B{বৈশিষ্ট্য: নাইলন ৬:৬ অপেক্ষা নমনীয় ও নিম্ন গলনাঙ্ক বিশিষ্ট।}
+    \item \B{ব্যবহার: তন্তু হিসাবে, কাপড়ের সুতা, চাকার টায়ারের রজ্জু, দড়ি তৈরিতে।}
+\end{itemize}
+
+\chsec{অধ্যায়-৭: বিভিন্ন ভৌত পরিমাপের প্রচলিত ও আন্তর্জাতিক {\lat (SI)} একক}
+
+\chsub{}{{\lat SI} \B{একক সমূহ}}
+
+\begin{itemize}
+    \item \textbf{\B{আয়তন:}} \B{ঘন মিটার} {\lat (SI): m$^3$}; \B{ঘন সেন্টিমিটার লিটার} {\lat cm$^3$, L}\\
+    {\lat $1\,m^3 = 10^6\,cm^3$; $1\,m^3 = 10^3\,dm^3 = 10^3\,L$; $1\,L = 10^3\,cm^3$}
+    \item \textbf{\B{ঘনত্ব:}} \B{কিলোগ্রাম/ঘনমিটার} {\lat (SI): kgm$^{-3}$}; \B{গ্রাম/ঘনসেন্টিমিটার} {\lat g/cm$^3$}; \B{গ্রাম/মিলি লিটার} {\lat g/ml}\\
+    {\lat $1\,g/cm^3 = 1\,g/ml = 10^3\,kg/m^3$}
+    \item \textbf{\B{শক্তি} {\lat (Force):}} \B{নিউটন} {\lat (SI): N}; {\lat $1\,N = 1\,kg\,ms^{-2}$}
+    \item \textbf{\B{চাপ:}} \B{প্যাসকাল} {\lat (SI): Pa}; \B{বার:} {\lat bar}; \B{বায়ুচাপ:} {\lat atm}; \B{মিমি পারদ:} {\lat mm}\\
+    {\lat $1\,Pa = 1\,N/m^2$; $1\,bar = 10^5\,Pa$; $1\,atm = 101.325\,kPa = 760\,\text{mm}$}
+    \item \textbf{\B{তড়িৎ বিভব:}} \B{ভোল্ট:} {\lat V}; {\lat $1\,V = 1\,W/A$}
+    \item \textbf{\B{শক্তি} {\lat (Energy):}} \B{জুল:} {\lat J}; \B{তাপ-ক্যালরি:} {\lat cal}; \B{বিদ্যুৎ-ইলেকট্রন ভোল্ট:} {\lat eV}\\
+    {\lat $1\,J = 1\,N.m = 1\,kg\,m^2s^{-2}$; $1\,cal = 4.184\,J$; $1\,eV = 1.6022 \times 10^{-19}\,J$}
+    \item \textbf{\B{গতিবেগ:}} \B{মিটার/সেকেন্ড} {\lat (SI): ms$^{-1}$}; \B{সেন্টিমিটার/সেকেন্ড:} {\lat cms$^{-1}$}\\
+    {\lat $1\,ms^{-1} = 100\,cm\,s^{-1}$}
+    \item \textbf{\B{সময়:}} \B{সেকেন্ড} {\lat (SI): s}; \B{মিনিট:} {\lat min}; {\lat $1\,min = 60\,s$}
+    \item \textbf{\B{তাপমাত্রা:}} \B{ডিগ্রি কেলভিন} {\lat (SI): K}; \B{ডিগ্রি সেলসিয়াস:} {\lat °C}; {\lat $K = {^\circ}C + 273$}
+    \item \textbf{\B{ভর:}} \B{কিলোগ্রাম} {\lat (SI): kg}; \B{গ্রাম:} {\lat g}; {\lat $1\,kg = 10^3\,g$}
+\end{itemize}
+
+\chsec{অধ্যায়-৮: মৌলিক ধ্রুবকসমূহ}
+
+\chsub{}{প্রয়োজনীয় মৌলিক ধ্রুবক}
+
+\begin{itemize}
+    \item \textbf{\B{পারমাণবিক ভর একক} (amu):} {\lat $1.66 \times 10^{-27}$} {\lat kg}
+    \item \textbf{\B{আভোগেড্রো সংখ্যা} (N):} {\lat $6.023 \times 10^{23}$} {\lat mol}$^{-1}$
+    \item \textbf{\B{ফ্যারাডে ধ্রুবক} (F):} {\lat $96485 \approx 96500$} {\lat C}
+    \item \textbf{\B{মৌলিক চার্জ} (e):} {\lat $1.602 \times 10^{-19}$\,C}
+    \item \textbf{\B{বোল্টজম্যান ধ্রুবক} (K$_b$):} {\lat $1.38 \times 10^{-22}$\,Jk$^{-1}$}
+    \item \textbf{\B{মোলার গ্যাস ধ্রুবক} (R):} {\lat \scalebox{0.85}{$8.316\,Jk^{-1}\,mol^{-1} = 1.987\,cal\,deg^{-1}\,mol^{-1}$}}
+    \item \textbf{\B{ইলেকট্রনের ভর} (m$_e$):} {\lat $9.1095 \times 10^{-31}$\,kg}
+    \item \textbf{\B{প্রোটনের ভর} (m$_p$):} {\lat $1.673 \times 10^{-27}$} {\lat kg}
+    \item \textbf{\B{নিউট্রনের ভর} (m$_n$):} {\lat $1.675 \times 10^{-27}$} {\lat kg}
+    \item \textbf{\B{প্ল্যাংকের ধ্রুবক} (h):} {\lat $6.626 \times 10^{-34}$} {\lat Js}
+    \item \textbf{\B{রিডবার্গ ধ্রুবক} (Rz):} {\lat $1.097 \times 10^5$} {\lat cm}$^{-1}$
+\end{itemize}
+
+
+
+\chsec{অধ্যায়-৯: গুরুত্বপূর্ণ রাসায়নিক বিক্রিয়া ও শর্ত}
+
+\chsub{}{শিল্পোৎপাদনে ব্যবহৃত প্রভাবক}
+
+\begin{itemize}
+    \item \textbf{\B{হেবার বস পদ্ধতি (অ্যামোনিয়া):}} {\lat N$_2$ + 3H$_2$ $\rightleftharpoons$ 2NH$_3$}; \B{তাপমাত্রা:} {\lat 450--550\,°C}; \B{চাপ:} {\lat 200\,atm}; \B{প্রভাবক:} {\lat Fe + K$_2$O + Al$_2$O$_3$}
+    \item \textbf{\B{স্পর্শ পদ্ধতি (সালফিউরিক এসিড):}} {\lat 2SO$_2$ + O$_2$ $\rightleftharpoons$ 2SO$_3$}; \B{তাপমাত্রা:} {\lat 400--500\,°C}; \B{চাপ:} {\lat 1.7\,atm}; \B{প্রভাবক:} {\lat V$_2$O$_5$}
+    \item \textbf{\B{অস্টওয়াল্ড পদ্ধতি (নাইট্রিক এসিড):}} {\lat 4NH$_3$ + 5O$_2$ $\rightarrow$ 4NO + 6H$_2$O}; \B{তাপমাত্রা:} {\lat 850\,°C}; \B{প্রভাবক:} {\lat Pt/Rh}
+    \item \textbf{\B{সোলভে পদ্ধতি (সোডিয়াম কার্বনেট):}} {\lat NaCl + NH$_3$ + CO$_2$ + H$_2$O $\rightarrow$ NaHCO$_3$ + NH$_4$Cl}
+    \item \textbf{\B{ডাউন পদ্ধতি (সোডিয়াম):}} \B{গলিত} {\lat NaCl} \B{এর তড়িৎ বিশ্লেষণ}
+\end{itemize}
+
+\chsub{}{গুরুত্বপূর্ণ জৈব বিক্রিয়া}
+
+\begin{itemize}
+    \item \textbf{\B{মার্কভনিকভের নিয়ম:}} \B{হাইড্রোজেন পরমাণু সেই কার্বনে যুক্ত হয় যে কার্বনে বেশি হাইড্রোজেন আছে।}
+    \item \textbf{\B{জাইতসেভের নিয়ম:}} \B{বেশি প্রতিস্থাপিত অ্যালকিন মুখ্য উৎপাদ।}
+    \item \textbf{\B{উলফ-কিশনার বিজারণ:}} {\lat $>$C=O $\rightarrow$ $>$CH$_2$}; \B{প্রভাবক:} {\lat KOH, N$_2$H$_4$}
+    \item \textbf{\B{ক্লেমেনসেন বিজারণ:}} {\lat $>$C=O $\rightarrow$ $>$CH$_2$}; \B{প্রভাবক: জিংক-অ্যামালগাম + গাঢ়} {\lat HCl}
+    \item \textbf{\B{স্যান্ডমায়ার বিক্রিয়া:}} {\lat ArN$_2$Cl + CuCl $\rightarrow$ ArCl + N$_2$}
+    \item \textbf{\B{কোলবে বিক্রিয়া:}} {\lat 2HCOONa $\xrightarrow{\Delta}$ Na$_2$CO$_3$ + H$_2$ + CO$_2$}
+    \item \textbf{\B{রাইমার-টিম্যান বিক্রিয়া:}} \B{ফেনল থেকে স্যালিসিলালডিহাইড তৈরি;} {\lat CHCl$_3$/NaOH} \B{প্রভাবক}
+\end{itemize}
+
+\chsub{}{গুরুত্বপূর্ণ তথ্য}
+
+\begin{itemize}
+    \item \textbf{\B{তেজস্ক্রিয় মৌল:}} {\lat U, Th, Ra, Rn, Po, At, Fr, Ac, Pa} \B{ইত্যাদি}
+    \item \textbf{\B{নোবেল গ্যাস:}} {\lat He, Ne, Ar, Kr, Xe, Rn}
+    \item \textbf{\B{হ্যালোজেন:}} {\lat F, Cl, Br, I, At}
+    \item \textbf{\B{অ্যালকালি ধাতু:}} {\lat Li, Na, K, Rb, Cs, Fr}
+    \item \textbf{\B{অ্যালকালাইন আর্থ ধাতু:}} {\lat Be, Mg, Ca, Sr, Ba, Ra}
+    \item \textbf{\B{অর্ধপরিবাহী:}} {\lat Si, Ge, As, Sb, Te}
+    \item \textbf{\B{অ্যাম্ফোটেরিক অক্সাইড:}} {\lat Al$_2$O$_3$, ZnO, SnO, PbO, Cr$_2$O$_3$}
+    \item \textbf{\B{সবল এসিড:}} {\lat HCl, HBr, HI, HNO$_3$, H$_2$SO$_4$, HClO$_4$}
+    \item \textbf{\B{সবল ক্ষার:}} {\lat NaOH, KOH, Ca(OH)$_2$, Ba(OH)$_2$}
+    \item \textbf{\B{বাফার দ্রবণ:}} \B{দুর্বল এসিড + সংযুগ ক্ষার; উদা:} {\lat CH$_3$COOH + CH$_3$COONa}
+\end{itemize}
+
+\end{multicols*}
 \end{document}"""
 
 with open("chemistry.tex", "w", encoding="utf-8") as f:
