@@ -2141,14 +2141,24 @@ $P\!=\!Q$ & $180°$ & $R = 0$ \B{(সর্বনিম্ন)} & $\theta=0°$ &
 \end{document}
 '''
 
+
+tex_content = tex_content  
+
 with open("physics_both_fixed.tex", "w", encoding="utf-8") as f:
     f.write(tex_content)
 
 def run(cmd):
     return subprocess.run(cmd, shell=True).returncode
 
-latex_cmd = "xelatex" if shutil.which("xelatex") else "nix shell nixpkgs#texliveFull -c xelatex"
+if not shutil.which("fc-cache"):
+    run("apt-get update && apt-get install -y fontconfig")
+
+if not shutil.which("xelatex"):
+    run("apt-get update && apt-get install -y texlive-full")
+
 run("fc-cache -fv 2>/dev/null")
-run(f"{latex_cmd} -interaction=nonstopmode physics_both_fixed.tex 2>&1 | tail -20")
-run(f"{latex_cmd} -interaction=nonstopmode physics_both_fixed.tex 2>&1 | tail -5")
+
+run("xelatex -interaction=nonstopmode physics_both_fixed.tex 2>&1 | tail -20")
+run("xelatex -interaction=nonstopmode physics_both_fixed.tex 2>&1 | tail -5")
+
 print("PDF ready:", os.path.exists("physics_both_fixed.pdf"))
