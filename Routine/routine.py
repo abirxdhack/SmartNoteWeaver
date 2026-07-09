@@ -1,194 +1,318 @@
-import subprocess
-import os
+import subprocess, os, shutil, sys
 
-tex_content = r"""
-\documentclass[7.5pt,a4paper]{article}
+FONTS = "/tmp/routine/fonts"
+
+TEX = r"""\documentclass[8pt,a4paper]{extarticle}
 \usepackage{fontspec}
-\usepackage[left=0.3cm,right=0.3cm,top=0.2cm,bottom=0.2cm]{geometry}
-\usepackage{xcolor}
+\usepackage[left=0.28cm,right=0.28cm,top=0.22cm,bottom=0.22cm]{geometry}
+\usepackage[table]{xcolor}
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{colortbl}
-\usepackage{enumitem}
-\usepackage{microtype}
+\usepackage[protrusion=false]{microtype}
 \pagestyle{empty}
 \hbadness=10000
-\setlength{\emergencystretch}{10pt}
+\vbadness=10000
+\sloppy
+\tolerance=9999
+\emergencystretch=25pt
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Latin Modern Roman}
-\newfontfamily\bn{Noto Serif Bengali}[Script=Bengali, BoldFont=Noto Serif Bengali Bold]
-\newfontfamily\stylish{LiberationSerif-Bold}
+\newfontfamily\bn[
+  Path=./fonts/,
+  Extension=.ttf,
+  Script=Bengali,
+  Ligatures=TeX,
+  UprightFont=NotoSerifBengali-Regular,
+  BoldFont=NotoSerifBengali-Bold,
+  ItalicFont=NotoSerifBengali-Regular,
+  BoldItalicFont=NotoSerifBengali-Bold
+]{NotoSerifBengali-Regular}
 \newcommand{\B}[1]{{\bn #1}}
 
-\definecolor{headerblue}{HTML}{C7DFFF}
+\definecolor{hdr}{RGB}{55,55,55}
+\definecolor{dayhdr}{RGB}{55,55,55}
+\definecolor{sechdr}{RGB}{220,220,220}
+\definecolor{timecol}{RGB}{240,240,240}
+\definecolor{pray}{RGB}{230,230,230}
+\definecolor{rowodd}{RGB}{248,248,248}
+\definecolor{roweven}{RGB}{255,255,255}
+\definecolor{tutor}{RGB}{235,235,235}
+\definecolor{notebg}{RGB}{230,230,230}
+\definecolor{firstpaper}{RGB}{255,255,255}
+\definecolor{secondpaper}{RGB}{246,246,246}
 
-\definecolor{c1}{HTML}{D0E4FF}
-\definecolor{c2}{HTML}{D6E8FF}
-\definecolor{c3}{HTML}{DCEBFF}
-\definecolor{c4}{HTML}{E2EEFF}
-\definecolor{c5}{HTML}{E7F2FF}
-\definecolor{c6}{HTML}{ECF5FF}
-\definecolor{c7}{HTML}{F0F7FF}
-\definecolor{c8}{HTML}{F3F9FF}
-\definecolor{c9}{HTML}{F6FBFF}
-\definecolor{c10}{HTML}{F9FCFF}
-\definecolor{c11}{HTML}{FCFDFF}
-\definecolor{c12}{HTML}{FFFFFF}
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.3pt}
+\setlength{\tabcolsep}{1.4pt}
+\setlength{\arrayrulewidth}{0.32pt}
+\renewcommand{\arraystretch}{0.9}
 
 \begin{document}
-
-\begin{center}
-{\large\bfseries\stylish Smart Study Routine}\\[0.5pt]
-{\scriptsize\color{black}By Abir Arafat Chawdhury --- HSC 2027}\\
-{\scriptsize\color{black}The Complete HSC Academic Success Routine}
-\end{center}
-
-\vspace{0.5pt}
-
-\setlength{\tabcolsep}{1.5pt}
-\setlength{\arrayrulewidth}{0.4pt}
-\renewcommand{\arraystretch}{0.80}
-
 \noindent
-\begin{tabularx}{\textwidth}{|
->{\centering\arraybackslash}X|
->{\centering\arraybackslash}X|
->{\centering\arraybackslash}X|
->{\centering\arraybackslash}X|
->{\centering\arraybackslash}X|
->{\centering\arraybackslash}X|
->{\centering\arraybackslash}X|}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{1.55cm}|*{7}{>{\centering\arraybackslash}X|}}
 \hline
-\rowcolor{headerblue}\color{black}\bfseries\small Saturday &
-\color{black}\bfseries\small Sunday &
-\color{black}\bfseries\small Monday &
-\color{black}\bfseries\small Tuesday &
-\color{black}\bfseries\small Wednesday &
-\color{black}\bfseries\small Thursday &
-\color{black}\bfseries\small Friday \\
+\multicolumn{8}{|c|}{\cellcolor{hdr}\color{white}\bfseries\large \B{স্মার্ট স্টাডি রুটিন} \textnormal{---} \B{আবির আরাফাত চৌধুরী, এইচএসসি ২০২৭}}\\
 \hline
-\rowcolor{c1}\tiny Morning & \tiny Morning & \tiny Morning & \tiny Morning & \tiny Morning & \tiny Morning & \tiny Morning \\
+\rowcolor{dayhdr}
+\color{white}\bfseries\small \B{সময়} &
+\color{white}\bfseries\small \B{শনিবার} &
+\color{white}\bfseries\small \B{রবিবার} &
+\color{white}\bfseries\small \B{সোমবার} &
+\color{white}\bfseries\small \B{মঙ্গলবার} &
+\color{white}\bfseries\small \B{বুধবার} &
+\color{white}\bfseries\small \B{বৃহস্পতিবার} &
+\color{white}\bfseries\small \B{শুক্রবার} \\
 \hline
-\rowcolor{c2}\tiny Wake up \textbf{4:30am} & \tiny 4:30am & \tiny 4:30am & \tiny 4:30am & \tiny 4:30am & \tiny 4:30am & \tiny 4:30am \\
+\rowcolor{dayhdr}
+\color{white}\tiny \B{---} &
+\color{white}\tiny \B{১ম পত্র দিন} &
+\color{white}\tiny \B{২য় পত্র দিন} &
+\color{white}\tiny \B{১ম পত্র দিন} &
+\color{white}\tiny \B{২য় পত্র দিন} &
+\color{white}\tiny \B{১ম পত্র দিন} &
+\color{white}\tiny \B{২য় পত্র দিন} &
+\color{white}\tiny \B{মেগা রিভিউ} \\
 \hline
-\rowcolor{c3}\tiny\textbf{\B{ফজর}} \textbf{4:30--4:50} & \tiny\textbf{\B{ফজর}} \textbf{4:30--4:50} & \tiny\textbf{\B{ফজর}} \textbf{4:30--4:50} & \tiny\textbf{\B{ফজর}} \textbf{4:30--4:50} & \tiny\textbf{\B{ফজর}} \textbf{4:30--4:50} & \tiny\textbf{\B{ফজর}} \textbf{4:30--4:50} & \tiny\textbf{\B{ফজর}} \textbf{4:30--4:50} \\
+\rowcolor{sechdr}
+\multicolumn{8}{|c|}{\bfseries\small \B{সকাল}}\\
 \hline
-\rowcolor{c4}\tiny SS1 \textbf{5:00--7:00am} & \tiny SS1 \textbf{5:00--7:00am} & \tiny SS1 \textbf{5:00--7:00am} & \tiny SS1 \textbf{5:00--7:00am} & \tiny SS1 \textbf{5:00--7:00am} & \tiny SS1 \textbf{5:00--7:00am} & \tiny SS1 \textbf{5:00--7:00am} \\
+\rowcolor{pray}
+\scriptsize\bfseries \B{৪:৩০--৫:০০} &
+\multicolumn{7}{c|}{\scriptsize \B{ঘুম থেকে ওঠা} \textbf{৪:৩০} \quad\textbar\quad \textbf{\B{ফজর নামাজ ৪:৩০--৪:৫০}}}\\
 \hline
-\rowcolor{c5}\tiny Eat,Move,Rest \textbf{7:00--8:00am} & \tiny Eat,Move,Rest \textbf{7:00--8:00am} & \tiny Eat,Move,Rest \textbf{7:00--8:00am} & \tiny Eat,Move,Rest \textbf{7:00--8:00am} & \tiny Eat,Move,Rest \textbf{7:00--8:00am} & \tiny Eat,Move,Rest \textbf{7:00--8:00am} & \tiny Eat,Move,Rest \textbf{7:00--8:00am} \\
+\cellcolor{timecol}\scriptsize\bfseries \B{৫:০০--৬:০০} &
+\cellcolor{firstpaper}\tiny \B{পদার্থবিজ্ঞান ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{পদার্থবিজ্ঞান ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{রসায়ন ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{রসায়ন ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{উচ্চতর গণিত ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{উচ্চতর গণিত ২য় পত্র} &
+\tiny \B{সবচেয়ে দুর্বল টপিক} \\
 \hline
-\rowcolor{c6}\tiny SS2 \textbf{8:00am--1:00pm} & \tiny SS2 \textbf{8:00am--1:00pm} & \tiny SS2 \textbf{8:00am--1:00pm} & \tiny SS2 \textbf{8:00am--1:00pm} & \tiny SS2 \textbf{8:00am--1:00pm} & \tiny SS2 \textbf{8:00am--1:00pm} & \tiny SS2 \textbf{8:00am--1:00pm} \\
+\cellcolor{timecol}\scriptsize\bfseries \B{৬:০০--৭:০০} &
+\cellcolor{firstpaper}\tiny \B{উচ্চতর গণিত ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{উচ্চতর গণিত ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{জীববিজ্ঞান ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{জীববিজ্ঞান ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{পদার্থবিজ্ঞান ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{পদার্থবিজ্ঞান ২য় পত্র} &
+\tiny \B{মক পরীক্ষা (চলমান)} \\
 \hline
-\rowcolor{c3}\tiny\textbf{\B{যোহর}} \textbf{1:20--2:00pm} & \tiny\textbf{\B{যোহর}} \textbf{1:20--2:00pm} & \tiny\textbf{\B{যোহর}} \textbf{1:20--2:00pm} & \tiny\textbf{\B{যোহর}} \textbf{1:20--2:00pm} & \tiny\textbf{\B{যোহর}} \textbf{1:20--2:00pm} & \tiny\textbf{\B{যোহর}} \textbf{1:20--2:00pm} & \tiny\textbf{\B{যোহর}} \textbf{1:20--2:00pm} \\
+\rowcolor{rowodd}
+\scriptsize\bfseries \B{৭:০০--৮:০০} &
+\multicolumn{7}{c|}{\scriptsize \B{নাস্তা, হাঁটাচলা, বিশ্রাম}}\\
 \hline
-\rowcolor{c7}\tiny Afternoon & \tiny Afternoon & \tiny Afternoon & \tiny Afternoon & \tiny Afternoon & \tiny Afternoon & \tiny Afternoon \\
+\cellcolor{timecol}\scriptsize\bfseries \B{৮:০০--৯:০০} &
+\cellcolor{firstpaper}\tiny \B{রসায়ন ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{রসায়ন ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{পদার্থবিজ্ঞান ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{পদার্থবিজ্ঞান ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{রসায়ন ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{রসায়ন ২য় পত্র} &
+\tiny \B{ফুল বোর্ড মক পরীক্ষা} \\
 \hline
-\rowcolor{c8}\tiny Lunch,Shower \textbf{2:00--3:00pm} & \tiny Lunch,Shower \textbf{2:00--3:00pm} & \tiny Lunch,Shower \textbf{2:00--3:00pm} & \tiny Lunch,Shower \textbf{2:00--3:00pm} & \tiny Lunch,Shower \textbf{2:00--3:00pm} & \tiny Lunch,Shower \textbf{2:00--3:00pm} & \tiny Self Study \textbf{2:00--3:00pm} \\
+\cellcolor{timecol}\scriptsize\bfseries \B{৯:১০--১০:১০} &
+\cellcolor{firstpaper}\tiny \B{জীববিজ্ঞান ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{জীববিজ্ঞান ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{উচ্চতর গণিত ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{উচ্চতর গণিত ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{জীববিজ্ঞান ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{জীববিজ্ঞান ২য় পত্র} &
+\tiny \B{মক (চলমান)} \\
 \hline
-\rowcolor{c9}\tiny\textbf{3:00--4:00pm}: \B{শাহিন স্যার} & \tiny\textbf{3:00--4:00pm}: \B{নুর আলম স্যার} & \tiny\textbf{3:00--4:00pm}: \B{শাহিন স্যার} & \tiny\textbf{3:00--4:00pm}: \B{নুর আলম স্যার} & \tiny\textbf{3:00--4:00pm}: \B{শাহিন স্যার} & \tiny\textbf{3:00--4:00pm}: \B{নুর আলম স্যার} & \tiny Self Study \\
+\cellcolor{timecol}\scriptsize\bfseries \B{১০:২০--১১:২০} &
+\cellcolor{firstpaper}\tiny \B{বাংলা ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{বাংলা ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{বাংলা ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{বাংলা ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{বাংলা ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{বাংলা ২য় পত্র} &
+\tiny \B{মক (চলমান)} \\
 \hline
-\rowcolor{c10}\tiny Rest,Snack \textbf{4:00--5:00pm} & \tiny Rest,Snack \textbf{4:00--5:00pm} & \tiny Rest,Snack \textbf{4:00--5:00pm} & \tiny Rest,Snack \textbf{4:00--5:00pm} & \tiny Rest,Snack \textbf{4:00--5:00pm} & \tiny Rest,Snack \textbf{4:00--5:00pm} & \tiny Rest,Snack \textbf{4:00--5:00pm} \\
+\cellcolor{timecol}\scriptsize\bfseries \B{১১:৩০--১২:৩০} &
+\cellcolor{firstpaper}\tiny \B{আইসিটি} &
+\cellcolor{secondpaper}\tiny \B{আইসিটি} &
+\cellcolor{firstpaper}\tiny \B{আইসিটি} &
+\cellcolor{secondpaper}\tiny \B{আইসিটি} &
+\cellcolor{firstpaper}\tiny \B{আইসিটি} &
+\cellcolor{secondpaper}\tiny \B{আইসিটি} &
+\tiny \B{উত্তরপত্র মিলানো} \\
 \hline
-\rowcolor{c3}\tiny\textbf{\B{আসর}} \textbf{5:00--5:15pm} & \tiny\textbf{\B{আসর}} \textbf{5:00--5:15pm} & \tiny\textbf{\B{আসর}} \textbf{5:00--5:15pm} & \tiny\textbf{\B{আসর}} \textbf{5:00--5:15pm} & \tiny\textbf{\B{আসর}} \textbf{5:00--5:15pm} & \tiny\textbf{\B{আসর}} \textbf{5:00--5:15pm} & \tiny\textbf{\B{আসর}} \textbf{5:00--5:15pm} \\
+\cellcolor{timecol}\scriptsize\bfseries \B{১২:৩০--১:০০} &
+\cellcolor{firstpaper}\tiny \B{মডেল প্রশ্ন সমাধান} &
+\cellcolor{secondpaper}\tiny \B{মডেল প্রশ্ন সমাধান} &
+\cellcolor{firstpaper}\tiny \B{মডেল প্রশ্ন সমাধান} &
+\cellcolor{secondpaper}\tiny \B{মডেল প্রশ্ন সমাধান} &
+\cellcolor{firstpaper}\tiny \B{মডেল প্রশ্ন সমাধান} &
+\cellcolor{secondpaper}\tiny \B{মডেল প্রশ্ন সমাধান} &
+\tiny \B{ভুল বিশ্লেষণ} \\
 \hline
-\rowcolor{c11}\tiny\textbf{5:15--6:00pm}: \B{মোরসালিন স্যার} & \tiny Self Study & \tiny\textbf{5:15--6:00pm}: \B{মোরসালিন স্যার} & \tiny Self Study & \tiny\textbf{5:15--6:00pm}: \B{মোরসালিন স্যার} & \tiny Self Study & \tiny Self Study \\
+\rowcolor{pray}
+\scriptsize\bfseries \B{১:২০--২:০০} &
+\multicolumn{7}{c|}{\scriptsize \textbf{\B{যোহর নামাজ + দুপুরের খাবার}}}\\
 \hline
-\rowcolor{c12}\tiny Self Study & \tiny\textbf{5:00--6:00pm}: \B{হেদায়েত স্যার} & \tiny Self Study & \tiny\textbf{5:00--6:00pm}: \B{হেদায়েত স্যার} & \tiny Self Study & \tiny\textbf{5:00--6:00pm}: \B{হেদায়েত স্যার} & \tiny Self Study \\
+\rowcolor{sechdr}
+\multicolumn{8}{|c|}{\bfseries\small \B{বিকাল}}\\
 \hline
-\rowcolor{c1}\tiny Move,Eat,Reset \textbf{6:00--6:30pm} & \tiny Move,Eat,Reset \textbf{6:00--6:30pm} & \tiny Move,Eat,Reset \textbf{6:00--6:30pm} & \tiny Move,Eat,Reset \textbf{6:00--6:30pm} & \tiny Move,Eat,Reset \textbf{6:00--6:30pm} & \tiny Move,Eat,Reset \textbf{6:00--6:30pm} & \tiny Move,Eat,Reset \textbf{6:00--6:30pm} \\
+\rowcolor{tutor}
+\scriptsize\bfseries \B{২:০০--৩:০০} &
+\tiny \B{লাঞ্চ, গোসল (২:০০--২:৩০)} &
+\tiny \textbf{\B{নুর আলম স্যার (ইংরেজী)}} &
+\tiny \B{লাঞ্চ, গোসল (২:০০--২:৩০)} &
+\tiny \textbf{\B{নুর আলম স্যার (ইংরেজী)}} &
+\tiny \B{লাঞ্চ, গোসল (২:০০--২:৩০)} &
+\tiny \textbf{\B{নুর আলম স্যার (ইংরেজী)}} &
+\tiny \B{স্বাধীন পড়াশোনা (বাংলা ১ম+২য় পত্র)} \\
 \hline
-\rowcolor{c3}\tiny\textbf{\B{মাগরিব}} \textbf{6:50--7:10pm} & \tiny\textbf{\B{মাগরিব}} \textbf{6:50--7:10pm} & \tiny\textbf{\B{মাগরিব}} \textbf{6:50--7:10pm} & \tiny\textbf{\B{মাগরিব}} \textbf{6:50--7:10pm} & \tiny\textbf{\B{মাগরিব}} \textbf{6:50--7:10pm} & \tiny\textbf{\B{মাগরিব}} \textbf{6:50--7:10pm} & \tiny\textbf{\B{মাগরিব}} \textbf{6:50--7:10pm} \\
+\rowcolor{tutor}
+\scriptsize\bfseries \B{২:৩০--৩:৩০} &
+\tiny \textbf{\B{শাহিন স্যার (পদার্থবিজ্ঞান)}} &
+\tiny \B{লাঞ্চ, গোসল (৩:০০--৩:৩০)} &
+\tiny \textbf{\B{শাহিন স্যার (পদার্থবিজ্ঞান)}} &
+\tiny \B{লাঞ্চ, গোসল (৩:০০--৩:৩০)} &
+\tiny \textbf{\B{শাহিন স্যার (পদার্থবিজ্ঞান)}} &
+\tiny \B{লাঞ্চ, গোসল (৩:০০--৩:৩০)} &
+\tiny \B{স্বাধীন পড়াশোনা (আইসিটি রিভিশন)} \\
 \hline
-\rowcolor{c8}\tiny Evening & \tiny Evening & \tiny Evening & \tiny Evening & \tiny Evening & \tiny Evening & \tiny Evening \\
+\rowcolor{rowodd}
+\scriptsize\bfseries \B{৩:৩০--৪:০০} &
+\multicolumn{7}{c|}{\scriptsize \B{বিকেলের নাস্তা, বিশ্রাম}}\\
 \hline
-\rowcolor{c9}\tiny SS4 \textbf{7:10--10:10pm} & \tiny SS4 \textbf{7:10--10:10pm} & \tiny SS4 \textbf{7:10--10:10pm} & \tiny SS4 \textbf{7:10--10:10pm} & \tiny SS4 \textbf{7:10--10:10pm} & \tiny SS4 \textbf{7:10--10:10pm} & \tiny SS4 \textbf{7:10--10:10pm} \\
+\rowcolor{tutor}
+\scriptsize\bfseries \B{৪:০০--৫:০০} &
+\tiny \textbf{\B{মোরসালিন স্যার (উচ্চতর গণিত)}} &
+\tiny \B{স্বাধীন পড়াশোনা (রসায়ন ২য় পত্র)} &
+\tiny \textbf{\B{মোরসালিন স্যার (উচ্চতর গণিত)}} &
+\tiny \B{স্বাধীন পড়াশোনা (জীববিজ্ঞান ২য় পত্র)} &
+\tiny \textbf{\B{মোরসালিন স্যার (উচ্চতর গণিত)}} &
+\tiny \B{স্বাধীন পড়াশোনা (পদার্থবিজ্ঞান ২য় পত্র)} &
+\tiny \B{স্বাধীন পড়াশোনা (উচ্চতর গণিত রিভিশন)} \\
 \hline
-\rowcolor{c3}\tiny\textbf{\B{এশা}} \textbf{8:45--9:10pm} & \tiny\textbf{\B{এশা}} \textbf{8:45--9:10pm} & \tiny\textbf{\B{এশা}} \textbf{8:45--9:10pm} & \tiny\textbf{\B{এশা}} \textbf{8:45--9:10pm} & \tiny\textbf{\B{এশা}} \textbf{8:45--9:10pm} & \tiny\textbf{\B{এশা}} \textbf{8:45--9:10pm} & \tiny\textbf{\B{এশা}} \textbf{8:45--9:10pm} \\
+\rowcolor{pray}
+\scriptsize\bfseries \B{৫:০০--৫:১৫} &
+\multicolumn{7}{c|}{\scriptsize \textbf{\B{আসর নামাজ}} \B{(সবার জন্য; হেদায়েত স্যারের ক্লাস সংক্ষিপ্ত বিরতিতে থাকে)}}\\
 \hline
-\rowcolor{c10}\tiny Eat,Move \textbf{10:10--11:20pm} & \tiny Eat,Move \textbf{10:10--11:20pm} & \tiny Eat,Move \textbf{10:10--11:20pm} & \tiny Eat,Move \textbf{10:10--11:20pm} & \tiny Eat,Move \textbf{10:10--11:20pm} & \tiny Eat,Move \textbf{10:10--11:20pm} & \tiny Eat,Move \textbf{10:10--11:20pm} \\
+\rowcolor{tutor}
+\scriptsize\bfseries \B{৫:১৫--৬:০০} &
+\tiny \B{স্বাধীন পড়াশোনা (জীববিজ্ঞান ১ম পত্র)} &
+\tiny \textbf{\B{হেদায়েত স্যার (রসায়ন)}} &
+\tiny \B{স্বাধীন পড়াশোনা (উচ্চতর গণিত ১ম পত্র)} &
+\tiny \textbf{\B{হেদায়েত স্যার (রসায়ন)}} &
+\tiny \B{স্বাধীন পড়াশোনা (পদার্থবিজ্ঞান ১ম পত্র)} &
+\tiny \textbf{\B{হেদায়েত স্যার (রসায়ন)}} &
+\tiny \B{স্বাধীন পড়াশোনা (রসায়ন রিভিশন)} \\
 \hline
-\rowcolor{c11}\tiny SS5 \textbf{10:10--11:20pm} & \tiny SS5 \textbf{10:10--11:20pm} & \tiny SS5 \textbf{10:10--11:20pm} & \tiny SS5 \textbf{10:10--11:20pm} & \tiny SS5 \textbf{10:10--11:20pm} & \tiny SS5 \textbf{10:10--11:20pm} & \tiny SS5 \textbf{10:10--11:20pm} \\
+\rowcolor{rowodd}
+\scriptsize\bfseries \B{৬:০০--৬:৩০} &
+\multicolumn{7}{c|}{\scriptsize \B{হাঁটাচলা, হালকা খাবার, রিসেট}}\\
 \hline
-\rowcolor{c12}\tiny Go to Bed \textbf{11:20pm} & \tiny Go to Bed \textbf{11:20pm} & \tiny Go to Bed \textbf{11:20pm} & \tiny Go to Bed \textbf{11:20pm} & \tiny Go to Bed \textbf{11:20pm} & \tiny Go to Bed \textbf{11:20pm} & \tiny Go to Bed \textbf{11:20pm} \\
+\rowcolor{pray}
+\scriptsize\bfseries \B{৬:৫০--৭:১০} &
+\multicolumn{7}{c|}{\scriptsize \textbf{\B{মাগরিব নামাজ}}}\\
+\hline
+\rowcolor{sechdr}
+\multicolumn{8}{|c|}{\bfseries\small \B{সন্ধ্যা --- সেশন-৪ (৭:১০--১০:১০, প্রতিদিন)}}\\
+\hline
+\cellcolor{timecol}\scriptsize\bfseries \B{৭:১০--৭:৫৫} &
+\cellcolor{firstpaper}\tiny \B{ইংরেজী ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{ইংরেজী ১ম পত্র} &
+\cellcolor{firstpaper}\tiny \B{ইংরেজী ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{ইংরেজী ১ম পত্র} &
+\cellcolor{firstpaper}\tiny \B{ইংরেজী ১ম পত্র} &
+\cellcolor{secondpaper}\tiny \B{ইংরেজী ১ম পত্র} &
+\tiny \B{ব্যাকলগ ক্লিয়ারেন্স} \\
+\hline
+\cellcolor{timecol}\scriptsize\bfseries \B{৮:০০--৮:৪৫} &
+\cellcolor{firstpaper}\tiny \B{ইংরেজী ২য় পত্র} &
+\cellcolor{secondpaper}\tiny \B{ইংরেজী ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{ইংরেজী ২য় পত্র} &
+\cellcolor{secondpaper}\tiny \B{ইংরেজী ২য় পত্র} &
+\cellcolor{firstpaper}\tiny \B{ইংরেজী ২য় পত্র} &
+\cellcolor{secondpaper}\tiny \B{ইংরেজী ২য় পত্র} &
+\tiny \B{বাংলা ১ম+২য় রিভিশন} \\
+\hline
+\rowcolor{pray}
+\scriptsize\bfseries \B{৮:৪৫--৯:১০} &
+\multicolumn{7}{c|}{\scriptsize \textbf{\B{এশা নামাজ + রাতের খাবার}} \B{(সেশন-৪ এর মাঝে সংক্ষিপ্ত বিরতি)}}\\
+\hline
+\cellcolor{timecol}\scriptsize\bfseries \B{৯:১০--১০:১০} &
+\cellcolor{firstpaper}\tiny \B{পদার্থ+গণিত+রসায়ন দ্রুত রিভিশন} &
+\cellcolor{secondpaper}\tiny \B{পদার্থ+গণিত+রসায়ন দ্রুত রিভিশন} &
+\cellcolor{firstpaper}\tiny \B{রসায়ন+জীব+বাংলা দ্রুত রিভিশন} &
+\cellcolor{secondpaper}\tiny \B{রসায়ন+জীব+বাংলা দ্রুত রিভিশন} &
+\cellcolor{firstpaper}\tiny \B{গণিত+পদার্থ+জীব দ্রুত রিভিশন} &
+\cellcolor{secondpaper}\tiny \B{গণিত+পদার্থ+জীব দ্রুত রিভিশন} &
+\tiny \B{আইসিটি সম্পূর্ণ রিভিশন} \\
+\hline
+\rowcolor{rowodd}
+\scriptsize\bfseries \B{১০:১০--১০:৩০} &
+\multicolumn{7}{c|}{\scriptsize \B{হালকা খাবার, হাঁটাচলা}}\\
+\hline
+\rowcolor{roweven}
+\scriptsize\bfseries \B{১০:৩০--১১:৪০} &
+\multicolumn{7}{c|}{\scriptsize \textbf{\B{সেশন-৫ (বিরতিহীন):}} \B{ইংরেজী ১ম পত্র ৩০মি + ইংরেজী ২য় পত্র ৩০মি + সারাদিনের ১০মি স্ক্যান}}\\
+\hline
+\rowcolor{pray}
+\scriptsize\bfseries \B{১১:৪০} &
+\multicolumn{7}{c|}{\scriptsize \textbf{\B{ঘুমাতে যাওয়া}}}\\
+\hline
+\rowcolor{notebg}
+\multicolumn{8}{|p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{%
+\tiny
+\textbf{\B{সেশন-১ (৫:০০--৭:০০, ২ঘ বিরতিহীন):}} \B{কঠিনতম ২টি বিষয়, প্রতিটি ১ ঘণ্টা করে।}
+\quad\textbf{\B{সেশন-২ (৮:০০--১:০০, ৫ঘ):}} \B{৪টি বিষয় + আইসিটি ১ঘ + মডেল টেস্ট ৩০মি; প্রতিটি সাইকেলের পর ১০মি বিরতি।}
+\quad\textbf{\B{সেশন-৪ (৭:১০--১০:১০, ৩ঘ):}} \B{ইংরেজী ১ম ৪৫মি + ইংরেজী ২য় ৪৫মি + দ্রুত রিভিশন ১ঘ১০মি।}
+\quad\textbf{\B{সেশন-৫ (১০:৩০--১১:৪০):}} \B{ইংরেজী ৩০+৩০মি + স্ক্যান রিভিশন ১০মি।}
+}\\
+\hline
+\rowcolor{notebg}
+\multicolumn{8}{|p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{%
+\tiny
+\textbf{\B{বিষয় ও সময়:}}
+\B{পদার্থবিজ্ঞান ১ম/২য় (১ঘ)} \textbar{}
+\B{উচ্চতর গণিত ১ম/২য় (১ঘ)} \textbar{}
+\B{রসায়ন ১ম/২য় (১ঘ)} \textbar{}
+\B{জীববিজ্ঞান ১ম/২য় (১ঘ)} \textbar{}
+\B{বাংলা ১ম/২য় (১ঘ)} \textbar{}
+\B{ইংরেজী ১ম+২য় পত্র (৪৫মি করে)} \textbar{}
+\B{আইসিটি (১ঘ)}
+\quad
+\textbf{\B{শনি/সোম/বুধ = ১ম পত্র দিন। রবি/মঙ্গল/বৃহস্পতি = ২য় পত্র দিন। শুক্রবার = মেগা রিভিউ।}}
+}\\
+\hline
+\rowcolor{notebg}
+\multicolumn{8}{|p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{%
+\tiny
+\textbf{\B{প্রাইভেট গৃহশিক্ষক:}}
+\B{শাহিন স্যার --- পদার্থবিজ্ঞান (শনি/সোম/বুধ ২:৩০--৩:৩০)} \textbar{}
+\B{মোরসালিন স্যার --- উচ্চতর গণিত (শনি/সোম/বুধ ৪:০০--৫:০০)} \textbar{}
+\B{নুর আলম স্যার --- ইংরেজী (রবি/মঙ্গল/বৃহস্পতি ২:০০--৩:০০)} \textbar{}
+\B{হেদায়েত স্যার --- রসায়ন (রবি/মঙ্গল/বৃহস্পতি ৫:১৫--৬:০০)}
+\quad
+\textbf{\B{৫ ওয়াক্ত নামাজ:}}
+\B{ফজর ৪:৩০--৪:৫০ \textbar{} যোহর ১:২০--২:০০ \textbar{} আসর ৫:০০--৫:১৫ \textbar{} মাগরিব ৬:৫০--৭:১০ \textbar{} এশা ৮:৪৫--৯:১০}
+\quad
+\textbf{\B{খাবার:}} \B{নাস্তা ৭:০০--৮:০০ \textbar{} দুপুর ১:২০--২:০০ \textbar{} বিকেল ৩:৩০--৪:০০ \textbar{} রাত ৮:৪৫--৯:১০ \textbar{} বিশ্রাম রুটিনে নির্ধারিত।}
+}\\
 \hline
 \end{tabularx}
-
-\vspace{0.5pt}
-
-\begin{itemize}[leftmargin=1em, itemsep=0.5pt, topsep=0pt, label=\textbullet, font=\tiny]
-
-\item SS1 -- Study Session 1: \textbf{2 hours NO BREAK deep focused study.} Study hardest subjects. Maximum 2 different topics. \B{কঠিনতম বিষয়:} Higher Math 1st Paper (1hr) + Physics 1st Paper (1hr).
-
-\item SS2 -- Study Session 2: \textbf{5 hours study with 5 to 15 minutes break after each cycle.} Cycle time can be 1 hour 30 minutes to 25 minutes. First cycle medium difficulty. Second cycle RESERVED FOR MODEL QUESTION SOLVE.
-
-\item SS4 -- Study Session 4: \textbf{3 hours study with max 3 breaks.} Study new topics. Example: 1hr 30min+15min break+50min+5min break+30min.
-
-\item SS5 -- Study Session 5: \textbf{1 hour 10 minute study. No break.} Revise whole day. \B{ইংরেজী ১ম পত্র} (30 min) + \B{ইংরেজী ২য় পত্র} (30 min) + 10 min scan.
-
-\end{itemize}
-
-\vspace{0pt}
-
-\noindent\textbf{\tiny Day-wise Schedule:}
-
-\vspace{0.3pt}
-
-\begin{itemize}[leftmargin=1em, itemsep=0pt, topsep=0pt, label=$\triangleright$, font=\tiny]
-
-\item \textbf{Saturday:} SS1: \B{পদার্থবিজ্ঞান ১ম পত্র} \quad SS2: \B{রসায়ন ১ম পত্র} \quad SS4: \B{উচ্চতর গণিত ১ম পত্র} (1.5hr) + \B{তথ্য ও যোগাযোগ প্রযুক্তি} (1.5hr)
-
-\item \textbf{Sunday:} SS1: \B{উচ্চতর গণিত ২য় পত্র} \quad SS2: \B{জীববিজ্ঞান ১ম পত্র} \quad SS4: \B{পদার্থবিজ্ঞান ২য় পত্র} (2hr) + \B{বাংলা ১ম পত্র} (1hr)
-
-\item \textbf{Monday:} SS1: \B{রসায়ন ২য় পত্র} \quad SS2: \B{পদার্থবিজ্ঞান ১ম পত্র} \quad SS4: \B{জীববিজ্ঞান ২য় পত্র} (2hr) + \B{ইংরেজী ১ম পত্র} (30min) + \B{ইংরেজী ২য় পত্র} (30min)
-
-\item \textbf{Tuesday:} SS1: \B{উচ্চতর গণিত ১ম পত্র} \quad SS2: \B{রসায়ন ২য় পত্র} \quad SS4: \B{পদার্থবিজ্ঞান ২য় পত্র} (2hr) + \B{বাংলা ২য় পত্র} (1hr)
-
-\item \textbf{Wednesday:} SS1: \B{জীববিজ্ঞান ২য় পত্র} \quad SS2: \B{উচ্চতর গণিত ২য় পত্র} \quad SS4: \B{রসায়ন ১ম পত্র} (1.5hr) + \B{তথ্য ও যোগাযোগ প্রযুক্তি} (1.5hr)
-
-\item \textbf{Thursday:} SS1: \B{পদার্থবিজ্ঞান ২য় পত্র} \quad SS2: \B{জীববিজ্ঞান ১ম পত্র} \quad SS4: \B{উচ্চতর গণিত ২য় পত্র} (2hr) + \B{ইংরেজী ১ম পত্র} (30min) + \B{ইংরেজী ২য় পত্র} (30min)
-
-\item \textbf{Friday:} \textbf{MEGA REVIEW DAY (No Tuitions).} SS1: Weekly Weakest Topic \quad SS2: Full Board Paper Mock Exam \quad SS4: Backlog Clearance + \B{বাংলা} Fast Revision
-
-\end{itemize}
-
-\vspace{0pt}
-
-\begin{itemize}[leftmargin=1em, itemsep=0pt, topsep=0pt, label=$\triangleright$, font=\tiny]
-
-\item Total Study Time: \textasciitilde{}12.5 hours/day. 1 Cycle $\leq$ 1hr 30min. No break $>$ 15 min. No cycle $<$ 25 min.
-
-\item Break must not be used for mobile phone. Just rest with eyes closed if needed.
-
-\item Commit to this routine for at least \textbf{22 days} consecutively. No rest days. Emergency: SS5 of Friday can be skipped.
-
-\item Tuition Schedule: \B{শাহিন স্যার} Physics (Sat, Mon, Wed 3--4pm), \B{মোরসালিন স্যার} H.Math (Sat, Mon, Wed 5:15--6pm), \B{নুর আলম স্যার} English (Sun, Tue, Thu 3--4pm), \B{হেদায়েত স্যার} Chemistry (Sun, Tue, Thu 5--6pm).
-
-\item \textbf{5 Daily Prayers:} \B{ফজর} 4:30--4:50am | \B{যোহর} 1:20--2:00pm | \B{আসর} 5:00--5:15pm | \B{মাগরিব} 6:50--7:10pm | \B{এশা} 8:45--9:10pm
-
-\end{itemize}
-
-\vspace{0.5pt}
-
-\begin{center}
-\makebox[5cm]{\hrulefill}\\[1pt]
-{\tiny Your Signature (With Date)}
-\end{center}
-
 \end{document}
 """
 
-with open("maxdoc.tex", "w", encoding="utf-8") as f:
-    f.write(tex_content)
+def main():
+    out = "/tmp/routine"
+    os.makedirs(out, exist_ok=True)
+    os.makedirs(os.path.join(out, "fonts"), exist_ok=True)
+    with open(os.path.join(out, "routine.tex"), "w", encoding="utf-8") as f:
+        f.write(TEX.replace("\u200d", ""))
+    xelatex = shutil.which("xelatex") or "/nix/store/6i7mj0hkffgy88bbgii5ffnqfv3awb29-texlive-2025-env/bin/xelatex"
+    for _ in range(2):
+        r = subprocess.run([xelatex, "-interaction=nonstopmode", "routine.tex"], cwd=out, capture_output=True, text=True)
+    ok = os.path.exists(os.path.join(out, "routine.pdf"))
+    if not ok:
+        print(r.stdout[-4000:]); print(r.stderr[-2000:]); sys.exit(1)
+    print("PDF ready")
 
-def run(cmd):
-    result = subprocess.run(cmd, shell=True)
-    return result.returncode
-
-run("apt update -qq --allow-unauthenticated 2>/dev/null; apt install -y texlive-xetex texlive-fonts-recommended texlive-latex-extra texlive-lang-other fonts-noto-core fonts-noto-extra fonts-liberation 2>/dev/null")
-run("fc-cache -fv 2>/dev/null")
-run("xelatex -interaction=nonstopmode maxdoc.tex")
-run("xelatex -interaction=nonstopmode maxdoc.tex")
-
-print("PDF ready:", os.path.exists("maxdoc.pdf"))
+if __name__ == "__main__":
+    main()
