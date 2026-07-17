@@ -1,11 +1,13 @@
-import subprocess, os, shutil, urllib.request, hashlib
+TEX = r"""
 
-tex_content = r'''\documentclass[9pt,a4paper]{extarticle}
+\documentclass[9pt,a4paper]{extarticle}
 \usepackage{fontspec}
 \usepackage{amsmath,amssymb}
 \usepackage{newunicodechar}
-\usepackage[margin=1.0cm, top=1.2cm, bottom=1.0cm]{geometry}
+\usepackage[margin=1.0cm, top=1.5cm, bottom=1.5cm, headsep=6pt, footskip=22pt]{geometry}
 \usepackage{multicol}
+\usepackage{multirow}
+\usepackage{pifont}
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{array}
@@ -18,7 +20,20 @@ tex_content = r'''\documentclass[9pt,a4paper]{extarticle}
 \usepackage{colortbl}
 \usepackage{tikz}
 \usepackage{ucharclasses}
+\usepackage{needspace}
 
+
+\definecolor{tkzA}{RGB}{198,40,40}
+\definecolor{tkzB}{RGB}{25,118,210}
+\definecolor{tkzC}{RGB}{46,125,50}
+\definecolor{tkzD}{RGB}{123,31,162}
+\definecolor{tkzE}{RGB}{230,81,0}
+\definecolor{tkzF}{RGB}{2,119,189}
+\definecolor{tkzG}{RGB}{136,14,79}
+\definecolor{tkzH}{RGB}{51,105,30}
+\tikzset{
+  every path/.style={line join=round,line cap=round},
+}
 \usetikzlibrary{
   arrows.meta,
   calc,
@@ -35,7 +50,21 @@ tex_content = r'''\documentclass[9pt,a4paper]{extarticle}
 \definecolor{tblhdr}{RGB}{210,224,242}
 \definecolor{tblalt}{RGB}{245,247,250}
 
-\pagestyle{empty}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[L]{\small\B{পদার্থবিজ্ঞান — সম্পূর্ণ সূত্র, সংজ্ঞা ও চিত্র}}
+\fancyhead[R]{\small\textbf{By Abir Arafat Chawdhury [Mr. Introvert]}}
+\fancyfoot[L]{\small\B{HSC পদার্থবিজ্ঞান রিভিশন}}
+\fancyfoot[C]{\small\textbf{\thepage}}
+\fancyfoot[R]{\small\textit{Mr. Introvert Notes}}
+\setlength{\headheight}{16pt}
+\setlength{\headsep}{6pt}
+\setlength{\footskip}{18pt}
+
 
 \setlength{\emergencystretch}{25pt}
 \hbadness=10000
@@ -65,6 +94,7 @@ tex_content = r'''\documentclass[9pt,a4paper]{extarticle}
 ]{NotoSerifBengali-Regular}
 
 \newunicodechar{°}{\ensuremath{^\circ}}
+\newunicodechar{।}{{\bn ।}}
 
 \definecolor{sectionbg}{RGB}{65,65,65}
 \definecolor{subsecbg}{RGB}{85,85,85}
@@ -81,6 +111,7 @@ tex_content = r'''\documentclass[9pt,a4paper]{extarticle}
 }
 
 \newcommand{\chsec}[1]{%
+  \needspace{8\baselineskip}%
   \vspace{2pt}%
   \noindent
   \colorbox{sectionbg}{%
@@ -89,10 +120,11 @@ tex_content = r'''\documentclass[9pt,a4paper]{extarticle}
       {\color{white}\B{\small\bfseries #1}}%
     }%
   }%
-  \vspace{1pt}\par
+  \nopagebreak\vspace{1pt}\par\nopagebreak
 }
 
 \newcommand{\chsub}[2]{%
+  \needspace{6\baselineskip}%
   \vspace{2pt}%
   \noindent
   \colorbox{subsecbg}{%
@@ -103,7 +135,7 @@ tex_content = r'''\documentclass[9pt,a4paper]{extarticle}
       \B{\bfseries\footnotesize #2}}%
     }%
   }%
-  \vspace{1pt}\par
+  \nopagebreak\vspace{1pt}\par\nopagebreak
 }
 
 \setlength{\columnseprule}{0.3pt}
@@ -135,14 +167,6 @@ tex_content = r'''\documentclass[9pt,a4paper]{extarticle}
 }
 
 \begin{document}
-
-\begin{center}
-\noindent
-{\B{\Large\bfseries পদার্থবিজ্ঞান ১ম পত্র — সম্পূর্ণ সূত্র, সংজ্ঞা ও চিত্র}}
-\hfill
-{\normalfont\small\textbf{By Abir Arafat Chawdhury  [Mr. Introvert ]}}
-\vspace{3pt}
-\end{center}
 
 \begin{multicols}{2}
 
@@ -1335,21 +1359,21 @@ $P\!=\!Q$ & $180°$ & $R = 0$ \B{(সর্বনিম্ন)} & $\theta=0°$ &
 \hline
 \rowcolor{tblhdr} \B{বস্তু ও ঘূর্ণন অক্ষের প্রকৃতি} & \B{গ্রাফিক চিত্র} & \B{জড়তার ভ্রামক} & \B{চক্রগতির ব্যাসার্ধ} \\
 \hline
-\B{M ভরের ও L দৈর্ঘ্যের সরু ও সুষম দণ্ডের ভরকেন্দ্রগামী লম্ব-অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick,fill=gray!12,rounded corners=1.4pt] (-2.2,-0.13) rectangle (2.2,0.13);\draw (-2.2,0) circle (0.13);\draw (2.2,0) circle (0.13);\draw[dashed,->] (0,-0.95)--(0,0.95) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (-2.2,-0.55)--(2.2,-0.55) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$L$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{12}ML^2$} & {\lat $K=\dfrac{L}{\sqrt{12}}$} \\
+\B{M ভরের ও L দৈর্ঘ্যের সরু ও সুষম দণ্ডের ভরকেন্দ্রগামী লম্ব-অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick,fill=white,rounded corners=1.4pt] (-2.2,-0.13) rectangle (2.2,0.13);\draw (-2.2,0) circle (0.13);\draw (2.2,0) circle (0.13);\draw[dashed,->] (0,-0.95)--(0,0.95) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (-2.2,-0.55)--(2.2,-0.55) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$L$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{12}ML^2$} & {\lat $K=\dfrac{L}{\sqrt{12}}$} \\
 \hline
-\B{M ভরের ও L দৈর্ঘ্যের সরু ও সুষম দণ্ডের প্রান্তবিন্দুগামী লম্ব-অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick,fill=gray!12,rounded corners=1.4pt] (0,-0.13) rectangle (4.1,0.13);\draw (0,0) circle (0.13);\draw (4.1,0) circle (0.13);\draw[dashed,->] (0,-0.95)--(0,0.95) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (0,-0.55)--(4.1,-0.55) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$L$};\end{tikzpicture} & {\lat $I=\dfrac{1}{3}ML^2$} & {\lat $K=\dfrac{L}{\sqrt{3}}$} \\
+\B{M ভরের ও L দৈর্ঘ্যের সরু ও সুষম দণ্ডের প্রান্তবিন্দুগামী লম্ব-অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick,fill=white,rounded corners=1.4pt] (0,-0.13) rectangle (4.1,0.13);\draw (0,0) circle (0.13);\draw (4.1,0) circle (0.13);\draw[dashed,->] (0,-0.95)--(0,0.95) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (0,-0.55)--(4.1,-0.55) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$L$};\end{tikzpicture} & {\lat $I=\dfrac{1}{3}ML^2$} & {\lat $K=\dfrac{L}{\sqrt{3}}$} \\
 \hline
-\B{M ভরের ও L দৈর্ঘ্যের ও R ব্যাসার্ধের নিরেট সিলিন্ডারের নিজ অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=gray!12] (-1.8,-0.45)--(1.8,-0.45);\draw[fill=gray!12] (-1.8,0.45)--(1.8,0.45);\draw[fill=gray!12] (-1.8,0) ellipse (0.28 and 0.45);\draw[fill=gray!12] (1.8,0) ellipse (0.28 and 0.45);\draw[dashed,->] (-2.35,0)--(2.45,0) node[right,font=\tiny]{\B{অক্ষ}};\draw[->,thin] (1.8,0)--(1.8,0.45) node[midway,right,font=\tiny]{$R$};\draw[<->] (-1.8,-0.75)--(1.8,-0.75) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$L$};\end{tikzpicture} & {\lat $I=\dfrac{1}{2}MR^2$} & {\lat $K=\dfrac{R}{\sqrt{2}}$} \\
+\B{M ভরের ও L দৈর্ঘ্যের ও R ব্যাসার্ধের নিরেট সিলিন্ডারের নিজ অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=white] (-1.8,-0.45)--(1.8,-0.45);\draw[fill=white] (-1.8,0.45)--(1.8,0.45);\draw[fill=white] (-1.8,0) ellipse (0.28 and 0.45);\draw[fill=white] (1.8,0) ellipse (0.28 and 0.45);\draw[dashed,->] (-2.35,0)--(2.45,0) node[right,font=\tiny]{\B{অক্ষ}};\draw[->,thin] (1.8,0)--(1.8,0.45) node[midway,right,font=\tiny]{$R$};\draw[<->] (-1.8,-0.75)--(1.8,-0.75) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$L$};\end{tikzpicture} & {\lat $I=\dfrac{1}{2}MR^2$} & {\lat $K=\dfrac{R}{\sqrt{2}}$} \\
 \hline
 \B{M ভরের, $R_1$ অন্তর্ব্যাসার্ধ ও $R_2$ বহির্ব্যাসার্ধবিশিষ্ট ফাঁপা সিলিন্ডারের নিজ অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw (-1.8,-0.55)--(1.8,-0.55) (-1.8,0.55)--(1.8,0.55);\draw (-1.8,0) ellipse (0.33 and 0.55);\draw (1.8,0) ellipse (0.33 and 0.55);\draw (-1.8,0) ellipse (0.18 and 0.31);\draw (1.8,0) ellipse (0.18 and 0.31);\draw[dashed,->] (-2.35,0)--(2.45,0) node[right,font=\tiny]{\B{অক্ষ}};\draw[<-,thin,shorten <=1pt] (-1.8,0.55)--(-1.25,0.7) node[right,font=\tiny]{$R_2$};\draw[<-,thin,shorten <=1pt] (-1.8,0.31)--(-1.25,0.18) node[right,font=\tiny]{$R_1$};\end{tikzpicture} & {\lat $I=\dfrac{1}{2}M(R_1^2+R_2^2)$} & {\lat $K=\sqrt{\dfrac{R_1^2+R_2^2}{2}}$} \\
 \hline
-\B{M ভরের ও L দৈর্ঘ্যের ও R ব্যাসার্ধের নিরেট সিলিন্ডারের দৈর্ঘ্যের সঙ্গে লম্ব ভরকেন্দ্রগামী অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=gray!12] (-1.8,-0.45)--(1.8,-0.45);\draw[fill=gray!12] (-1.8,0.45)--(1.8,0.45);\draw[fill=gray!12] (-1.8,0) ellipse (0.28 and 0.45);\draw[fill=gray!12] (1.8,0) ellipse (0.28 and 0.45);\draw[dashed,->] (0,-0.95)--(0,0.95) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (-1.8,-0.75)--(1.8,-0.75) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$L$};\draw[->,thin] (2.15,0)--(2.15,0.45) node[midway,right,font=\tiny]{$R$};\end{tikzpicture} & {\lat $I=\dfrac{1}{4}MR^2+\dfrac{1}{12}ML^2$} & {\lat $K=\sqrt{\dfrac{R^2}{4}+\dfrac{L^2}{12}}$} \\
+\B{M ভরের ও L দৈর্ঘ্যের ও R ব্যাসার্ধের নিরেট সিলিন্ডারের দৈর্ঘ্যের সঙ্গে লম্ব ভরকেন্দ্রগামী অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=white] (-1.8,-0.45)--(1.8,-0.45);\draw[fill=white] (-1.8,0.45)--(1.8,0.45);\draw[fill=white] (-1.8,0) ellipse (0.28 and 0.45);\draw[fill=white] (1.8,0) ellipse (0.28 and 0.45);\draw[dashed,->] (0,-0.95)--(0,0.95) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (-1.8,-0.75)--(1.8,-0.75) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$L$};\draw[->,thin] (2.15,0)--(2.15,0.45) node[midway,right,font=\tiny]{$R$};\end{tikzpicture} & {\lat $I=\dfrac{1}{4}MR^2+\dfrac{1}{12}ML^2$} & {\lat $K=\sqrt{\dfrac{R^2}{4}+\dfrac{L^2}{12}}$} \\
 \hline
-\B{M ভরের ও R ব্যাসার্ধের পাতলা বৃত্তাকার চাকতির ভরকেন্দ্রগামী লম্ব-অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=gray!16] (0,0) ellipse (1.7 and 0.48);\draw[dashed,->] (0,-1.12)--(0,1.18) node[above,font=\tiny]{\B{অক্ষ}};\draw[->] (0,0)--(1.7,0) node[right,font=\tiny]{$R$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{2}MR^2$} & {\lat $K=\dfrac{R}{\sqrt{2}}$} \\
+\B{M ভরের ও R ব্যাসার্ধের পাতলা বৃত্তাকার চাকতির ভরকেন্দ্রগামী লম্ব-অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=white] (0,0) ellipse (1.7 and 0.48);\draw[dashed,->] (0,-1.12)--(0,1.18) node[above,font=\tiny]{\B{অক্ষ}};\draw[->] (0,0)--(1.7,0) node[right,font=\tiny]{$R$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{2}MR^2$} & {\lat $K=\dfrac{R}{\sqrt{2}}$} \\
 \hline
-\B{M ভরের ও R ব্যাসার্ধের পাতলা বৃত্তাকার চাকতির পৃষ্ঠের অভিলম্বভাবে গমনকারী স্পর্শকের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=gray!16,rotate=14] (0,0) ellipse (1.7 and 0.58);\draw[dashed,->] (-1.9,-1.0)--(-1.9,1.1) node[above,font=\tiny]{\B{অক্ষ}};\draw[->,rotate=14] (0,0)--(1.7,0) node[right,font=\tiny]{$R$};\end{tikzpicture} & {\lat $I=\dfrac{3}{2}MR^2$} & {\lat $K=\sqrt{\dfrac{3}{2}}R$} \\
+\B{M ভরের ও R ব্যাসার্ধের পাতলা বৃত্তাকার চাকতির পৃষ্ঠের অভিলম্বভাবে গমনকারী স্পর্শকের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=white,rotate=14] (0,0) ellipse (1.7 and 0.58);\draw[dashed,->] (-1.9,-1.0)--(-1.9,1.1) node[above,font=\tiny]{\B{অক্ষ}};\draw[->,rotate=14] (0,0)--(1.7,0) node[right,font=\tiny]{$R$};\end{tikzpicture} & {\lat $I=\dfrac{3}{2}MR^2$} & {\lat $K=\sqrt{\dfrac{3}{2}}R$} \\
 \hline
-\B{M ভরের ও R ব্যাসার্ধের পাতলা বৃত্তাকার চাকতির যেকোনো ব্যাসের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=gray!16] (0,0) ellipse (1.65 and 0.48);\draw[dashed,->] (-1.9,0)--(1.95,0) node[right,font=\tiny]{\B{অক্ষ}};\draw[->] (0,0)--(1.65,0) node[above right,font=\tiny]{$R$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{4}MR^2$} & {\lat $K=\dfrac{R}{2}$} \\
+\B{M ভরের ও R ব্যাসার্ধের পাতলা বৃত্তাকার চাকতির যেকোনো ব্যাসের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=white] (0,0) ellipse (1.65 and 0.48);\draw[dashed,->] (-1.9,0)--(1.95,0) node[right,font=\tiny]{\B{অক্ষ}};\draw[->] (0,0)--(1.65,0) node[above right,font=\tiny]{$R$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{4}MR^2$} & {\lat $K=\dfrac{R}{2}$} \\
 \hline
 \end{tabular}
 
@@ -1362,17 +1386,17 @@ $P\!=\!Q$ & $180°$ & $R = 0$ \B{(সর্বনিম্ন)} & $\theta=0°$ &
 \hline
 \B{M ভরের ও R ব্যাসার্ধের পাতলা বৃত্তাকার রিং-এর যেকোনো ব্যাসের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick] (0,0) ellipse (1.65 and 0.48);\draw[dashed,->] (-1.9,0)--(1.95,0) node[right,font=\tiny]{\B{অক্ষ}};\draw[->] (0,0)--(1.65,0) node[above right,font=\tiny]{$R$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{2}MR^2$} & {\lat $K=\dfrac{R}{\sqrt{2}}$} \\
 \hline
-\B{M ভরের, a দৈর্ঘ্যের ও b প্রস্থের আয়তাকার পাতের ভরকেন্দ্রগামী লম্ব-অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=gray!13] (-1.65,-0.85) rectangle (1.65,0.85);\draw[dashed,->] (0,-1.15)--(0,1.15) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (-1.65,-1.05)--(1.65,-1.05) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$a$};\draw[<->] (1.85,-0.85)--(1.85,0.85) node[midway,right,font=\tiny]{$b$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{12}M(a^2+b^2)$} & {\lat $K=\sqrt{\dfrac{a^2+b^2}{12}}$} \\
+\B{M ভরের, a দৈর্ঘ্যের ও b প্রস্থের আয়তাকার পাতের ভরকেন্দ্রগামী লম্ব-অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=white] (-1.65,-0.85) rectangle (1.65,0.85);\draw[dashed,->] (0,-1.15)--(0,1.15) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (-1.65,-1.05)--(1.65,-1.05) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$a$};\draw[<->] (1.85,-0.85)--(1.85,0.85) node[midway,right,font=\tiny]{$b$};\fill (0,0) circle (1.2pt);\end{tikzpicture} & {\lat $I=\dfrac{1}{12}M(a^2+b^2)$} & {\lat $K=\sqrt{\dfrac{a^2+b^2}{12}}$} \\
 \hline
-\B{M ভরের, a দৈর্ঘ্যের ও b প্রস্থের আয়তাকার পাতের প্রস্থের সমান্তরাল ভরকেন্দ্রগামী অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=gray!13] (-1.65,-0.85) rectangle (1.65,0.85);\draw[dashed,->] (-1.9,0)--(1.95,0) node[right,font=\tiny]{\B{অক্ষ}};\draw[<->] (-1.65,-1.05)--(1.65,-1.05) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$a$};\end{tikzpicture} & {\lat $I=\dfrac{1}{12}Ma^2$} & {\lat $K=\dfrac{a}{\sqrt{12}}$} \\
+\B{M ভরের, a দৈর্ঘ্যের ও b প্রস্থের আয়তাকার পাতের প্রস্থের সমান্তরাল ভরকেন্দ্রগামী অক্ষের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[fill=white] (-1.65,-0.85) rectangle (1.65,0.85);\draw[dashed,->] (-1.9,0)--(1.95,0) node[right,font=\tiny]{\B{অক্ষ}};\draw[<->] (-1.65,-1.05)--(1.65,-1.05) node[midway,fill=white,inner sep=0.2pt,font=\tiny]{$a$};\end{tikzpicture} & {\lat $I=\dfrac{1}{12}Ma^2$} & {\lat $K=\dfrac{a}{\sqrt{12}}$} \\
 \hline
-\B{M ভরের ও R ব্যাসার্ধের নিরেট গোলকের যেকোনো ব্যাসের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\shade[ball color=gray!28] (0,0) circle (1.05);\draw[dashed,->] (0,-1.35)--(0,1.35) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (1.32,-1.05)--(1.32,1.05) node[midway,right,font=\tiny]{$2R$};\draw (0,0) ellipse (1.05 and 0.28);\end{tikzpicture} & {\lat $I=\dfrac{2}{5}MR^2$} & {\lat $K=\sqrt{\dfrac{2}{5}}R$} \\
+\B{M ভরের ও R ব্যাসার্ধের নিরেট গোলকের যেকোনো ব্যাসের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\shade[ball color=white] (0,0) circle (1.05);\draw[dashed,->] (0,-1.35)--(0,1.35) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (1.32,-1.05)--(1.32,1.05) node[midway,right,font=\tiny]{$2R$};\draw (0,0) ellipse (1.05 and 0.28);\end{tikzpicture} & {\lat $I=\dfrac{2}{5}MR^2$} & {\lat $K=\sqrt{\dfrac{2}{5}}R$} \\
 \hline
-\B{M ভরের ও R ব্যাসার্ধের নিরেট গোলকের স্পর্শকের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\shade[ball color=gray!28] (0,0) circle (1.05);\draw[dashed,->] (-1.27,-1.35)--(-1.27,1.35) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (1.32,-1.05)--(1.32,1.05) node[midway,right,font=\tiny]{$2R$};\draw (0,0) ellipse (1.05 and 0.28);\end{tikzpicture} & {\lat $I=\dfrac{7}{5}MR^2$} & {\lat $K=\sqrt{\dfrac{7}{5}}R$} \\
+\B{M ভরের ও R ব্যাসার্ধের নিরেট গোলকের স্পর্শকের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\shade[ball color=white] (0,0) circle (1.05);\draw[dashed,->] (-1.27,-1.35)--(-1.27,1.35) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (1.32,-1.05)--(1.32,1.05) node[midway,right,font=\tiny]{$2R$};\draw (0,0) ellipse (1.05 and 0.28);\end{tikzpicture} & {\lat $I=\dfrac{7}{5}MR^2$} & {\lat $K=\sqrt{\dfrac{7}{5}}R$} \\
 \hline
-\B{M ভরের ও R ব্যাসার্ধের পাতলা ফাঁপা গোলকের যেকোনো ব্যাসের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick,fill=gray!8] (0,0) circle (1.05);\draw[dashed,->] (0,-1.35)--(0,1.35) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (1.32,-1.05)--(1.32,1.05) node[midway,right,font=\tiny]{$2R$};\draw (0,0) ellipse (1.05 and 0.28);\end{tikzpicture} & {\lat $I=\dfrac{2}{3}MR^2$} & {\lat $K=\sqrt{\dfrac{2}{3}}R$} \\
+\B{M ভরের ও R ব্যাসার্ধের পাতলা ফাঁপা গোলকের যেকোনো ব্যাসের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick,fill=white] (0,0) circle (1.05);\draw[dashed,->] (0,-1.35)--(0,1.35) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (1.32,-1.05)--(1.32,1.05) node[midway,right,font=\tiny]{$2R$};\draw (0,0) ellipse (1.05 and 0.28);\end{tikzpicture} & {\lat $I=\dfrac{2}{3}MR^2$} & {\lat $K=\sqrt{\dfrac{2}{3}}R$} \\
 \hline
-\B{M ভরের ও R ব্যাসার্ধের পাতলা ফাঁপা গোলকের স্পর্শকের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick,fill=gray!8] (0,0) circle (1.05);\draw[dashed,->] (-1.27,-1.35)--(-1.27,1.35) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (1.32,-1.05)--(1.32,1.05) node[midway,right,font=\tiny]{$2R$};\draw (0,0) ellipse (1.05 and 0.28);\end{tikzpicture} & {\lat $I=\dfrac{5}{3}MR^2$} & {\lat $K=\sqrt{\dfrac{5}{3}}R$} \\
+\B{M ভরের ও R ব্যাসার্ধের পাতলা ফাঁপা গোলকের স্পর্শকের সাপেক্ষে} & \begin{tikzpicture}[scale=0.34,baseline=-2pt,>=Stealth,line cap=round]\draw[very thick,fill=white] (0,0) circle (1.05);\draw[dashed,->] (-1.27,-1.35)--(-1.27,1.35) node[above,font=\tiny]{\B{অক্ষ}};\draw[<->] (1.32,-1.05)--(1.32,1.05) node[midway,right,font=\tiny]{$2R$};\draw (0,0) ellipse (1.05 and 0.28);\end{tikzpicture} & {\lat $I=\dfrac{5}{3}MR^2$} & {\lat $K=\sqrt{\dfrac{5}{3}}R$} \\
 \hline
 \end{tabular}
 \endgroup
@@ -2865,14 +2889,14 @@ $P\!=\!Q$ & $180°$ & $R = 0$ \B{(সর্বনিম্ন)} & $\theta=0°$ &
 \begin{itemize}
     \item[] \B{স্কেলের পারস্পরিক রূপান্তর:} {\lat $\dfrac{C}{5}=\dfrac{F-32}{9}=\dfrac{K-273}{5}=\dfrac{R_n-491.67}{9}=\dfrac{R}{4}$}
     \item[] \B{কেলভিন ও সেলসিয়াস সম্পর্ক:} {\lat $K=C+273$}
-    \item[] \B{র‍্যাঙ্কিন ও ফারেনহাইট সম্পর্ক:} {\lat $R(^\circ\text{Rk})=F+459.67$}
+    \item[] \B{র্যাঙ্কিন ও ফারেনহাইট সম্পর্ক:} {\lat $R(^\circ\text{Rk})=F+459.67$}
     \item[] \B{স্কেলের এক ভাগের সম্পর্ক:} {\lat $1^\circ\text{C}=\tfrac{9}{5}{}^\circ\text{F}$}
     \item[] \B{তাপমাত্রার ব্যবধানের মধ্যে সম্পর্ক:} {\lat $\dfrac{\Delta C}{5}=\dfrac{\Delta F}{9}=\dfrac{\Delta K}{5}=\dfrac{\Delta R_n}{9}=\dfrac{\Delta R}{4}$}
     \item[] \B{ত্রুটিপূর্ণ থার্মোমিটারের ক্ষেত্রে:} {\lat $\dfrac{X-M}{B-M}=\dfrac{C}{100}=\dfrac{F-32}{180}=\dfrac{K-273}{100}$}
     \item[] {\lat $C$} = \B{সেলসিয়াস স্কেলে তাপমাত্রা}
     \item[] {\lat $F$} = \B{ফারেনহাইট স্কেলে তাপমাত্রা}
     \item[] {\lat $K$} = \B{কেলভিন স্কেলে তাপমাত্রা}
-    \item[] {\lat $R_n$} = \B{র‍্যাঙ্কিন স্কেলে তাপমাত্রা}
+    \item[] {\lat $R_n$} = \B{র্যাঙ্কিন স্কেলে তাপমাত্রা}
     \item[] {\lat $R$} = \B{রোমার স্কেলে তাপমাত্রা}
     \item[] {\lat $B$} = \B{বাষ্পবিন্দু (Steam point)}
     \item[] {\lat $M$} = \B{বরফবিন্দু (Ice point)}
@@ -4319,13 +4343,1538 @@ $P\!=\!Q$ & $180°$ & $R = 0$ \B{(সর্বনিম্ন)} & $\theta=0°$ &
 
 \end{multicols}
 
-\end{document}
-'''
 
+\clearpage
+\begin{multicols*}{2}
+\chsec{পরিশিষ্ট-শ: ১ম পত্রের অতিরিক্ত সার-সংক্ষেপ ও সংজ্ঞা}
+\chsec{সার-সংক্ষেপ | Summary}
+
+\begin{description}
+    \item[ভৌত রাশি:] ভৌত জগতের রাশিিসমূহ হলো ভৌত রাশি। 
+    \item[পদার্থবিজ্ঞান:] বিজ্ঞানের যে শাখায় পদার্থ ও শক্তি এবং এদের মিথস্ক্রিয়া সম্পর্কে আলোচনা করা হয় তাকে পদার্থবিজ্ঞান বলে। 
+    \item[পদার্থবিজ্ঞানের মূলনীতি:] ভরের, জড়বেগের এবং শক্তির সংরক্ষণশীলতা নীতি হচ্ছে পদার্থবিজ্ঞানের মূলনীতি। 
+    \item[বিজ্ঞান:] পরীক্ষা-নিরীক্ষা, পর্যবেক্ষণ ও পদ্ধতিগতভাবে লব্ধ সুশৃঙ্খল ও সুবব্ধ জ্ঞান এবং জ্ঞান অর্জনের প্রক্রিয়া হলো বিজ্ঞান। 
+    \item[স্বীকার্য:] স্বীকার্য হলো একটি প্রস্তাবনা যার প্রমাণের প্রয়োজন হয় না, নিজে থেকেই প্রতিষ্ঠিত অথবা সত্য বলে স্বীকার করার কোনো সুনির্দিষ্ট উদ্দেশ্য থাকে এবং এটি অন্য একটি প্রস্তাবনা প্রমাণের জন্য ব্যবহৃত হয়। 
+    \item[ধারণা:] ধারণা হলো কোনো বিশেষেভাবে নির্দিষ্ট আকস্মিক ঘটনা হতে উদ্ভূত সাধারণ কল্পনা, প্রমাণের ওপর নির্ভরশীল নয় এমন কোনো কিছু সম্পর্কে সার্বিক উপলব্ধি বা বোধগম্যতা হলো ধারণা। 
+    \item[অনুকল্প:] কোনো পর্যবেক্ষণ, ঘটনা বা বৈজ্ঞানিক সমস্যার জন্য একটি সম্ভাব্য ব্যাখ্যা যা আরও অনুসন্ধানের মাধ্যমে যাচাই করা যায়, তাই অনুকল্প। 
+    \item[নীতি:] নীতি হচ্ছে নিয়ম বা আইন যা সাধারণত মেনে চলতে পারে বা ইচ্ছানুযায়ী মেনে চলতে পারে বা কোনো কিছু অপরিহার্য পরিপন্হী। 
+    \item[স্থান:] স্থান হলো বস্তু কর্তৃক অধিকৃত অঞ্চল। 
+    \item[মৌলিক রাশি:] যেসব রাশি মূল অর্থাৎ স্বাধীন বা নিরপেক্ষ, যেগুলো অন্য রাশির ওপর নির্ভর করে না বরং অন্যান্য রাশি এদের ওপর নির্ভর করে তাদেরকে মৌলিক রাশি বলে। 
+    \item[মৌলিক একক:] যেসব মৌলিক ভৌত রাশির একক অনপেক্ষ বা পরস্পরের ওপর নির্ভরশীল নয় তাদেরকেই বলা হয় মৌলিক একক। 
+    \item[লব্ধ একক:] যেসব ভৌত রাশির একক স্বাধীন বা নিরপেক্ষ নয় অন্য কোনো মৌলিক রাশির এককের ওপর নির্ভর করে এবং একক বা একাধিক মৌলিক রাশির গুণফল বা ভাগফল থেকে উৎপন্ন হয় তাই হলো লব্ধ একক। 
+    \item[পরিমাপ:] কোনো কিছুর পরিমাপ নির্ণয় করাই হলো পরিমাপ। অর্থাৎ আমাদের দৈনন্দিন জীবনের মাপজোখের বিষয়টি হলো পরিমাপ। 
+    \item[ভর্নিয়ার স্কেল:] মূল বা প্রধান স্কেলের ক্ষুদ্রতম ভাগের ভগ্নাংশের নির্ভুল পরিমাপের জন্য প্রধান স্কেলের পাশে আর একটি সচল স্কেল ব্যবহার করা হয়। এটিই ভর্নিয়ার স্কেল। 
+    \item[স্ক্রু গজ:] যে পরিমাপ যন্ত্রে একটি সমবাসাঠের মাইক্রোমিটার স্ক্রু থাকে সেটিই স্ক্রু গজ। 
+    \item[বৈজ্ঞানিক প্রতীক:] কোনো সংখ্যাকে ১০ এর যেকোনো ঘাত এবং ১ থেকে ১০ এর মধ্যে অপসংখ্যার গুণফল হিসেবে প্রকাশ করা হলে তাকে বৈজ্ঞানিক প্রতীক বলে। 
+    \item[মাত্রা:] কোনো একটি রাশি এবং তার মৌলিক এককের মধ্যে সম্পর্ক স্থাপনের জন্য যে সংকেত ব্যবহার করা হয় তাকে উক্ত রাশির মাত্রা বলে। 
+    \item[মাত্রা সমীকরণ:] যে সমীকরণ মৌলিক একক এবং লব্ধ এককের মধ্যে সম্পর্ক স্থাপন করে তাকে মাত্রা সমীকরণ বলে। 
+    \item[পিচট ত্রুটি:] স্ক্রু গজ যন্ত্র ক্রমাগত ব্যবহারের ফলে স্ক্রু ক্ষয় হয়ে আলগা হয়ে পড়ে এবং স্ক্রুকে উভয়দিকে একই পরিমাণ ঘুরালে সমান দূরত্ব অতিক্রম করে না, তাই পিচট ত্রুটি। 
+    \item[ভর্নিয়ার ধ্রুবক:] প্রধান স্কেলের ক্ষুদ্রতম এক ভাগের চেয়ে ভর্নিয়ার স্কেলের এক ভাগ কতটুকু ছোট তার পরিমাণ হলো ভর্নিয়ার ধ্রুবক। 
+    \item[লঘিষ্ঠ গণন:] স্ক্রু-নাট নীতির ওপর ভিত্তি করে গঠিত যন্ত্রগুলোর বৃত্তাকার স্কেলের একভাগ ঘুরালে স্ক্রুটি যতটুকু সরে আসে তাকে লঘিষ্ঠ গণন বলে। অর্থাৎ পিচকে বৃত্তাকার স্কেলের ভাগ সংখ্যা দ্বারা ভাগ করলে লঘিষ্ঠ গণন পাওয়া যায়। 
+    \item[সম্ভাব্য ত্রুটি:] কোনো ধ্রুব রাশির সঠিক মান যে সীমার মধ্যে অবস্থান করতে পারে তাকে সম্ভাব্য ত্রুটি বলে। 
+    \item[লেভেল ত্রুটি:] ভিক্ষেপী চৌদক মান যন্ত্র নিক্তি ইত্যাদি যন্ত্রে যন্ত্রটি বা যন্ত্রের পাতাতন অনুভূমিককে না থাকলে যন্ত্রের পাঠে যে ভুল হয় তাই লেভেল ত্রুটি। 
+    \item[পরম ত্রুটি:] কোনো ভৌত রাশির পরিমাপে প্রকৃত মান এবং পরিমাপকৃত মানের পার্থক্যকে পরম ত্রুটি বলে। 
+    \item[পিচ:] স্ক্রু গজের বৃত্তাকার স্কেলটি একবার ঘুরালে এটি রৈখিক স্কেল বরাবর যতটুকু দূরত্ব অতিক্রম করে তাই স্ক্রুর পিচ। 
+    \item[স্ফেরোমিটার:] যে যন্ত্রের সাহায্যে গোলীয় তল তথা গোলকের বক্রতার ব্যাসার্ধ পরিমাপ করে গোলকের আয়তন ও গোলক পৃষ্ঠের ক্ষেত্রফল পরিমাপ করা যায় তাই স্ফেরোমিটার। 
+\end{description}
+\end{multicols*}
+
+\clearpage
+
+\chsec{পরিশিষ্ট-ষ: ২য় পত্রের বিস্তারিত সংজ্ঞা, ছক ও পার্থক্যসমূহ}
+
+\noindent \textbf{সমোষ্ণ ও রুদ্ধতাপীয় প্রক্রিয়ার মধ্যে পার্থক্য :} \\[0.5em]
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|p{6.5cm}|c|p{6.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{সমোষ্ণ প্রক্রিয়া}} & \multicolumn{2}{c|}{\textbf{রুদ্ধতাপীয় প্রক্রিয়া}} \\ \hline
+\textbf{১.} & এ পরিবর্তনে প্রয়োজন মত তাপ প্রয়োগ অথবা প্রত্যাহার করতে হয়। & \textbf{১.} & এ পরিবর্তনে তাপ প্রয়োগ বা প্রত্যাহার করতে হয় না। \\ \hline
+\textbf{২.} & এ পরিবর্তনে তাপমাত্রা $T = \text{ধ্রুবক}$ অর্থাৎ $\Delta T = 0$ & \textbf{২.} & এ পরিবর্তনে তাপ $Q = \text{ধ্রুবক}$ অর্থাৎ $\Delta Q = 0$ \\ \hline
+\textbf{৩.} & এই প্রক্রিয়ায় সিস্টেমটি হবে আবদ্ধ সিস্টেম। & \textbf{৩.} & এ প্রক্রিয়ায় সিস্টেমটি হবে বিচ্ছিন্ন সিস্টেম। \\ \hline
+\textbf{৪.} & এ পরিবর্তনে পাত্রটি তাপের সুপরিবাহী হওয়া প্রয়োজন। & \textbf{৪.} & এ পরিবর্তনে পাত্রটি তাপের কুপরিবাহী হওয়া প্রয়োজন। \\ \hline
+\textbf{৫.} & এটি ধীর প্রক্রিয়া। & \textbf{৫.} & এটি দ্রুত প্রক্রিয়া। \\ \hline
+\textbf{৬.} & এ পরিবর্তনে পাত্রের চারপাশের মাধ্যমের তাপগ্রাহিতা উচ্চ হতে হয়। & \textbf{৬.} & এ পরিবর্তনের পাত্রের চারপাশের মাধ্যমের তাপগ্রাহিতা নিম্ন হতে হয়। \\ \hline
+\textbf{৭.} & অভ্যন্তরীণ শক্তি $U = \text{ধ্রুবক}$ অর্থাৎ $\Delta U = 0$ & \textbf{৭.} & অভ্যন্তরীণ শক্তি $U \neq \text{ধ্রুবক}$ অর্থাৎ $\Delta U \neq 0$ \\ \hline
+\textbf{৮.} & গ্যাসের আপেক্ষিক তাপ অসীম হবে। & \textbf{৮.} & গ্যাসের আপেক্ষিক তাপ শূন্য হবে। \\ \hline
+\textbf{৯.} & এ প্রক্রিয়া $PV = \text{ধ্রুবক}$ সূত্র মেনে চলে। & \textbf{৯.} & এ প্রক্রিয়া $PV^{\gamma} = \text{ধ্রুবক}$ সূত্র মেনে চলে। \\ \hline
+\textbf{১০.} & সমোষ্ণ লেখ অপেক্ষাকৃত কম খাড়া, এ রেখার ঢাল $\frac{dP}{dV} = -\frac{P}{V}$ & \textbf{১০.} & রুদ্ধতাপীয় লেখ অপেক্ষাকৃত বেশি খাড়া, এ রেখার ঢাল $\frac{dP}{dV} = -\gamma \left(\frac{P}{V}\right)$ \\ \hline
+\end{tabular}
+}
+
+
+
+\bigskip
+
+\begin{itemize}
+    \item[\ding{226}] কার্নো ইঞ্জিনের দক্ষতা $45\%$ এবং উৎসের তাপমাত্রা $300\text{ K}$ হলে গ্রাহকের তাপমাত্রা $165\text{ K}$।
+    \item[\ding{226}] এনট্রপি বিশৃঙ্খলাতা পরিমাণ নির্দেশ করে।
+    \item[\ding{226}] $0\ ^\circ\text{C}$ তাপমাত্রার $0.01\text{ kg}$ পানিকে $10\ ^\circ\text{C}$ তাপমাত্রায় উন্নীত করলে এনট্রপির পরিবর্তন $1.5\text{ J K}^{-1}$।
+    \item[\ding{226}] $0\ ^\circ\text{C}$ তাপমাত্রার $600\text{ g}$ বরফকে শুধুমাত্র গলানো হলে, এনট্রপির পরিবর্তন $738.4\text{ J K}^{-1}$।
+    \item[\ding{226}] ফারেনহাইট ও সেলসিয়াস স্কেল $-40^\circ$ তাপমাত্রায় একই পাঠ দেয়।
+    \item[\ding{226}] কাজ ও তাপের মধ্যে সম্পর্ক স্থাপন করে বিজ্ঞানী জুল সর্বপ্রথম তাপগতিবিদ্যার প্রথম সূত্রটি আবিষ্কার করেন। সূত্রটি শক্তির সংরক্ষণশীলতার সূত্রের বিশেষ রূপ।
+    \item[\ding{226}] সমচাপ প্রক্রিয়ায় $dP = 0$, সমোষ্ণ প্রক্রিয়ায় $dT = 0$।
+    \item[\ding{226}] রুদ্ধতাপ প্রক্রিয়ার ক্ষেত্রে চাপের পরিবর্তন খুব দ্রুত সংগঠিত করতে হয়। অর্থাৎ এটি দ্রুত প্রক্রিয়া।
+    \item[\ding{226}] রুদ্ধতাপ প্রক্রিয়ায় তাপের পরিমাণ স্থির থাকে কিন্তু তাপমাত্রার পরিবর্তন ঘটে।
+    \item[\ding{226}] কোনো পদার্থের এক মোল এর উষ্ণতা এক কেলভিন বৃদ্ধি করতে প্রয়োজনীয় তাপকে বলা হয় ঐ পদার্থের মোলার আপেক্ষিক তাপ। মোলার আপেক্ষিক তাপের একক $\text{J mol}^{-1}\text{ K}^{-1}$।
+    \item[\ding{226}] সেলসিয়াস স্কেলে মৌলিক ব্যবধানকে সমান $100$ ভাগে ভাগ করা হয়েছে।
+    \item[\ding{226}] $dU$ এর মান ঋণাত্মক হয় যখন সিস্টেমের অন্তঃস্থ শক্তি হ্রাস পায়।
+    \item[\ding{226}] সিস্টেম দ্বারা ও সিস্টেমের উপর কাজ সম্পাদিত হলে $dW$ এর মান যথাক্রমে ধনাত্মক ও ঋণাত্মক হয়।
+    \item[\ding{226}] রুদ্ধতাপীয় সংকোচনে সিস্টেমটির উষ্ণতা বাড়ে এবং প্রসারণে সিস্টেমটির উষ্ণতা কমে।
+    \item[\ding{226}] এক পারমাণবিক, দ্বিপারমাণবিক ও বহুপারমাণবিক গ্যাসের ক্ষেত্রে $\gamma$ (গামা) এর মান যথাক্রমে $1.67, 1.41$ ও $1.33$।
+\end{itemize}
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize প্রতীক ও এককসহ গুরুত্বপূর্ণ সূত্রাবলি | Important Formulas with Symbols \& Units}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & তাপমাত্রা, $\theta = \frac{X_\theta - X_{\text{ice}}}{X_{\text{steam}} - X_{\text{ice}}} \times 100^\circ\text{C}$ & $\theta =$ তাপমাত্রা & \\
+ & \phantom{তাপমাত্রা,} $\theta = \frac{X_\theta - X_{\text{ice}}}{X_{\text{steam}} - X_{\text{ice}}} \times 180^\circ\text{F} + 32^\circ\text{F}$ & \begin{tabular}[c]{@{}l@{}}$X_\theta = \theta$ তাপমাত্রায় উষ্ণতামিতিক ধর্মের\\ মান\end{tabular} & \\ \cline{3-3}
+ & দৈর্ঘ্য, চাপ, আয়তন, রোধ ও তড়িৎচালক শক্তির ক্ষেত্রে, & \begin{tabular}[c]{@{}l@{}}$X_{\text{steam}} =$ ঊর্ধ্ব স্থির বিন্দুতে\\ উষ্ণতামিতিক মান\end{tabular} & \\
+ & (i) পারদ থার্মোমিটারের ক্ষেত্রে, $\theta = \frac{l_\theta - l_0}{l_{100} - l_0} \times 100^\circ\text{C}$ & & \\
+\textbf{১.} & (ii) স্থির আয়তন গ্যাস থার্মোমিটারের ক্ষেত্রে, & & কেলভিন ($\text{K}$) \\
+ & $\theta = \frac{P_\theta - P_0}{P_{100} - P_0} \times 100^\circ\text{C}$ & & \\ \cline{3-3}
+ & (iii) স্থির চাপ গ্যাস থার্মোমিটারের ক্ষেত্রে, & \begin{tabular}[c]{@{}l@{}}$X_{\text{ice}} =$ নিম্ন স্থির বিন্দুতে উষ্ণতামিতিক\\ মান\end{tabular} & \\
+ & $\theta = \frac{V_\theta - V_0}{V_{100} - V_0} \times 100^\circ\text{C}$ & & \\
+ & (iv) রোধ থার্মোমিটারের ক্ষেত্রে, $\theta = \frac{R_\theta - R_0}{R_{100} - R_0} \times 100^\circ\text{C}$ & & \\
+ & (v) তাপ তড়িৎ থার্মোমিটারের ক্ষেত্রে, $\theta = \frac{E_\theta - E_0}{E_{100} - E_0} \times 100^\circ\text{C}$ & & \\ \hline
+ & পানির ত্রৈধ বিন্দুর সাপেক্ষে তাপমাত্রা, $T = \frac{X}{X_{\text{tr}}} \times 273.16\text{ K}$ & $T =$ তাপমাত্রা & কেলভিন ($\text{K}$) \\ \cline{3-4}
+ & (i) পারদ থার্মোমিটার : $T = \frac{l}{l_{\text{tr}}} \times 273.16\text{ K}$ & & \\
+\textbf{২.} & (ii) স্থির আয়তন গ্যাস থার্মোমিটার : $T = \frac{P}{P_{\text{tr}}} \times 273.16\text{ K}$ & & \\
+ & (iii) স্থির চাপ গ্যাস থার্মোমিটার : $T = \frac{V}{V_{\text{tr}}} \times 273.16\text{ K}$ & $R =$ রোধ & ওহম ($\Omega$) \\
+ & (iv) রোধ থার্মোমিটার : $T = \frac{R}{R_{\text{tr}}} \times 273.16\text{ K}$ & & \\
+ & (v) তাপযুগল থার্মোমিটার : $T = \frac{E}{E_{\text{tr}}} \times 273.16\text{ K}$ & & \\ \hline
+\end{tabular}
+}
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize সার-সংক্ষেপ | Summary}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent \textbf{তাপ :} যা সিস্টেমের মধ্যে প্রবেশ করলে বা সিস্টেম হতে নির্গত হলে সিস্টেমের তাপগতীয় চলরাশির পরিবর্তন ঘটে তাই তাপ।
+
+\noindent \textbf{তাপমাত্রা :} তাপমাত্রা হচ্ছে এমন একটি মৌলিক রাশি, যা দ্বারা কোনো বস্তু কতটুকু ঠান্ডা বা গরম তা জানা যায়।
+
+\noindent \textbf{উষ্ণতামিতিক ধর্ম :} তাপমাত্রা পরিমাপে উপযোগী পদার্থের যেসব ধর্ম কাজে লাগানো হয়, পদার্থের ঐ ধর্মগুলোকে উষ্ণতামিতিক ধর্ম বলে।
+
+\noindent \textbf{পানির ত্রৈধ বিন্দু :} $4.58\text{ mm}$ পারদ চাপে যে তাপমাত্রায় বিশুদ্ধ বরফ, পানি ও জলীয় বাষ্প একই তাপীয় সাম্যে থাকে তাকে পানির ত্রৈধ বিন্দু বলে।
+
+\noindent \textbf{থার্মোমিটার :} যে যন্ত্রের সাহায্যে কোনো বস্তুর তাপমাত্রা সঠিকভাবে পরিমাপ করা যায় এবং বিভিন্ন বস্তুর তাপমাত্রার পার্থক্য নির্ণয় করা যায় তাকে থার্মোমিটার বলে।
+
+\noindent \textbf{আপেক্ষিক তাপ :} $1\text{ kg}$ ভরের কোনো বস্তুর তাপমাত্রা $1\text{ K}$ বৃদ্ধি করতে প্রয়োজনীয় তাপকে ঐ বস্তুর আপেক্ষিক তাপ বলে।
+
+\noindent \textbf{উষ্ণতা :} তাপমাত্রা হচ্ছে এমন একটি মৌলিক রাশি, যা দ্বারা কোনো বস্তু কতটুকু ঠান্ডা বা গরম তা জানা যায়।
+
+\noindent \textbf{তাপীয় সমতা :} ভিন্ন তাপমাত্রার দুটি বস্তু পরস্পর তাপীয় সংস্পর্শে আসার পর যখন সমতাপমাত্রায় উপনীত হয় তখন ঐ অবস্থাই হলো তাপীয় সমতা।
+
+\noindent \textbf{মৌলিক ব্যবধান :} তাপমাত্রার বিভিন্ন স্কেলের ঊর্ধ্ব স্থিরাঙ্ক ও নিম্ন স্থিরাঙ্ক মধ্যবর্তী তাপমাত্রার ব্যবধানই মৌলিক ব্যবধান।
+
+\noindent \textbf{তাপগতীয় চলক :} তাপগতিবিদ্যার তাপমাত্রা, চাপ ও আয়তনই তাপগতীয় চলক।
+
+\noindent \textbf{তাপগতিবিদ্যার ১ম সূত্র :} তাপগতিবিদ্যার প্রথম সূত্রটি হলো— যখন যান্ত্রিক শক্তিকে সম্পূর্ণরূপে তাপে বা তাপশক্তিকে সম্পূর্ণরূপে কাজে রূপান্তরিত করা হয় তখন যান্ত্রিক শক্তি ও তাপ পরস্পরের সমানুপাতিক হয়।
+
+\noindent \textbf{তাপগতিবিদ্যা :} পদার্থবিজ্ঞানের যে শাখায় তাপ ও যান্ত্রিক কাজের সম্পর্ক সম্বন্ধে আলোচনা করা হয় তাকে তাপগতিবিদ্যা বলে।
+
+\noindent \textbf{তাপীয় সিস্টেম :} পরীক্ষা-নিরীক্ষার সময় আমরা জড় জগতের যে নির্দিষ্ট তাপীয় অংশ বিবেচনা করি তাই তাপীয় সিস্টেম।
+
+\noindent \textbf{রুদ্ধতাপীয় প্রক্রিয়া :} যে তাপগতীয় প্রক্রিয়ায় সিস্টেম থেকে তাপ বাইরে যায় না বা বাইরে থেকে কোনো তাপ সিস্টেমে আসে না তাই রুদ্ধতাপীয় প্রক্রিয়া।
+
+\noindent \textbf{সমচাপ প্রক্রিয়া :} যে তাপগতীয় প্রক্রিয়ায় সিস্টেমের চাপের কোনো পরিবর্তন হয় না তাই সমচাপ প্রক্রিয়া।
+
+\noindent \textbf{সমতাপীয় প্রক্রিয়ার :} যে প্রক্রিয়ায় সিস্টেম থেকে তাপ বাইরে যায় না বা বাইরে থেকে কোনো তাপ সিস্টেমে আসে না তাকে সমতাপীয় প্রক্রিয়া বলে।
+
+\noindent \textbf{উন্মুক্ত সিস্টেম :} যে সিস্টেম তার পরিবেশের সাথে শক্তি বিনিময় করতে পারে তাকে উন্মুক্ত সিস্টেম বলে।
+
+\noindent \textbf{বিচ্ছিন্ন সিস্টেম :} যে সিস্টেম পরিবেশ দ্বারা মোটেই প্রভাবিত হয় না অর্থাৎ পরিবেশের সাথে ভর বা শক্তি কোনো কিছুই বিনিময় করে না তাকে বিচ্ছিন্ন সিস্টেম বলে।
+
+\noindent \textbf{মোলার আপেক্ষিক তাপ :} এক মোল কোনো গ্যাসের তাপমাত্রা এক কেলভিন বৃদ্ধি করতে যে পরিমাণ তাপের প্রয়োজন হয় তাকে ঐ গ্যাসের মোলার আপেক্ষিক তাপ বলে।
+
+\noindent \textbf{মোলার তাপধারণ ক্ষমতা :} এক মোল গ্যাসের তাপমাত্রা এক কেলভিন বৃদ্ধি করতে প্রয়োজনীয় তাপকে ঐ গ্যাসের মোলার তাপধারণ ক্ষমতা বা মোলার আপেক্ষিক তাপ বলে।
+
+\noindent \textbf{অন্তঃস্থ শক্তি :} বস্তুর অভ্যন্তরস্থ অণু, পরমাণু ও মৌলিক কণাসমূহের রৈখিক গতি, স্পন্দন গতি ও ঘূর্ণনগতি এবং তাদের মধ্যকার বলের কারণে উদ্ভূত শক্তিই অন্তঃস্থ শক্তি।
+
+\noindent \textbf{তরলীকরণ :} বাষ্পচাপ পদ্ধতিতে রাসায়নিক পদার্থকে বাষ্প থেকে তরলে রূপান্তরের প্রক্রিয়াকে তরলীকরণ বা কনডেনসেশন বলে।
+
+\noindent \textbf{মেয়ারের প্রকল্প :} কোনো নির্দিষ্ট পরিমাণ গ্যাসের অভ্যন্তরীণ শক্তি শুধুমাত্র এর তাপমাত্রার উপর নির্ভর করে। এর চাপ বা আয়তনের উপর নির্ভর করে না। এটিই মেয়ারের প্রকল্প।
+
+\noindent \textbf{তাপের যান্ত্রিক সমতা :} একক তাপ উৎপন্ন করতে যে পরিমাণ কাজ করতে হয় বা একক তাপ দ্বারা যে পরিমাণ কাজ করা যায় তাকে তাপের যান্ত্রিক সমতা বলে।
+
+\noindent \textbf{তাপগতিবিদ্যার ২য় সূত্র :} তাপগতিবিদ্যার ২য় সূত্রটি হলো— বাইরের কোনো শক্তির সাহায্য ছাড়া কোনো স্বয়ংক্রিয় যন্ত্রের পক্ষে নিম্ন তাপমাত্রার কোনো বস্তু হতে উচ্চ তাপমাত্রার কোনো বস্তুতে তাপের স্থানান্তর সম্ভব নয়।
+
+প্রত্যাপ্যামী প্রক্রিয়া : যে প্রক্রিয়া বিপরীতমুখী হয়ে প্রত্যাবর্তন করতে পারে অর্থাৎ সম্মুখগামী প্রক্রিয়ার কার্যনির্বাহক বস্তুটির প্রতিটি স্তর পশ্চাৎগামী প্রক্রিয়ায় প্রতিটি স্তরের সাথে সর্বতোভাবে মিলে যায়, তাকে প্রত্যাপ্যামী প্রক্রিয়া বলা হয়।
+অপ্রত্যাবর্তী প্রক্রিয়া : যে প্রক্রিয়া বিপরীতমুখী হয়ে প্রত্যাবর্তন করতে পারে না তাকে অপ্রত্যাবর্তী প্রক্রিয়া বলে।
+কার্নো চক্র : যে বিশেষ প্রক্রিয়ায় কাজ করলে একটি আদর্শ তাপ ইঞ্জিন তথা কার্নো ইঞ্জিন অবিরাম শক্তি সরবরাহ করতে পারে তাই কার্নো চক্র।
+তাপ ইঞ্জিন : যে যন্ত্র তাপশক্তির বিনিময়ে কাজ করতে পারে তাকে তাপ ইঞ্জিন বলে।
+কার্যকৃত সহণ : কার্যকৃত সহণ হলো রেফ্রিজারেটর হতে অপসারিত তাপ ও কম্প্রেসার কর্তৃক সরবরাহকৃত যান্ত্রিক কাজের অনুপাত।
+রেফ্রিজারেটর : যে যন্ত্রের সাহায্যে পরিবেশ অপেক্ষা কম তাপমাত্রা সৃষ্টি করা যায় এবং তাপমাত্রা সর্বদা স্থির অবস্থায় রাখা যায় তাকে রেফ্রিজারেটর বলে।
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+\ding{226} তাপমাত্রা পরিমাপে উপযোগী পদার্থের ধর্মসমূহকে উচ্চতামিতিক ধর্ম বলা হয়।
+\ding{226} কোনো বস্তুর অণুগুলোর গতিশক্তি বৃদ্ধি পেলে তাপমাত্রার বৃদ্ধি পায়।
+\ding{226} স্থির আয়তন গ্যাস থার্মোমিটারে ব্যবহৃত উচ্চতামিতিক পদার্থ গ্যাস।
+\ding{226} রিক্রিয়াল পাইরোমিটারে উচ্চতামিতিক পদার্থ হিসেবে কৃষ্ণকায় পাত ব্যবহার করা হয়।
+\ding{226} থার্মোকপল দ্বারা   থেকে   পরিসরের তাপমাত্রা পরিমাপ করা যায়।
+\ding{226}   তাপমাত্রা সেন্টিগ্রেড স্কেলের দ্বিগুণ।
+\ding{226} মানবদেহের তাপমাত্রা   হলে সেলসিয়াস স্কেলে এর মান   ।
+\ding{226} 200 m উঁচু জলপ্রপাতের তলদেশ ও শীর্ষ দেশের তাপমাত্রার ব্যবধান   ।
+\ding{226} ভিন্ন তাপমাত্রার দুটি বস্তুর পরস্পরের সংস্পর্শে থেকে সম তাপমাত্রায় উপনীত হওয়াকে তাপীয় সমতা বলা হয়।
+\ding{226} প্রমাণ চাপে যে তাপমাত্রায় বিতক বরফ গলতে শুরু করে তাকে বরফ বিন্দু বলে।
+\ding{226} ফারেনহাইট স্কেল প্রবর্তন করেন জি.ডি. ফারেনহাইট।
+\ding{226} তাপমাত্রা পরিমাপের সেলসিয়াস স্কেল প্রবর্তন করেন অ্যান্ডার্স সেলসিয়াস।
+\ding{226} কেলভিন স্কেলে বরফ বিন্দুর মান   ।
+\ding{226} সেলসিয়াস স্কেলের 100 ভাগ ফারেনহাইট স্কেলের 180 ভাগের সমান।
+\ding{226} মানবদেহে তাপমাত্রা পরিমাপের জন্য ব্যবহৃত থার্মোমিটার ফারেনহাইট স্কেলে দাপ্তরিত থাকে।
+\ding{226} তাপগতিবিদ্যার 1ম সূত্র সর্বপ্রথম জুল আবিষ্কার করেন।
+\ding{226} 20 cal তাপ সম্পূর্ণরূপে যান্ত্রিক শক্তিকে রূপান্তরিত হলে 84 J জুল যান্ত্রিক শক্তি উৎপন্ন হবে।
+\ding{226} কোনো ব্যবস্থা দ্রুত আয়তনে 500 J তাপ বর্জন করলে ব্যবস্থাটির অন্তঃস্থ শক্তির পরিবর্তন   ।
+\ding{226} দ্বিপারমাণবিক গ্যাসের ক্ষেত্রে   এর মান 1.40।
+\ding{226}   হলে সিস্টেমে গ্যাসের স্বাভাবিক সংখ্যা 3।
+\ding{226} অক্সিজেনের স্থির আয়তনে মোলার তাপধারণ ক্ষমতা   ।
+\ding{226} যে তাপগতীয় প্রক্রিয়ায় চাপের কোনো পরিবর্তন হয় না তাকে সমচাপ প্রক্রিয়া বলে।
+\ding{226} রুদ্ধতাপ প্রক্রিয়ায় দ্বি-পরমাণু গ্যাসের চাপ 0.5% বৃদ্ধি করা হলে গ্যাসের আয়তন 0.36% কমবে।
+\ding{226} 1 mol গ্যাসের তাপমাত্রা 1 K বৃদ্ধি করতে প্রয়োজনীয় তাপকে মোলার তাপধারণ ক্ষমতা বলে।
+\ding{226} মোলার আপেক্ষিক তাপের একক   ।
+\ding{226} গ্যাসকে হঠাৎ সংকুচিত করে তার আয়তন এক তৃতীয়াংশ করা হলে চূড়ান্ত তাপমাত্রা   ।
+\ding{226} ফুটন্ত পানি বাষ্পে পরিণত হওয়ার সময় পানির আপেক্ষিক-তাপ   ।
+\ding{226} 6 cal তাপশক্তিকে কাজে পরিণত করলে 33.6 J জুল কাজ হবে।
+\ding{226} রেফ্রিজারেট স্থান থেকে আগত উষ্ণ বাষ্প কম্প্রেসারে প্রেরণ করা হয়।
+\ding{226} একটি কার্নো ইঞ্জিন পানির বাষ্পবিন্দু ও বরফ বিন্দুর মধ্যে কাজ করলে এর দক্ষতা 26.81%।
+\ding{226} একটি তাপ ইঞ্জিন   ও   এর মধ্যে কার্যত হলে এর কর্মদক্ষতা 22.3%।
+\ding{226} কোনো তাপ ইঞ্জিন থেকে তাপ বর্জিত না হলে ইঞ্জিনের দক্ষতা 100% হবে।
+
+\ding{226} কার্নো ইঞ্জিনের দক্ষতা 45% এবং উৎসের তাপমাত্রা 300 K হলে গ্রাহকের তাপমাত্রা 165 K।
+\ding{226} এন্ট্রপি বিশৃঙ্খলতা পরিমাণ নির্দেশ করে।
+\ding{226} 0 °C তাপমাত্রার 0.01 kg পানিকে 10 °C তাপমাত্রায় উত্তীর্ণ করলে এন্ট্রপির পরিবর্তন   ।
+\ding{226} 0 °C তাপমাত্রার 600 g বরফকে শুধুমাত্র গলানো হলে, এন্ট্রপির পরিবর্তন   ।
+\ding{226} ফারেনহাইট ও সেলসিয়াস স্কেল - 40° তাপমাত্রায় একই পাঠ দেয়।
+\ding{226} কাজ ও তাপের মধ্যে সম্পর্ক স্থাপন করে বিজ্ঞানী জুল সর্বপ্রথম তাপগতিবিদ্যার প্রথম সূত্রটি আবিষ্কার করেন। সূত্রটি শক্তির সংরক্ষণশীলতার সূত্রের বিশেষ রূপ।
+\ding{226} সমচাপ প্রক্রিয়ায়   , সমোষ্ণ প্রক্রিয়ায়   ।
+\ding{226} রুদ্ধতাপ প্রক্রিয়ার ক্ষেত্রে তাপের পরিবর্তন খুব দ্রুত সংঘটিত করতে হয়। অর্থাৎ এটি দ্রুত প্রক্রিয়া।
+\ding{226} রুদ্ধতাপ প্রক্রিয়ায় তাপের পরিমাণ স্থির থাকে কিন্তু তাপমাত্রার পরিবর্তন ঘটে।
+\ding{226} কোনো পদার্থের এক মোল এর উষ্ণতা এক কেলভিন বৃদ্ধি করতে প্রয়োজনীয় তাপকে বলা হয় ঐ পদার্থের মোলার আপেক্ষিক তাপ। মোলার আপেক্ষিক তাপের একক   ।
+\ding{226} সেলসিয়াস স্কেলে মৌলিক ব্যবধানকে সমান 100 ভাগে ভাগ করা হয়েছে।
+\ding{226}   এর মান ঋণাত্মক হয় যখন সিস্টেমের অন্তঃস্থ শক্তি হ্রাস পায়।
+\ding{226} সিস্টেম দ্বারা ও সিস্টেমের উপর কাজ সম্পাদিত হলে   এর মান যথাক্রমে ধনাত্মক ও ঋণাত্মক হয়।
+\ding{226} রুদ্ধতাপীয় সঙ্কোচনে সিস্টেমটির উষ্ণতা বাড়ে এবং প্রসারণে সিস্টেমটির উষ্ণতা কমে।
+\ding{226} এক পারমাণবিক, দ্বিপারমাণবিক ও বহুপারমাণবিক গ্যাসের ক্ষেত্রে   (গামা) এর মান যথাক্রমে 1.67, 1.41 ও 1.33।
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize প্রতীক ও এককসহ গুরুত্বপূর্ণ সূত্রাবলি | Important Formulas with Symbols \& Units}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{tabular}{|c|l|l|c|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \textbf{একক} \\ \hline
+ & তাপমাত্রা, $\theta = \frac{X_\theta - X_{\text{ice}}}{X_{\text{steam}} - X_{\text{ice}}} \times 100^\circ\text{C}$ & $\theta = \text{তাপমাত্রা}$ & \\
+ & \phantom{তাপমাত্রা,} $\theta = \frac{X_\theta - X_{\text{ice}}}{X_{\text{steam}} - X_{\text{ice}}} \times 180^\circ\text{F} + 32^\circ\text{F}$ & $X_\theta = \theta$ তাপমাত্রায় উষ্ণতামিতিক ধর্মের & \\
+ & দৈর্ঘ্য, চাপ, আয়তন, রোধ ও তড়িৎচালক শক্তির ক্ষেত্রে, & মান & \\ \cline{3-3}
+ & (i) পারদ থার্মোমিটারের ক্ষেত্রে, $\theta = \frac{l_\theta - l_0}{l_{100} - l_0} \times 100^\circ\text{C}$ & \begin{tabular}[c]{@{}l@{}}$X_{\text{steam}} = \text{উর্ধ্ব স্থির বিন্দুতে}$\\ \phantom{$X_{\text{steam}} =$} $\text{উষ্ণতামিতিক মান}$\end{tabular} & \\
+\textbf{১.} & (ii) স্থির আয়তন গ্যাস থার্মোমিটারের ক্ষেত্রে, & & কেলভিন ($\text{K}$) \\
+ & $\theta = \frac{P_\theta - P_0}{P_{100} - P_0} \times 100^\circ\text{C}$ & & \\ \cline{3-3}
+ & (iii) স্থির চাপ গ্যাস থার্মোমিটারের ক্ষেত্রে, & \begin{tabular}[c]{@{}l@{}}$X_{\text{ice}} = \text{নিম্ন স্থির বিন্দুতে উষ্ণতামিতিক}$\\ \phantom{$X_{\text{ice}} =$} $\text{মান}$\end{tabular} & \\
+ & $\theta = \frac{V_\theta - V_0}{V_{100} - V_0} \times 100^\circ\text{C}$ & & \\
+ & (iv) রোধ থার্মোমিটারের ক্ষেত্রে, $\theta = \frac{R_\theta - R_0}{R_{100} - R_0} \times 100^\circ\text{C}$ & & \\
+ & (v) তাপ তড়িৎ থার্মোমিটারের ক্ষেত্রে, $\theta = \frac{E_\theta - E_0}{E_{100} - E_0} \times 100^\circ\text{C}$ & & \\ \hline
+ & পানির ত্রৈধ বিন্দুর সাপেক্ষে তাপমাত্রা, $T = \frac{X}{X_{\text{tr}}} \times 273.16\text{ K}$ & $T = \text{তাপমাত্রা}$ & কেলভিন ($\text{K}$) \\ \cline{3-4}
+ & (i) পারদ থার্মোমিটার : $T = \frac{l}{l_{\text{tr}}} \times 273.16\text{ K}$ & & \\
+\textbf{২.} & (ii) স্থির আয়তন গ্যাস থার্মোমিটার : $T = \frac{P}{P_{\text{tr}}} \times 273.16\text{ K}$ & & \\
+ & (iii) স্থির চাপ গ্যাস থার্মোমিটার : $T = \frac{V}{V_{\text{tr}}} \times 273.16\text{ K}$ & $R = \text{রোধ}$ & ওহম ($\Omega$) \\
+ & (iv) রোধ থার্মোমিটার : $T = \frac{R}{R_{\text{tr}}} \times 273.16\text{ K}$ & & \\
+ & (v) তাপযুগল থার্মোমিটার : $T = \frac{E}{E_{\text{tr}}} \times 273.16\text{ K}$ & & \\ \hline
+\end{tabular}
+
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & & $C = \text{সেন্টিগ্রেড স্কেলে পাঠ}$ & ডিগ্রি সেলসিয়াস ($^\circ\text{C}$) \\ \cline{3-4} 
+\textbf{৩.} & তাপমাত্রা স্কেলের সম্পর্ক, $\frac{C}{5} = \frac{F - 32}{9} = \frac{K - 273}{5}$ & $F = \text{ফারেনহাইট স্কেলে পাঠ}$ & ডিগ্রি ফারেনহাইট ($^\circ\text{F}$) \\ \cline{3-4} 
+ & & $K = \text{কেলভিন স্কেলে পাঠ}$ & কেলভিন ($\text{K}$) \\ \hline
+ & ত্রুটিপূর্ণ থার্মোমিটারের ক্ষেত্রে, & $S = \text{ত্রুটিপূর্ণ স্কেলের তাপমাত্রা}$ & ডিগ্রি সেলসিয়াস ($^\circ\text{C}$) \\ \cline{3-3}
+\textbf{৪.} & $\frac{S - M}{B - M} = \frac{C}{100} = \frac{F - 32}{180}$ & $B = \text{ঊর্ধ্ব স্থিরাঙ্ক}$ & বা ডিগ্রি ফারেনহাইট \\ \cline{3-3}
+ & & $M = \text{নিম্ন স্থিরাঙ্ক}$ & ($^\circ\text{F}$) \\ \hline
+\textbf{৫.} & কৃতকাজ, $W = JQ$ & $J = \text{তাপীয় সমতা}$ & জুল-ক্যালরি ($\text{J cal}^{-1}$) \\ \cline{3-4} 
+ & & $Q = \text{তাপ}$ & ক্যালরি ($\text{cal}$) \\ \hline
+ & অভ্যন্তরীণ শক্তির পরিবর্তন, $\Delta U = \Delta Q + \Delta W$ & $dQ = \text{গৃহীত তাপ শক্তি}$ & \\
+\textbf{৬.} & বা, $dQ = dU + dW = dU + P\,dV$ & $dU = \text{অভ্যন্তরীণ শক্তির পরিবর্তন}$ & জুল ($\text{J}$) \\
+ & & $dW = \text{সম্পন্ন কাজ}$ & \\ \hline
+\textbf{৭.} & সমচাপ প্রক্রিয়ায় কাজ, $W = P(V_2 - V_1)$ & $P = \text{চাপ}$ & $\text{Nm}^{-2}$ \\ \cline{3-4} 
+ & & $V = \text{আয়তন}$ & $\text{m}^3$ \\ \hline
+ & সমোষ্ণ প্রক্রিয়ার ক্ষেত্রে : $dW = dQ$ এবং $P_1V_1 = P_2V_2$ & $P = \text{চাপ}$ & $\text{Nm}^{-2}$ \\ \cline{3-4} 
+ & রুদ্ধতাপীয় প্রক্রিয়ার ক্ষেত্রে : & $V = \text{আয়তন}$ & $\text{m}^3$ \\ \cline{3-4} 
+\textbf{৮.} & (i) $dW = -dQ$; (ii) $P_1V_1^\gamma = P_2V_2^\gamma$ & & \\
+ & (iii) $T_1V_1^{\gamma-1} = T_2V_2^{\gamma-1}$; (iv) $T_1P_1^{\frac{1-\gamma}{\gamma}} = T_2P_2^{\frac{1-\gamma}{\gamma}}$ & $T = \text{তাপমাত্রা}$ & $\text{K}$ \\ \hline
+\textbf{৯.} & $C_p - C_v = R$ এবং $\gamma = \frac{C_p}{C_v}$ & $C_p = \text{স্থির চাপে মোলার আপেক্ষিক তাপ}$ & $\text{J mol}^{-1}\text{K}^{-1}$ \\ \cline{3-4} 
+ & & $C_v = \text{স্থির আয়তনে মোলার আপেক্ষিক তাপ}$ & $\text{J mol}^{-1}\text{K}^{-1}$ \\ \hline
+ & (i) সমোষ্ণ প্রসারণে কাজ : $W = RT \ln \frac{V_2}{V_1}$ & & \\
+ & (ii) সমোষ্ণ সংকোচনে কাজ : $W = -RT \ln \frac{V_2}{V_1}$ & $T_1 = \text{তাপ উৎসের তাপমাত্রা}$ & \\
+\textbf{১০.} & (iii) রুদ্ধতাপীয় প্রসারণে কাজ, & $T_2 = \text{তাপগ্রাহকের তাপমাত্রা}$ & কেলভিন ($\text{K}$) \\
+ & \phantom{(iii)} $W = \frac{R}{\gamma - 1}(T_1 - T_2) = C_v(T_1 - T_2)$ & & \\
+ & (iv) রুদ্ধতাপীয় সংকোচনে কাজ, & & \\
+ & \phantom{(iv)} $W = \frac{R}{\gamma - 1}(T_2 - T_1) = C_v(T_2 - T_1)$ & & \\ \hline
+\textbf{১১.} & কার্যকৃত সহগ, $K = \frac{Q_2}{Q_1 - Q_2}$ & $Q_1 = \text{উৎস হতে গৃহীত তাপ}$ & জুল ($\text{J}$) \\ \cline{3-3}
+ & & $Q_2 = \text{উৎস কর্তৃক বর্জিত তাপ}$ & \\ \hline
+ & (i) ইঞ্জিনের দক্ষতা, $\eta = \left(1 - \frac{Q_2}{Q_1}\right) \times 100\%$ & $T_1 = \text{তাপ উৎসের তাপমাত্রা}$ & কেলভিন ($\text{K}$) \\ \cline{3-4} 
+\textbf{১২.} & (ii) ইঞ্জিনের দক্ষতা, $\eta = \left(1 - \frac{T_2}{T_1}\right) \times 100\%$ & $T_2 = \text{তাপগ্রাহকের তাপমাত্রা}$ & \\ \cline{3-4} 
+ & & $Q_1 = \text{উৎস হতে গৃহীত তাপ}$ & জুল ($\text{J}$) \\ \cline{3-3}
+ & (iii) কার্নো প্রত্যাগামী $\frac{Q_1}{T_1} = \frac{Q_2}{T_2}$ & $Q_2 = \text{উৎস কর্তৃক বর্জিত তাপ}$ & \\ \hline
+ & (i) একই তাপমাত্রায় এনট্রপির পরিবর্তন, & $dQ = \text{তাপমাত্রার পরিবর্তন}$ & কেলভিন ($\text{K}$) \\ \cline{3-4} 
+ & $     dS = \frac{dQ}{T}$; $dQ = mL_f$ বা $dQ = mL_v$ & $dS = \text{এনট্রপির পরিবর্তন}$ & জুল/কেলভিন ($\text{JK}^{-1}$) \\ \cline{3-4} 
+\textbf{১৩.} & (ii) ভিন্ন তাপমাত্রায় এনট্রপির পরিবর্তন, & & \\
+ & $     \Delta S = ms \int_{T_1}^{T_2} \frac{dT}{T} = ms \ln \frac{T_2}{T_1}$ & $L_f = \text{আপেক্ষিক সুপ্ততাপ}$ & জুল/কেজি ($\text{Jkg}^{-1}$) \\ \hline
+\end{tabular}
+}
+
+\noindent \textbf{কয়েকটি বস্তুর ডাই ইলেকট্রিক ধ্রুবক :} \\
+
+\bigskip
+
+\begin{tabular}{|l|c|l|c|}
+\hline
+\multicolumn{1}{|c|}{\textbf{বস্তুর নাম}} & \textbf{ডাই-ইলেকট্রিক ধ্রুবক (K)} & \multicolumn{1}{c|}{\textbf{বস্তুর নাম}} & \textbf{ডাই ইলেকট্রিক ধ্রুবক (K)} \\ \hline
+শূন্য (বস্তুর উপস্থিতি নেই) & $1.0$ & পলিথিন & $2.3$ \\ \hline
+হাইড্রোজেন ($1$ বায়ু চাপে) & $1.000264$ & পলিভিনাইল ক্লোরাইড & $3.18$ \\ \hline
+অক্সিজেন ($1$ বায়ু চাপে) & $1.00055$ & & \\ \hline
+বাতাস ($1$ বায়ু চাপে) & $1.0059$ & ইবোনাইট & $2.69 - 3.4$ \\ \hline
+বাতাস ($100$ বায়ু চাপে) & $1.0548$ & অ্যাম্বার & $2.7$ \\ \hline
+মোম & $2.1 - 2.5$ & মাইলার & $3.1$ \\ \hline
+টেফলন & $2.1$ & মাইকা & $3 - 6$ \\ \hline
+রবার & $2 - 3.0$ & বরফ & $3$ \\ \hline
+কাগজ & $2 - 3.5$ & কাচ & $3 - 3.7$ \\ \hline
+মোমযুক্ত কাগজ & $2.2$ & & \\ \hline
+গন্ধক & $3.8 - 4.3$ & কাচ (ক্রাউন) & $3 - 7$ \\ \hline
+কাঠ & $5$ & অ্যামোনিয়া (তরল) & $25$ \\ \hline
+সোডিয়াম ক্লোরাইড & $6.12$ & ইথাইল অ্যালকোহল & $26.8$ \\ \hline
+চিনামাটি & $6 - 8$ & জার্মেনিয়াম & $16$ \\ \hline
+কাচ (ফ্লিন্ট) & $7 - 10$ & গ্লিসারিন & $42.5$ \\ \hline
+বেনজিন & $2.28$ & পানি & $80.4$ \\ \hline
+\end{tabular}
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize সার-সংক্ষেপ | Summary}}}\par\vspace{2pt}
+বিন্দু চার্জের জন্য কুলম্বের সূত্র : কুলম্বের সূত্রটি হলো— নির্দিষ্ট মাধ্যমে দুটি বিন্দু আধানের মধ্যে ক্রিয়াশীল আকর্ষণ বা বিকর্ষণ বলের মান আধানদ্বয়ের গুণফলের সমানুপাতিক, এদের মধ্যবর্তী দূরত্বের বর্গের ব্যস্তানুপাতিক এবং এই বল আধানদ্বয়ের সংযোজক সরলরেখা বরাবর ক্রিয়া করে।
+তড়িৎ বিভব : অসীম দূর থেকে একক ধনাত্মক আধানকে তড়িৎ ক্ষেত্রের কোনো বিন্দুতে আনতে কৃতকাজের পরিমাণই হলো তড়িৎ বিভব।
+চার্জের তল ঘনত্ব : কোনো চার্জিত পরিবাহী পৃষ্ঠের যেকোনো বিন্দুর চারপাশে একক ক্ষেত্রফলে যে পরিমাণ চার্জ বর্তমান থাকে তাকে ঐ বিন্দুতে ঐ পরিবাহীর চার্জের তল ঘনত্ব বলে।
+তড়িৎ তীব্রতা : তড়িৎ ক্ষেত্রের কোনো বিন্দুতে একটি একক ধনাত্মক চার্জ স্থাপন করলে তার উপর যে বল প্রযুক্ত হয়, তাকে ঐ তড়িৎ ক্ষেত্রের জন্য উক্ত বিন্দুর তড়িৎ তীব্রতা বলে।
+বিন্দু চার্জ : আহিত বা চার্জিত বস্তুর আকার যখন খুবই ক্ষুদ্র হয় তখন ঐ চার্জিত বস্তুর চার্জকে বিন্দু চার্জ বলে।
+তড়িৎ আবেশ : চার্জিত বস্তুর উপস্থিতিতে অচার্জিত পরিবাহী ক্ষণস্থায়ীভাবে চার্জিত হওয়াই তড়িৎ আবেশ।
+তড়িৎক্ষেত্র : একটি আহিত বস্তুর চারদিকে যে অঞ্চলব্যাপী তার প্রভাব বজায় থাকে সেই অঞ্চলকে ঐ আহিত বস্তুর তড়িৎ বলক্ষেত্র বা তড়িৎক্ষেত্র বলে।
+তড়িৎ প্রাবল্য : কোনো বিন্দুতে একক আধান বা চার্জের উপর ক্রিয়াশীল বলই তড়িৎ ক্ষেত্রের প্রাবল্য।
+স্থির তড়িৎ : স্থির আধান বা প্রভাবের ক্রিয়াই স্থির তড়িৎ।
+তড়িৎ বলরেখা : তড়িৎক্ষেত্রে স্থাপিত একটি একক ধনাত্মক চার্জ স্থাপন করলে এটি যে পথে পরিভ্রমণ করে তাকে তড়িৎ বলরেখা বলে।
+১ কুলম্ব আধানের : দুটি সম মানের চার্জ শূন্য মাধ্যমে ১ মিটার দূরে অবস্থান করে পরস্পরের ওপর   N বল প্রয়োগ করলে ঐ চার্জ দুটির প্রত্যেককে ১ কুলম্ব বলে।
+সমবিভব তল : যে চার্জিত তলের প্রতিটি বিন্দুর বিভব সমান তাকে সমবিভব তল বলে।
+তড়িৎ দ্বিমেরু : এক জোড়া সমান ও বিপরীত বিন্দু আধান অল্প দূরত্বে অবস্থিত থাকলে তাকে তড়িৎ দ্বিমেরু বলে।
+তড়িৎ দ্বিমেরু ভ্রামক : কোনো একটি তড়িৎ দ্বিমেরুর যেকোনো একটি আধানের পরিমাণ এবং তাদের মধ্যবর্তী দূরত্বের গুণফলকে দ্বিমেরু ভ্রামক বলে।
+বদ্ধ আধান : আবিষ্ট পরিবাহকের যে প্রান্ত আবেশী বস্তুর নিকটে থাকে সেই প্রান্তে যে আধানের সমষ্টি হয় তাই বদ্ধ আধান।
+আধানের নিত্যতা : আধানের সৃষ্টি বা বিনাশ নেই তা শুধু এক বস্তু থেকে অন্য বস্তুতে স্থানান্তরিত হয় এবং জগতের মোট আধান সর্বদা একই থাকে এটিই আধানের নিত্যতা।
+চার্জের কোয়ান্টায়ন : পরমাণু তথা যেকোনো বস্তুর ন্যূনতম চার্জ ইলেকট্রনের চার্জের পূর্ণসংখ্যার গুণিতক হিসেবে চার্জিত হতে পারে এবং চার্জের মান কখনো ভগ্নাংশ হবে না। একে চার্জের কোয়ান্টায়ন বলে।
+এক ইলেকট্রন ভোল্ট : ১ ভোল্ট বিভব পার্থক্যে কোনো ইলেকট্রনকে গতিশীল করতে সম্পন্ন কাজের পরিমাণকে এক ইলেকট্রন ভোল্ট (eV) বলা হয়।
+পোলার ডাই ইলেকট্রিক : যেসব ডাই ইলেকট্রিক পদার্থের কোনো অণুর ঋনাত্মক আধানের কেন্দ্র ধনাত্মক আধানের কেন্দ্রের সাথে সমাপতিত হয় না সেই সকল ডাই ইলেকট্রিক পদার্থকে পোলার ডাই ইলেকট্রিক পদার্থ বলে।
+পর্যবেক্ষণাত্মক দ্রবক : দুটি বিন্দু চার্জের মধ্যে নির্দিষ্ট দূরত্বের শূন্যস্থানে ক্রিয়াশীল বল ও ঐ দুই চার্জের মধ্যে একই দূরত্বে অন্য কোনো মাধ্যমে ক্রিয়াশীল বলের অনুপাতকে ঐ মাধ্যমের তড়িৎ মাধ্যমাক বা পর্যবেক্ষণাত্মক দ্রবক বলে।
+আপেক্ষিক ভেদনযোগ্যতা : কোনো মাধ্যমের ভেদনযোগ্যতা ও শূন্য মাধ্যমের ভেদনযোগ্যতার অনুপাতই হলো আপেক্ষিক ভেদনযোগ্যতা।
+অস্তরিত অপরিবাহী : তড়িৎ সংক্রান্ত কাজে যে সকল পদার্থ সংযোজক হিসেবে ব্যবহৃত হয় সেগুলোই অস্তরিত অপরিবাহী।
+ভেদন যোগ্যতা : মাধ্যমের যে ধর্ম ঐ মাধ্যমে স্থাপিত দুটি চার্জের মধ্যে কুলম্ব বলকে প্রভাবিত করে তাকে ঐ মাধ্যমের ভেদন যোগ্যতা বলে।
+
+
+
+\bigskip
+
+\noindent \textbf{তড়িৎ মাধ্যম :} যে সমস্ত পদার্থের মধ্য দিয়ে চার্জ বা তড়িৎ প্রবাহিত হয় বা প্রবাহিত হতে চায়, তাদেরই তড়িৎ মাধ্যম বলে।
+
+\noindent \textbf{অতি পরিবাহিতা :} অতি নিম্ন তাপমাত্রায় কিছু কিছু পদার্থের রোধ শূন্যে নেমে আসে। এসব পদার্থকে বলা হয় অতিপরিবাহী এবং পদার্থের এ ধর্মকে বলা হয় অতি পরিবাহিতা।
+
+\noindent \textbf{দ্বিতড়িৎ ধ্রুবক :} একই দূরত্বে দুটি নির্দিষ্ট বিন্দু চার্জের মধ্যে শূন্য মাধ্যমে ক্রিয়াশীল তড়িৎ বল এবং কোনো দ্বিতড়িৎ মাধ্যমে ক্রিয়াশীল তড়িৎ বলের অনুপাতকে ঐ মাধ্যমের দ্বিতড়িৎ ধ্রুবক বলে।
+
+\noindent \textbf{ধারক কাকে :} কাছাকাছি স্থাপিত দুটি পরিবাহীর মধ্যবর্তী স্থানে অন্তরক পদার্থ রেখে তড়িৎ আধানরূপে শক্তি সঞ্চয় করে রাখার যান্ত্রিক কৌশলকে ধারক বলে।
+
+\noindent \textbf{ধারকের সমবায় :} একাধিক ধারককে একত্রে সংযুক্ত করে ব্যবহার করাকে ধারকের সমবায় বলে।
+
+\noindent \textbf{ফ্যারাড :} কোনো ধারককে এক কুলম্ব চার্জ প্রদান করলে যদি এর বিভব এক ভোল্ট বৃদ্ধি পায় তবে উক্ত ধারকের ধারকত্বকে এক ফ্যারাড বা সংক্ষেপে ফ্যারাড বলে।
+
+\noindent \textbf{তুল্য ধারকত্ব :} ধারকের সমবায়ের পরিবর্তে যে একটি মাত্র ধারক ব্যবহার করলে সমবায়ের বিভব পার্থক্য ও আধানের কোনো পরিবর্তন হয় না তার ধারকত্বকে সমবায়ের তুল্য ধারকত্ব বলে।
+
+\noindent \textbf{গসিয়ান তল :} সুষমভাবে চার্জিত একটি গোলকের গোলকীয় তলের প্রত্যেক বিন্দুতে যদি তড়িৎপ্রাবল্য মানে সমান এবং লম্ব অভিমুখে ক্রিয়াশীল থাকে তবে এ প্রকারের গোলকীয় তলকে গাউসিয়ান তল বলে।
+
+\noindent \textbf{তড়িৎ ফ্লাক্স :} কোনো তড়িৎক্ষেত্রের সাথে লম্বভাবে অবস্থিত বা কল্পিত কোনো তলের মধ্য দিয়ে অতিক্রান্ত মোট প্রবাহরেখা হলো তড়িৎ ফ্লাক্স।
+
+\noindent \textbf{গসের সূত্র :} গসের সূত্রটি হলো— কোনো বদ্ধ তলের উপর স্থির তড়িৎ ক্ষেত্রের মোট অভিলম্ব আবেশ বা ফ্লাক্স ঐ তল দ্বারা বেষ্টিত মোট চার্জের $\frac{1}{\epsilon_0}$ গুণ।
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{itemize}
+    \item[\ding{226}] শূন্যস্থানে কুলম্ব ধ্রুবকের মান $9 \times 10^9$।
+    \item[\ding{226}] এস. আই. পদ্ধতিতে আধানের একক কুলম্ব।
+    \item[\ding{226}] বায়ুতে $5 \times 10^{-4}\text{ C}$ এবং $8 \times 10^{-4}\text{ C}$ মানের দুটি চার্জের মধ্যবর্তী দূরত্ব $2\text{ m}$ হলে, এদের মধ্যবর্তী ক্রিয়াশীল বল $900\text{ N}$।
+    \item[\ding{226}] $- 1 \times 10^{-6}\text{ C}$ এবং $3 \times 10^{-6}\text{ C}$ চার্জদ্বয়কে পরস্পর হতে $15\text{ cm}$ দূরে রাখা হলে তাদের মধ্যে আকর্ষণ বলের মান $1.2\text{ N}$।
+    \item[\ding{226}] $1\text{ \AA}$ দূরত্বে অবস্থিত দুটি ইলেকট্রনের মধ্যকার বলের মান $2.304 \times 10^{-8}$ নিউটন।
+    \item[\ding{226}] শূন্য মাধ্যমে দুইটি ইলেকট্রনের মধ্যকার কুলম্ব বল এবং মহাকর্ষ বলের অনুপাত $4.2 \times 10^{42}$।
+    \item[\ding{226}] একটি বস্তুর চার্জ $+ 5\text{ C}$ হলে এতে ইলেকট্রন সংখ্যা $3.125 \times 10^{19}$।
+    \item[\ding{226}] কোনো একটি আহিত বস্তুর আধানের জন্য গ্রহণযোগ্য মান ইলেকট্রনিক আধানের গুণিতক হবে।
+    \item[\ding{226}] $10\text{ C}$ বিন্দু আধান হতে শূন্য মাধ্যমে $1\text{ m}$ দূরত্বের বিন্দুতে বিভবের মান $9 \times 10^{10}\text{ V}$।
+    \item[\ding{226}] $4$ পরা বৈদ্যুতিক ধ্রুবকের কোনো মাধ্যমে রক্ষিত $0.25\text{ C}$ আধান হতে $10\text{ m}$ দূরত্বের বিন্দুতে তড়িৎ বিভবের মান $5.625 \times 10^7\text{ V}$।
+    \item[\ding{226}] $2.58 \times 10^{-10}\text{ C}$ এর পরখ আধানের ওপর $1.35\text{ N}$ বল প্রয়োগকারী তড়িৎ ক্ষেত্রের মান $5.23 \times 10^9\text{ N C}^{-1}$।
+    \item[\ding{226}] ধনাত্মক আধানের আহিত একটি বস্তুকে ভূমির সাথে সংযুক্ত করলে নিষ্ক্রিয় হবে।
+    \item[\ding{226}] কোনো নিঃসসঙ্গ চার্জ হতে $10\text{ cm}$ দূরে $100\text{ V}$ বিভব সৃষ্টি হলে ঐ চার্জটির পরিমাণ $1.1 \times 10^{-9}\text{ C}$।
+    \item[\ding{226}] $2 \times 10^{-9}\text{ C}$ চার্জ থেকে $0.1\text{ m}$ দূরত্বে বৈদ্যুতিক প্রাবল্যের মান $1800\text{ N/C}$।
+    \item[\ding{226}] একটি সুষম তড়িৎ ক্ষেত্রে $5\text{ cm}$ ব্যবধানে অবস্থিত দুটি বিন্দুর বিভব পার্থক্য $100\text{ V}$ হলে তড়িৎ ক্ষেত্রের প্রাবল্য $2000\text{ Vm}^{-1}$।
+    \item[\ding{226}] $2\text{ eV}$ জুলের সমান $3.2 \times 10^{-19}\text{ J}$।
+    \item[\ding{226}] $30$ ভোল্টের একটি ব্যাটারির এক প্রান্ত হতে অন্য প্রান্তে $60\text{ C}$ চার্জকে পরিবাহিত করতে $1800\text{ J}$ পরিমাণ কাজ করতে হয়।
+    \item[\ding{226}] $100\text{ C}$ চার্জ হতে $3\text{ m}$ দূরে বৈদ্যুতিক প্রাবল্য $3 \times 10^{11}\text{ N C}^{-1}$।
+    \item[\ding{226}] $r$ ব্যাসার্ধের গোলকীয় তলের কেন্দ্রে $8.854 \times 10^{-8}\text{ C}$ চার্জ রাখা হলে উক্ত তল থেকে নিঃসৃত তড়িৎ ফ্লাক্সের মান $10^4$।
+    \item[\ding{226}] $2\sqrt{2}\text{ m}$ বাহুবিশিষ্ট একটি বর্গক্ষেত্রের চার কোণায় $2 \times 10^{-9}\text{ C}$ চার্জ থাকলে উহার কেন্দ্রে বিভব $36\text{ V}$।
+    \item[\ding{226}] বায়ুতে $50\text{ C}$ চার্জ হতে $2\text{ m}$ দূরত্বে কোন বিন্দুতে তড়িৎ প্রাবল্যের মান $11.25 \times 10^{10}\text{ N C}^{-1}$।
+\end{itemize}
+
+\bigskip
+\bigskip
+
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] $6.2\text{ g}$ ভরের একটি অ্যালুমিনিয়াম মুদ্রায় মোট ধনাত্মক চার্জের পরিমাণ $2.879 \times 10^5\text{ C}$।
+    \item[$\blacktriangleright$] $100\text{ C}$ চার্জ থেকে $0.5\text{ m}$ দূরে তড়িৎ বিভব $18 \times 10^{11}\text{ volt}$।
+    \item[$\blacktriangleright$] তড়িৎ বলরেখা একটি সমবিভব তলকে লম্বভাবে ছেদ করে।
+    \item[$\blacktriangleright$] ইলেকট্রন ও প্রোটনের মৌলিক ধর্ম আধান।
+    \item[$\blacktriangleright$] $20^\circ\text{C}$ তাপমাত্রায় পানির পরাবৈদ্যুতিক ধ্রুবক $80.4$।
+    \item[$\blacktriangleright$] পরিবাহীতে চার্জ সঞ্চিত রাখার যান্ত্রিক প্রক্রিয়ার নাম ধারক।
+    \item[$\blacktriangleright$] এস আই পদ্ধতিতে ধারকত্বের একক ফ্যারাড।
+    \item[$\blacktriangleright$] কোনো পরিবাহীর বিভব $1$ ভোল্ট বাড়াতে $1$ কুলম্ব চার্জের প্রয়োজন হলে ঐ পরিবাহীর ধারকত্বের মান $1\text{ F}$।
+    \item[$\blacktriangleright$] $2.5\text{ }\mu\text{F}$ ধারকত্ব বিশিষ্ট একটি ধারককে $20\text{ V}$ ব্যাটারির সাথে সংযুক্ত করা হলে এতে $50 \times 10^{-6}\text{ C}$ পরিমাণ চার্জ সঞ্চিত হবে।
+    \item[$\blacktriangleright$] পৃথিবীর ব্যাসার্ধ $6400\text{ km}$ হলে, পৃথিবীর ধারকত্ব $711\text{ }\mu\text{F}$।
+    \item[$\blacktriangleright$] $2.5\text{ }\mu\text{F}$ ধারকত্ববিশিষ্ট একটি ধারককে $20\text{ V}$ ব্যাটারির সাথে যুক্ত করা হলে, এতে $50\text{ }\mu\text{C}$ চার্জ সংযুক্ত হবে।
+    \item[$\blacktriangleright$] $5\text{ }\mu\text{F}$, $10\text{ }\mu\text{F}$ এবং $15\text{ }\mu\text{F}$ তিনটি ধারককে শ্রেণি সমবায়ে সংযুক্ত করলে তুল্যধারকত্ব $2.73\text{ }\mu\text{F}$ হবে।
+    \item[$\blacktriangleright$] বায়ুতে $10.76\text{ m}$ দূরবর্তী $15\text{ m}^2$ ক্ষেত্রফলের পরিবাহীর ধারকত্ব $12.34\text{ pF}$।
+    \item[$\blacktriangleright$] $6\text{ }\mu\text{F}$ একটি ধারককে $9.04\text{ V}$ ব্যাটারি দ্বারা চার্জিত করলে এতে $2.43 \times 10^{-4}\text{ J}$ পরিমাণ শক্তি সঞ্চিত হবে।
+    \item[$\blacktriangleright$] শূন্য মাধ্যমে তড়িৎ ভেদনযোগ্যতা, $\epsilon_0 = 8.854 \times 10^{-12}\text{ C}^2\text{N}^{-1}\text{m}^{-2}$।
+    \item[$\blacktriangleright$] একটি সমান্তরাল পাতধারকের ধারকত্ব বৃদ্ধি করতে হলে এর পাতদ্বয়কে সঠিকভাবে সমান্তরাল রাখতে হবে।
+    \item[$\blacktriangleright$] একটি চার্জিত রিং এর কেন্দ্রে কোন চার্জ রাখলে ঐ চার্জের উপর নিট বল শূন্য হবে।
+    \item[$\blacktriangleright$] একই দূরত্বে দুটি চার্জের মধ্যকার ক্রিয়াশীল বল নির্ভর করে চার্জ দুটির মানের উপর এবং মধ্যবর্তী মাধ্যমের উপর।
+    \item[$\blacktriangleright$] ঘর্ষণের ফলে নতুন কোনো চার্জের উৎপত্তি হয় না, শুধু চার্জের আদান-প্রদান হয়।
+    \item[$\blacktriangleright$] একটি চার্জিত গোলকের অভ্যন্তরে তড়িৎ প্রাবল্য শূন্য হবে।
+    \item[$\blacktriangleright$] পরিবাহীর বক্র অংশে সঞ্চিত চার্জের পরিমাণ সবচেয়ে বেশি।
+    \item[$\blacktriangleright$] তড়িৎ ক্ষেত্রে দূরত্বের সাপেক্ষে বিভবের অন্তরক সহগকে তড়িৎ প্রাবল্য বলে।
+    \item[$\blacktriangleright$] একটি ইলেকট্রন বা প্রোটনের চার্জের পরিমাণ $1.6 \times 10^{-19}\text{ C}$।
+    \item[$\blacktriangleright$] পরিবাহীতে চার্জ সঞ্চিত রাখার যান্ত্রিক প্রক্রিয়ার নাম ধারক। আবিষ্কারক ভ্যান মুসেন।
+    \item[$\blacktriangleright$] সমান্তরাল পাত ধারকের পাতদ্বয়ের মধ্যবর্তী দূরত্ব বাড়ালে ধারকত্ব কমে যায়।
+    \item[$\blacktriangleright$] সুষম তড়িৎ ক্ষেত্রে সর্বত্র প্রাবল্যের মান ও দিক অভিন্ন এবং তড়িৎ বলরেখা সমান্তরাল হয়।
+\end{itemize}
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize প্রতীক ও এককসহ গুরুত্বপূর্ণ সূত্রাবলি | Important Formulas with Symbols \& Units}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & & $F = \text{বল}$ & নিউটন ($\text{N}$) \\ \cline{3-4} 
+ & & $q_1 \text{ ও } q_2 = \text{বিন্দু আধান}$ & কুলম্ব ($\text{C}$) \\ \cline{3-4} 
+\textbf{১.} & কুলম্ব বল : $F = \frac{1}{4\pi\epsilon_0} \cdot \frac{q_1q_2}{d^2}$ & $d = \text{আধানদ্বয়ের মধ্যবর্তী দূরত্ব}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+ & & $\frac{1}{4\pi\epsilon_0} = \text{ধ্রুব মান} = 9 \times 10^9$ & নিউটন মিটার$^2$/কুলম্ব$^2$ ($\text{Nm}^2\text{C}^{-2}$) \\ \hline
+ & & $E = \text{তড়িৎ প্রাবল্য}$ & \begin{tabular}[c]{@{}l@{}}নিউটন/কুলম্ব ($\text{N/C}$)\\ বা ভোল্ট/মিটার ($\text{V/m}$)\end{tabular} \\ \cline{3-4} 
+\textbf{২.} & তড়িৎ প্রাবল্য : $E = \frac{1}{4\pi\epsilon_0} \cdot \frac{q}{r^2}$ & $r = \text{দূরত্ব}$ & মিটার ($\text{m}$) \\ \hline
+ & & $\sigma = \text{চার্জের তলমাত্রিক ঘনত্ব}$ & কুলম্ব/মিটার$^2$ ($\text{C/m}^2$) \\ \cline{3-4} 
+ & চার্জের তলমাত্রিক ঘনত্ব : $\sigma = \frac{Q}{A} = \frac{Q}{4\pi r^2}$ & $A = \text{পরিবাহীর বহিঃপৃষ্ঠের ক্ষেত্রফল}$ & বর্গমিটার ($\text{m}^2$) \\ \cline{3-4} 
+\textbf{৩.} & $\sigma_1 : \sigma_2 = r_2^2 : r_1^2$ ; যখন $Q_1 = Q_2$ & $4\pi r^2 = \text{গোলকের পৃষ্ঠের ক্ষেত্রফল}$ & বর্গমিটার ($\text{m}^2$) \\ \cline{3-4} 
+ & $\frac{\sigma_1}{\sigma_2} = \frac{Q_1}{Q_2} \cdot \frac{r_2^2}{r_1^2}$ ; যখন $Q_1 \neq Q_2$ & $r = \text{গোলকের ব্যাসার্ধ}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+ & & $Q = \text{চার্জ}$ & কুলম্ব ($\text{C}$) \\ \hline
+\end{tabular}
+}
+
+\bigskip
+\bigskip
+
+
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & & $r = \text{দূরত্ব}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+\textbf{৪.} & তড়িৎ বিভব : $V = \frac{1}{4\pi\epsilon_0} \cdot \frac{q}{r}$ & $V = \text{তড়িৎ বিভব}$ & ভোল্ট ($\text{V}$) \\ \cline{3-4} 
+ & & $r = \text{পরিবাহী গোলকের ব্যাসার্ধ}$ & মিটার ($\text{m}$) \\ \hline
+ & & $P = \text{দ্বিমেরু ভ্রামক}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+ & তড়িৎ দ্বিমেরুর লম্ব দ্বিখণ্ডকের উপর কোনো বিন্দুতে & $2l = \text{দ্বিমেরুর দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+\textbf{৫.} & প্রাবল্য : $E = \frac{1}{4\pi\epsilon_0} \cdot \frac{P}{\left(r^2 + l^2\right)^{\frac{3}{2}}}$ & $E = \text{তড়িৎ প্রাবল্য}$ & \begin{tabular}[c]{@{}l@{}}নিউটন/কুলম্ব ($\text{N/C}$)\\ বা ভোল্ট/মিটার ($\text{V/m}$)\end{tabular} \\ \cline{3-4} 
+ & & $r = \text{দূরত্ব}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{৬.} & গোলাকার পরিবাহীর ধারকত্ব : $C = 4\pi\epsilon_0 r$ & $r = \text{গোলকের ব্যাসার্ধ}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+ & & $\epsilon_0 = \text{তড়িৎভেদ্যনযোগ্যতা}$ & \begin{tabular}[c]{@{}l@{}}কুলম্ব$^2$/নিউটন-মিটার$^2$\\ ($\text{C}^2\text{N}^{-1}\text{m}^{-2}$)\end{tabular} \\ \hline
+ & সমান্তরাল পাত ধারকের ধারকত্ব : & $C = \text{ধারকত্ব}$ & ফ্যারাড ($\text{F}$) \\ \cline{3-4} 
+ & (i) দুটি পাতের ক্ষেত্রে, $C = \frac{\epsilon_0 A}{d}$ & $A = \text{প্রত্যেক পাতের ক্ষেত্রফল}$ & মিটার$^2$ ($\text{m}^2$) \\ \cline{3-4} 
+\textbf{৭.} & (ii) $n$-সংখ্যক পাতের ক্ষেত্রে, $C = \frac{(n-1)\epsilon_0 A}{d}$ & $d = \text{সমান্তরাল দুটি পাতের দূরত্ব}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+ & \phantom{(ii)} [প্রতিটি পাত পরস্পর থেকে $d$ দূরে অবস্থিত] & & \\
+ & (iii) $t$ বেধযুক্ত $K$ পরাবৈদ্যুতিক মাধ্যমের ক্ষেত্রে দুটি & $k = \text{পরাবৈদ্যুতিক ধ্রুবক}$ & \\
+ & সমান্তরাল পাত ধারকের ধারকত্ব : $C = \frac{\epsilon_0 A}{(d-t) + \frac{t}{K}}$ & & \\ \hline
+\textbf{৮.} & \begin{tabular}[c]{@{}l@{}}সমান্তরাল সমবায়ের ক্ষেত্রে তুল্য ধারকত্ব :\\ $C_p = C_1 + C_2 + C_3 + .......... + C_n$\end{tabular} & \begin{tabular}[c]{@{}l@{}}$C_p = \text{সমান্তরাল সমবায়ে যুক্ত}$\\ \text{ধারকগুলোর ধারকত্ব}\end{tabular} & ফ্যারাডে ($\text{F}$) \\ \hline
+\textbf{৯.} & \begin{tabular}[c]{@{}l@{}}শ্রেণি সমবায়ের ক্ষেত্রে তুল্য ধারকত্ব :\\ $\frac{1}{C_s} = \frac{1}{C_1} + \frac{1}{C_2} + \frac{1}{C_3} + .......... + \frac{1}{C_n}$\end{tabular} & \begin{tabular}[c]{@{}l@{}}$C_s = \text{শ্রেণি সমবায়ে যুক্ত}$\\ \text{ধারকগুলোর ধারকত্ব}\end{tabular} & ফ্যারাডে ($\text{F}$) \\ \hline
+ & & $C = \text{ধারকত্ব}$ & ফ্যারাডে ($\text{F}$) \\ \cline{3-4} 
+\textbf{১০.} & ধারকে সঞ্চিত শক্তি : & $V = \text{বিভব পার্থক্য}$ & ভোল্ট ($\text{V}$) \\ \cline{3-4} 
+ & $U = \frac{1}{2}CV^2 = \frac{1}{2}QV = \frac{1}{2}\frac{Q^2}{C}$ & $U = \text{সঞ্চিত শক্তি}$ & জুল ($\text{J}$) \\ \cline{3-4} 
+ & & $Q = \text{আধান}$ & কুলম্ব ($\text{C}$) \\ \hline
+ & ধারকের একক আয়তনে সঞ্চিত শক্তি : & $V = \text{তড়িৎ বিভব}$ & ভোল্ট ($\text{V}$) \\ \cline{3-4} 
+\textbf{১১.} & $U = \frac{1}{2}K\epsilon_0 E^2$ , $E = \frac{V}{d}$ & & \\
+ & ($\text{আয়তন} = Ad = \text{পাতের ক্ষেত্রফল} \times \text{পাতদ্বয়ের}$ & $d = \text{সমান্তরাল দুটি পাতের দূরত্ব}$ & মিটার ($\text{m}$) \\
+ & $\text{মধ্যবর্তী দূরত্ব}$) & & \\ \hline
+\textbf{১২.} & সমান্তরাল দুটি পাত ধারকের পাতদ্বয়ের মধ্যবর্তী & $F = \text{কুলম্ব বল}$ & নিউটন ($\text{N}$) \\ \cline{3-4} 
+ & আকর্ষণ বল : $F = \frac{1}{2} \cdot \frac{Q^2}{\epsilon_0 KA}$ & $\epsilon_0 = \text{শূন্যস্থানের ভেদন যোগ্যতা}$ & \begin{tabular}[c]{@{}l@{}}ফ্যারাডে/মিটার ($\text{F/m}$) বা\\ কুলম্ব$^2$/নিউটন মিটার$^2$ ($\text{C}^2/\text{N-m}^2$)\end{tabular} \\ \hline
+\end{tabular}
+}
+
+\bigskip
+\bigskip
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize সার-সংক্ষেপ | Summary}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent \textbf{অর্ধ পরিবাহী :} সাধারণ তাপমাত্রায় যে সকল পদার্থের যোজন ব্যান্ড প্রায় পূর্ণ এবং পরিবহন ব্যান্ড প্রায় খালি থাকে এবং এ দুটি ব্যান্ডের মধ্যে নিষিদ্ধ শক্তি ব্যবধান $2\text{ eV}$ এর চেয়ে কম থাকে তাদেরকে অর্ধপরিবাহী বলে।
+
+\noindent \textbf{তাড়ন বেগ :} তাড়ন বেগ হলো কোনো কণা যেমন ইলেকট্রনের সেই বেগ যা সে তড়িৎক্ষেত্রের কারণে লাভ করে।
+
+\noindent \textbf{ওহমের সূত্র :} ও'মের সূত্রটি হলো— তাপমাত্রা স্থির থাকলে কোনো পরিবাহীর মধ্যদিয়ে যে পরিমাণ তড়িৎ প্রবাহিত হয়, তা সেই পরিবাহীর দুই প্রান্তের বিভব পার্থক্যের সমানুপাতিক।
+
+\noindent \textbf{এক অ্যাম্পিয়ার প্রবাহ :} শূন্য মাধ্যমে $1\text{ m}$ দূরত্বে অবস্থিত অসীম দৈর্ঘ্যের এবং উপেক্ষণীয় প্রস্থচ্ছেদের দুটি সমান্তরাল সরল পরিবাহীর প্রত্যেকটিতে যে পরিমাণ প্রবাহ চললে পরস্পরের মধ্যে প্রতি মিটার দৈর্ঘ্যে $2 \times 10^{-7}\text{ N}$ বল উৎপন্ন হয় তাই এক অ্যাম্পিয়ার।
+
+\noindent \textbf{আপেক্ষিক রোধ :} একক দৈর্ঘ্য ও একক প্রস্থচ্ছেদের ক্ষেত্রফল বিশিষ্ট কোনো পরিবাহীর রোধকে আপেক্ষিক রোধ বলে।
+
+\noindent \textbf{অতি পরিবাহিতা :} অতি নিম্ন তাপমাত্রায় কিছু কিছু পদার্থের রোধ শূন্যে নেমে আসে। এসব পদার্থকে বলা হয় অতিপরিবাহী এবং পদার্থের এ ধর্মকে বলা হয় অতি পরিবাহিতা।
+
+\noindent \textbf{প্রবাহ ঘনত্ব :} কোনো পরিবাহকের প্রতি একক প্রস্থচ্ছেদের ক্ষেত্রফলের মধ্য দিয়ে প্রবাহিত প্রবাহকে প্রবাহ ঘনত্ব বলে।
+
+\noindent \textbf{অ্যাম্পিয়ারের সূত্র :} অ্যাম্পিয়ারের সূত্রটি হলো— কোনো তড়িৎবাহী পরিবাহীকে কেন্দ্র করে কাল্পনিক কোনো বদ্ধ রেখা বা লুপের ওপর $\vec{B} \cdot d\vec{l}$ এর রৈখিক যোগজীকরণ ঐ পরিবাহীতে প্রবাহিত তড়িৎ প্রবাহমাত্রা $i$ এবং $\mu_0$ এর গুণফল সমান।
+
+\noindent \textbf{রোধের উষ্ণতা গুণাঙ্ক :} প্রতি কেলভিন তাপমাত্রা বৃদ্ধিতে একক রোধ বিশিষ্ট কোনো পরিবাহীর রোধের যে বৃদ্ধি ঘটে তাকে ঐ পরিবাহীর রোধের উষ্ণতা গুণাঙ্ক বলে।
+
+\noindent \textbf{রোধ :} পরিবাহীর যে ধর্মের জন্য এর মধ্যদিয়ে তড়িৎ প্রবাহ বাধাগ্রস্ত হয় তাকে ঐ পরিবাহীর রোধ বলে।
+
+\noindent \textbf{রোধের দৈর্ঘ্যের সূত্র :} রোধের দৈর্ঘ্যের সূত্রটি হলো নির্দিষ্ট তাপমাত্রায় নির্দিষ্ট উপাদানের পরিবাহকের প্রস্থচ্ছেদের ক্ষেত্রফল স্থির থাকলে পরিবাহকের রোধ দৈর্ঘ্যের সমানুপাতিক পরিবর্তিত হয়।
+
+\noindent \textbf{ওহম মিটার :} যে যন্ত্রের সাহায্যে রোধ নির্ণয় করা হয়, তাকে ওহম মিটার বলে।
+
+\noindent \textbf{রোধাঙ্ক :} কোনো নির্দিষ্ট তাপমাত্রার একক দৈর্ঘ্যের ও একক প্রস্থচ্ছেদের ক্ষেত্রফলের কোনো পরিবাহীর রোধকে বা একক বাহুবিশিষ্ট কোনো ঘনকের রোধকে ঐ তাপমাত্রায় ঐ পরিবাহীর উপাদানের আপেক্ষিক রোধ বা রোধাঙ্ক বলে।
+
+\noindent \textbf{১ ওহম রোধ :} যে পরিবাহকের দুই প্রান্তের বিভব পার্থক্য এক ভোল্ট হলে তার মধ্য দিয়ে $1$ অ্যাম্পিয়ার তড়িৎ প্রবাহ চলে সেই পরিবাহকের রোধকে এক ওহম বলে।
+
+\noindent \textbf{স্লাইডিং রোধ :} বিভব বিভাজকে $R_1$ ও $R_2$ এর পরিবর্তে এমন রোধ যুক্ত করা যায় যার মান পরিবর্তন করে $V_1$ এর মান শূন্য থেকে $V_2$ পর্যন্ত পাওয়া সম্ভব। একে স্লাইডিং রোধ বলে।
+
+\noindent \textbf{মুক্ত ইলেকট্রন :} পরমাণুর সর্ববহিঃস্থ শক্তিস্তরের ইলেকট্রনের সাথে নিউক্লিয়াসের আকর্ষণ বল অনেক কম থাকে বলে এর ইলেকট্রন সহজেই পরমাণু থেকে মুক্ত হয়ে তড়িৎ পরিবহনে অংশ নেয়। এদের মুক্ত ইলেকট্রন বলে।
+
+\noindent \textbf{জুলের প্রথম সূত্র :} জুলের প্রথম সূত্রটি হলো— বিদ্যুৎবাহী পরিবাহী রোধ $R$ এবং বিদ্যুৎ প্রবাহকাল $t$ অপরিবর্তিত থাকলে পরিবাহীতে বিদ্যুৎ প্রবাহের দরুন উদ্ভূত তাপ প্রবাহমাত্রার বর্গের সমানুপাতিক।
+
+\noindent \textbf{তাপ উৎপাদন সম্পর্কিত জুলের দ্বিতীয় সূত্র :} তাপ উৎপাদন সম্পর্কিত জুলের দ্বিতীয় সূত্রটি হলো— বিদ্যুৎবাহী পরিবাহীর রোধ এবং বিদ্যুৎ প্রবাহমাত্রা অপরিবর্তিত থাকলে পরিবাহীতে বিদ্যুৎ প্রবাহের দরুন উদ্ভূত তাপ প্রবাহকালের সমানুপাতিক।
+
+\noindent \textbf{জুলের রোধের সূত্র :} জুলের রোধের সূত্রটি হলো— তড়িৎ প্রবাহমাত্রা এবং তড়িৎ প্রবাহকাল অপরিবর্তিত থাকলে পরিবাহীতে তড়িৎ প্রবাহের দরুন উদ্ভূত তাপ পরিবাহীর রোধের সমানুপাতিক।
+
+\noindent \textbf{B.O.T. unit :} এক কিলোওয়াট ক্ষমতা সম্পন্ন কোনো যন্ত্র এক ঘণ্টা ধরে যে বৈদ্যুতিক শক্তি ব্যয় করে তাকে কিলোওয়াট ঘণ্টা বা $1\text{ B.O.T unit}$ বলে।
+
+\noindent \textbf{কিলোওয়াট ঘণ্টা :} এক কিলোওয়াট ক্ষমতা সম্পন্ন কোনো যন্ত্র এক ঘণ্টা কাজ করলে যে শক্তি ব্যয় হয়, তাই কিলোওয়াট-ঘণ্টা।
+
+\noindent \textbf{বর্তনী :} তড়িৎ প্রবাহ চলার সম্পূর্ণ পথকে তড়িৎ বর্তনী বলে।
+
+\bigskip
+\bigskip
+
+
+\bigskip
+
+\noindent \textbf{চৌম্বক প্রাবল্য বা চৌম্বক তীব্রতা :} শূন্যস্থানে বায়ু মাধ্যমে কোনো চৌম্বক ক্ষেত্রে একক ক্ষেত্রফলের মধ্য দিয়ে অতিক্রান্ত চৌম্বক বলরেখার সংখ্যা বা ফ্লাক্সকে চৌম্বক ক্ষেত্রের প্রাবল্য বা তীব্রতা বলে।
+
+\noindent \textbf{চুম্বকায়ন বা চুম্বকায়ন তীব্রতা :} কোনো চৌম্বক পদার্থের প্রতি একক আয়তনের চৌম্বক ভ্রামককে চুম্বকায়ন বলে।
+
+\noindent \textbf{চৌম্বক সম্পৃক্তি :} চুম্বকায়নের পর চৌম্বক পদার্থ যে নির্দিষ্ট সীমার উপরে তার চুম্বকত্ব প্রাপ্ত হয় না তাকে চৌম্বক সম্পৃক্তি বলে।
+
+\noindent \textbf{চৌম্বক প্রবেশ্যতা :} কোনো চৌম্বক ক্ষেত্রে স্থাপিত চৌম্বক পদার্থের উপর চৌম্বক আবেশ ও চৌম্বক প্রাবল্যের অনুপাতকে চৌম্বক প্রবেশ্যতা বলে।
+
+\noindent \textbf{চৌম্বক প্রবণতা বা চৌম্বক গ্রাহিতা :} কোনো চৌম্বক পদার্থকে কত সহজে চুম্বকিত করা যায় তা যে ধর্মের দ্বারা নির্ণীত হয় তাকে পদার্থটির চৌম্বক প্রবণতা বলা হয়।
+
+\noindent \textbf{কুরীবিন্দু (Curie Point) :} যে তাপমাত্রায় কোনো একটি চুম্বকের চুম্বকত্ব সম্পূর্ণরূপে লোপ পায়, তাকে উক্ত চুম্বকের উপাদানের কুরীবিন্দু বলে।
+
+\noindent \textbf{চৌম্বক ধারকত্ব বা ধারণ ক্ষমতা :} চুম্বকনকারী বল সরিয়ে নিলেও চৌম্বক পদার্থের চুম্বকত্ব ধরে রাখার যে ক্ষমতা থাকে, তাকে চৌম্বক ধারকত্ব বলে।
+
+\noindent \textbf{চৌম্বক নিগ্রাহিতা বা সহনশীলতা :} চুম্বকত্ব হ্রাসের কারণগুলো উপস্থিত থাকা সত্ত্বেও পদার্থের চুম্বকত্ব ধরে রাখার ক্ষমতাকে চৌম্বক সহনশীলতা বলে।
+
+\noindent \textbf{প্যাারাচৌম্বক পদার্থ :} যেসব পদার্থকে চৌম্বক ক্ষেত্রে স্থাপন করলে, চুম্বকনকারী ক্ষেত্রের দিকে দুর্বল চৌম্বকত্ব লাভ করে সেসব পদার্থকে প্যারাচৌম্বক পদার্থ বলে।
+
+\noindent \textbf{ডায়াচৌম্বক পদার্থ :} যেসব পদার্থকে চৌম্বক ক্ষেত্রে স্থাপন করা হলে চুম্বকনকারী ক্ষেত্রের বিপরীত দিকে সামান্য চুম্বকত্ব লাভ করে তাদেরকে ডায়াচৌম্বক পদার্থ বলে।
+
+\noindent \textbf{ফেরোচৌম্বক পদার্থ :} যেসব পদার্থকে চৌম্বক ক্ষেত্রে স্থাপন করা হলে চুম্বকনকারী ক্ষেত্রের দিকে শক্তিশালী চুম্বকত্ব লাভ করে তাদেরকে ফেরোচৌম্বক পদার্থ বলে।
+
+\noindent \textbf{তড়িৎচুম্বক :} একটি দীর্ঘ অন্তরীত পরিবাহী তারকে যদি একটি কুপরিবাহী লম্বা চোঙের গায়ে এমনভাবে জড়ানো হয়, যাতে প্রতিটি বৃত্তাকার পাকই চোঙের অক্ষের সাথে লম্বভাবে থাকে, তবে ঐ তারের কুণ্ডলীকে সলিনয়েড বলে।
+
+\noindent \textbf{স্থায়ী চুম্বক :} কোনো চুম্বক পদার্থকে চুম্বকে পরিণত করার পর চুম্বকত্ব প্রদানকারী শক্তিকে অপসারণ করলেও যদি চুম্বকত্ব অনেকদিন স্থায়ী হয়, তবে ঐ চুম্বককে স্থায়ী চুম্বক বলে।
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] শূন্য মাধ্যমে চৌম্বক প্রবেশ্যতার মান $4\pi \times 10^{-7}\text{ TmA}^{-1}$।
+    \item[$\blacktriangleright$] চৌম্বক ক্ষেত্র $\text{B}$ এর মানের একক, $\text{Tesla}$, $\text{Weber m}^{-2}$, $\text{NA}^{-1}\text{m}^{-1}$।
+    \item[$\blacktriangleright$] চৌম্বক ফ্লাক্সের একক ওয়েবার ($\text{Wb}$)। চৌম্বক ফ্লাক্স ঘনত্বের একক $\text{Wb m}^{-2} = \text{T}$।
+    \item[$\blacktriangleright$] ওয়েরস্টেড তড়িৎ প্রবাহের চৌম্বক ক্রিয়া আবিষ্কার করেন।
+    \item[$\blacktriangleright$] আদিতে ব্যবহৃত চৌম্বক প্রাবল্যের একক $1\text{ Gauss} = 10^{-4}\text{ Tesla}$, $1\text{ Oersted} = 10^{-4}\text{ T}$।
+    \item[$\blacktriangleright$] চৌম্বক পদার্থের প্রতি একক আয়তনে চৌম্বক ভ্রামককে চুম্বকায়ন তীব্রতা বলে।
+    \item[$\blacktriangleright$] অ্যাম্পিয়ারের সূত্রানুযায়ী, $\oint \vec{B} \cdot d\vec{l} = \mu_0 \text{I}$।
+    \item[$\blacktriangleright$] চার্জের গতিশীলতায় সৃষ্টি হয় তড়িৎ প্রবাহ ও চৌম্বক ক্ষেত্র।
+    \item[$\blacktriangleright$] চৌম্বক ক্ষেত্রে গতিশীল একটি চার্জের উপর ক্রিয়াশীল বল, $\vec{F} = q\left(\vec{v} \times \vec{B}\right)$।
+    \item[$\blacktriangleright$] হল ক্রিয়ার সাহায্যে নির্ণয় করা যায় প্রবাহ সৃষ্টিকারী চার্জের প্রকৃতি।
+    \item[$\blacktriangleright$] চৌম্বক ভ্রামক $\vec{M}$ এবং চৌম্বক ক্ষেত্র $\vec{B}$ হলে টর্ক, $\vec{\tau} = \vec{M} \times \vec{B}$।
+    \item[$\blacktriangleright$] লুপের ক্ষেত্রফল যত বেশি হবে চৌম্বক ভ্রামক তত বেশি হবে।
+\end{itemize}
+
+\bigskip
+\bigskip
+
+
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] ইলেকট্রনের ঘূর্ণনের দিক তড়িৎ প্রবাহের বিপরীত দিকে।
+    \item[$\blacktriangleright$] স্পিনের মান দুই ধরনের হতে পারে। যথা, স্পিনের সঠিক মান $+\frac{1}{2}$ অথবা $-\frac{1}{2}$।
+    \item[$\blacktriangleright$] বিনতি, বিচ্যুতি এবং ভূ-চৌম্বক ক্ষেত্রের অনুভূমিক উপাংশ হলো পৃথিবীর ভূ-চুম্বকত্বের উপাদান।
+    \item[$\blacktriangleright$] ঢাকার বিনতি $31^\circ\text{ N}$।
+    \item[$\blacktriangleright$] বিষুবরেখার বিনতির মান $0^\circ$।
+    \item[$\blacktriangleright$] বিনতির সর্বোচ্চ ও সর্বনিম্ন মান $90^\circ$ ও $0^\circ$।
+    \item[$\blacktriangleright$] প্যারাচৌম্বক পদার্থের ক্ষেত্রে $\mu > 1$ ও $\text{k} < 1$ হবে।
+    \item[$\blacktriangleright$] ডায়াচৌম্বক পদার্থের চৌম্বক প্রবেশ্যতার মান $\mu < 1$।
+    \item[$\blacktriangleright$] ডায়াচৌম্বক ও প্যারাচৌম্বক পদার্থে কুরী বিন্দু পাওয়া যায় না।
+    \item[$\blacktriangleright$] পানি, পারদ, সোনা, তামা, কাচ ইত্যাদি ডায়াচৌম্বক পদার্থ।
+    \item[$\blacktriangleright$] নিকেল ফেরাইট, ফেরোসোফেরিক অক্সাইড ($\text{Fe}_3\text{O}_4$) একটি ফেরিচৌম্বক পদার্থ।
+    \item[$\blacktriangleright$] হিসটেরেসিসের ফলে শক্তির অপচয় ঘটে ও বস্তুর তাপমাত্রা বৃদ্ধি পায়।
+\end{itemize}
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize প্রতীক ও এককসহ গুরুত্বপূর্ণ সূত্রাবলি | Important Formulas with Symbols \& Units}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & & $\text{I} = \text{তড়িৎ প্রবাহ}$ & অ্যাম্পিয়ার ($\text{A}$) \\ \cline{3-4} 
+\textbf{১.} & বায়ো-স্যাভার্ট সূত্র : $\text{dB} = \frac{\mu_0}{4\pi}\frac{\text{Id}l \sin\theta}{\text{r}^2}$ & $\text{B} = \text{চৌম্বক ক্ষেত্র}$ & টেসলা ($\text{T}$) \\ \cline{3-4} 
+ & & $l = \text{তারের দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{২.} & ঋজু তারের ক্ষেত্রে, $\text{B} = \frac{\mu_0\text{I}}{2\pi\text{a}}$ & $\text{a} = \text{লম্ব দূরত্ব}$ & মিটার ($\text{m}$) \\ \hline
+ & & $\text{N} = \text{পাকসংখ্যা}$ & ঘূর্ণন/সে. \\ \cline{3-4} 
+\textbf{৩.} & বৃত্তাকার কুণ্ডলীর তারের ক্ষেত্রে, $\text{B} = \frac{\mu_0\text{I}}{2\text{r}}\text{N}$ & $\text{r} = \text{ব্যাসার্ধ}$ & মিটার ($\text{m}$) \\ \hline
+ & & $\text{F} = \text{চৌম্বক বল}$ & নিউটন \\ \cline{3-4} 
+ & চৌম্বক বল, $\text{F} = \text{qvB} \sin\theta$ & $\text{q} = \text{আধান}$ & কুলম্ব ($\text{C}$) \\ \cline{3-4} 
+\textbf{৪.} & \phantom{চৌম্বক বল, }$\text{F} = \text{qvB}$, যখন, $\theta = 90^\circ$ & $\text{v} = \text{ইলেকট্রনের বেগ}$ & মি./সে. ($\text{m s}^{-1}$) \\ \cline{3-4} 
+ & & $\text{B} = \text{চৌম্বক ক্ষেত্র}$ & টেসলা ($\text{T}$) \\ \hline
+ & & $l = \text{তারের দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+\textbf{৫.} & তড়িৎবাহী তারে ক্রিয়াশীল বল, $\text{F} = \text{IlB} \sin\theta$ & \begin{tabular}[c]{@{}l@{}}$\theta = \text{পরিবাহীর}$\\ $\text{মধ্যবিন্দুতে সৃষ্ট কোণ}$\end{tabular} & ডিগ্রি ($^\circ$) \\ \hline
+ & & $\text{d} = \text{পরিবাহকের প্রস্থ}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+\textbf{৬.} & দুটি সমমুখী সমান্তরাল তারের একক দৈর্ঘ্যে ক্রিয়াশীল বল, $\text{F} = \frac{\mu_0\text{I}_1\text{I}_2}{2\pi\text{d}}$ & $\text{I}_1, \text{I}_2 = \text{তড়িৎপ্রবাহ}$ & অ্যাম্পিয়ার ($\text{A}$) \\ \hline
+ & & $\text{V}_\text{H} = \text{হল বিভব}$ & ভোল্ট ($\text{V}$) \\ \cline{3-4} 
+\textbf{৭.} & হল বিভব, $\text{V}_\text{H} = \text{vBd}$ & $\text{v} = \text{চার্জের বেগ}$ & মি./সে. ($\text{m s}^{-1}$) \\ \hline
+ & & $\tau = \text{টর্ক}$ & নিউটন-মি. ($\text{N-m}$) \\ \cline{3-4} 
+\textbf{৮.} & টর্ক, $\tau = \text{NIAB} \sin\theta$ & $\text{A} = \text{বর্তনীর ক্ষেত্রফল}$ & মিটার$^2$ ($\text{m}^2$) \\ \cline{3-4} 
+ & & $\text{B} = \text{চৌম্বক ফ্লাক্স ঘনত্ব}$ & টেসলা ($\text{T}$) \\ \hline
+ & চৌম্বক ক্ষেত্রে অনুভূমিক ও উলম্ব উপাংশ, & $\text{H} = \text{অনুভূমিক উপাংশ}$ & টেসলা ($\text{T}$) \\ \cline{3-4} 
+\textbf{৯.} & $\text{H} = \text{B} \cos\delta$, \qquad $\text{V} = \text{B} \sin\delta$, & $\text{V} = \text{উলম্ব উপাংশ}$ & টেসলা ($\text{T}$) \\ \cline{3-4} 
+ & $\text{V} = \text{H} \tan\delta$, \qquad $\text{V}^2 + \text{H}^2 = \text{B}^2$ & $\delta = \text{বিনতি কোণ}$ & ডিগ্রি ($^\circ$) \\ \hline
+\end{tabular}
+}
+
+\bigskip
+\bigskip
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize সার-সংক্ষেপ | Summary}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent \textbf{তড়িৎ চৌম্বকীয় আবেশ :} একটি গতিশীল চুম্বক বা একটি গতিশীল তড়িৎবাহী কুণ্ডলীর সাহায্যে অন্য একটি বদ্ধ বর্তনীতে ক্ষণস্থায়ী তড়িৎচালক বল তথা তড়িৎ প্রবাহ উৎপন্ন হওয়ার পদ্ধতি হলো তড়িৎ চৌম্বকীয় আবেশ।
+
+\noindent \textbf{চৌম্বক ফ্লাক্স :} কোনো তলের ক্ষেত্রফল এবং ঐ তলের লম্ব বরাবর চৌম্বক ক্ষেত্রের উপাংশের গুণফলকে ঐ তলের সাথে সংশ্লিষ্ট চৌম্বক ফ্লাক্স বলে।
+
+\noindent \textbf{ওয়েবার :} ওয়েবার হচ্ছে চৌম্বক ফ্লাক্সের একক। এক পাকের একটি কুণ্ডলীর সাথে সংশ্লিষ্ট যে পরিমাণ চৌম্বক ফ্লাক্স এক সেকেন্ডে সুষমভাবে হ্রাস পেয়ে শূন্যতে নেমে আসলে ঐ কুণ্ডলী এক ভোল্ট তড়িৎচালক বল আবিষ্ট হয়, সে পরিমাণ চৌম্বক ফ্লাক্সই এক ওয়েবার বা সংক্ষেপে শুধু ওয়েবার।
+
+\noindent \textbf{ফ্লাক্স ঘনত্ব :} কোনো বিন্দুর চারপাশে একক ক্ষেত্রফল দিয়ে অতিক্রমকারী চৌম্বক ফ্লাক্সকে ঐ বিন্দুতে ঐ তলের লম্ব বরাবর ফ্লাক্স ঘনত্ব বলে।
+
+\noindent \textbf{আবিষ্ট তড়িৎচালক বল :} কোনো বদ্ধ বর্তনীতে তড়িৎ চৌম্বকীয় আবেশে সৃষ্ট ক্ষণস্থায়ী তড়িৎচালক শক্তিই আবিষ্ট তড়িৎচালক শক্তি।
+
+\noindent \textbf{লেঞ্জ-এর সূত্র :} লেঞ্জ-এর সূত্রটি হলো— যেকোনো তড়িৎচৌম্বক আবেশের বেলায় আবিষ্ট তড়িৎচালক শক্তি বা প্রবাহের দিক এমন হয় যে তা সৃষ্টি হওয়া মাত্রই যে কারণে সৃষ্টি হয় সেই কারণকেই বাধা দেয়।
+
+\noindent \textbf{স্বকীয় আবেশ গুণাঙ্ক :} কোনো কুণ্ডলীতে একক তড়িৎ প্রবাহিত হলে কুণ্ডলীতে সংযুক্ত মোট চৌম্বক ফ্লাক্সকে ঐ কুণ্ডলীর স্বকীয় আবেশ গুণাঙ্ক বলে।
+
+\noindent \textbf{পারস্পরিক আবেশ গুণাঙ্ক :} কোনো মুখ্য কুণ্ডলীতে তড়িৎপ্রবাহ একক হারে পরিবর্তিত হলে গৌণ কুণ্ডলীতে যে আবিষ্ট তড়িৎচালক শক্তি উৎপন্ন হয় তাকে পারস্পরিক আবেশ গুণাঙ্ক বলে।
+
+\noindent \textbf{স্বকীয় আবেশ :} একটি মাত্র বদ্ধ কুণ্ডলীতে অসম তড়িৎ প্রবাহের দরুন চৌম্বক ফ্লাক্সের পরিবর্তনের ফলে অথবা কোনো চৌম্বক ক্ষেত্রে বদ্ধ কুণ্ডলীর গতির ফলে যে তড়িৎ চৌম্বক আবেশ ঘটে, তাই স্বকীয় আবেশ।
+
+\noindent \textbf{পারস্পরিক আবেশ :} পাশাপাশি অবস্থিত দুটি কুণ্ডলীর যেকোনো একটিতে তড়িৎ প্রবাহের পরিবর্তন ঘটলে অপরটিতে তড়িৎচালক বল আবিষ্ট হয়। এ ঘটনা পারস্পরিক আবেশ বলে।
+
+\noindent \textbf{হেনরি :} কোনো কুণ্ডলীতে তড়িৎ প্রবাহ প্রতি সেকেন্ডে এক অ্যাম্পিয়ার হারে পরিবর্তিত হলে যদি ঐ কুণ্ডলীতে এক ভোল্ট তড়িৎচালক বল আবিষ্ট হয়, তাহলে ঐ কুণ্ডলীর স্বকীয় আবেশ গুণাঙ্ককে এক হেনরি বলে।
+
+\noindent \textbf{আবেশহীন কুণ্ডলী :} যে কুণ্ডলীর মধ্যে তড়িৎ প্রবাহ পরিবর্তন করা হলে তাতে তড়িৎচালক বল আবিষ্ট হয় না তাকে আবেশহীন কুণ্ডলী বলে।
+
+\noindent \textbf{একমুখী প্রবাহ :} সময়ের সাথে যে প্রবাহের দিক অপরিবর্তিত থাকে তাই একমুখী প্রবাহ।
+
+\noindent \textbf{দিক পরিবর্তী প্রবাহ :} যে প্রবাহের দিক বা অভিমুখ একটি নির্দিষ্ট সময় অন্তর অন্তর সুষমভাবে পরিবর্তিত হতে থাকে, তাকে দিক পরিবর্তী প্রবাহ বলে।
+
+\noindent \textbf{মুখ্য ও গৌণ কুণ্ডলী :} তড়িৎবাহী কুণ্ডলীকে মুখ্য কুণ্ডলী এবং যে তারের কুণ্ডলীতে আবিষ্ট তড়িৎ প্রবাহ উৎপন্ন হয় তাকে গৌণ কুণ্ডলী বলে।
+
+\noindent \textbf{একমুখী প্রবাহ ডায়নামো :} যে ডায়নামোর সাহায্যে একমুখী তড়িৎ প্রবাহ পাওয়া যায় তাকে একমুখী প্রবাহ ডায়নামো বলে।
+
+\noindent \textbf{মোটর :} যে যন্ত্রের সাহায্যে তড়িৎ শক্তিকে যান্ত্রিক শক্তিতে রূপান্তর করে তাকে মোটর বলা হয়।
+
+\noindent \textbf{বৈদ্যুতিক যন্ত্রপাতি :} তড়িৎবিজ্ঞানে আমরা যেসব যন্ত্রপাতি ব্যবহার করি, তাদের বৈদ্যুতিক যন্ত্রপাতি বলে।
+
+\noindent \textbf{ডায়নামো :} যে যন্ত্র যান্ত্রিক শক্তিকে তড়িৎ শক্তিতে রূপান্তর করে তাকে জেনারেটর বা ডায়নামো বলে।
+
+\noindent \textbf{ট্রান্সফরমার :} যে যন্ত্রের সাহায্যে পরিবর্তী বিভবকে অপেক্ষাকৃত উচ্চ বা নিম্ন বিভবে পরিণত করা যায় তাকে রূপান্তরক বা ট্রান্সফরমার বলে।
+
+\noindent \textbf{শীর্ষ গুণাঙ্ক :} প্রবাহের শীর্ষমান এবং বর্গমূল গড় বর্গমানের অনুপাতই শীর্ষ গুণাঙ্ক।
+
+\noindent \textbf{প্রবাহের কম্পাঙ্ক :} পরিবর্তী তড়িৎচালক শক্তি বা প্রবাহ প্রতি সেকেন্ডে যত সংখ্যক পরিবর্তী চক্র সম্পন্ন করে, তাকে উক্ত তড়িৎচালক বল বা প্রবাহের কম্পাঙ্ক বলে।
+
+\noindent \textbf{বিস্তার :} যেকোনো অভিমুখে তড়িৎচালক শক্তি বা প্রবাহের সর্বোচ্চ মানকে বিস্তার বা শীর্ষমান বলে।
+
+\noindent \textbf{কার্যকর প্রবাহ :} পরিবাহী প্রবাহের গড়বর্গের বর্গমূল মানকে কার্যকর প্রবাহ বলে।
+
+\noindent \textbf{আকৃতি গুণাঙ্ক :} দিক পরিবর্তী তড়িৎচালক শক্তি বা প্রবাহমাত্রার গড় বর্গের বর্গমূল মান এবং গড় মানের অনুপাতকে আকৃতি গুণাঙ্ক বলে।
+
+\bigskip
+\bigskip
+
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] চৌম্বক আবেশ চৌম্বক ফ্লাক্স ঘনত্ব।
+    \item[$\blacktriangleright$] তাড়িতচৌম্বকীয় আবেশ আবিষ্কার করেন মাইকেল ফ্যারাডে।
+    \item[$\blacktriangleright$] তড়িৎ প্রবাহ দুই প্রকার।
+    \item[$\blacktriangleright$] $10\text{A}$ বিদ্যুৎ প্রবাহিত একটি লম্বা সোজা তার থেকে $0.05\text{ m}$ দূরে চৌম্বক ফ্লাক্স ঘনত্ব $4 \times 10^{-4}\text{ T}$।
+    \item[$\blacktriangleright$] $4 \times 10^{-5}\text{ T}$ এর চৌম্বক ক্ষেত্রের সাথে $0.4\text{ m}^2$ ক্ষেত্রের একটি তল $30^\circ$ কোণ উৎপন্ন করে। তলের মধ্য দিয়ে অতিক্রান্ত ফ্লাক্সের পরিমাণ $8 \times 10^{-6}\text{ Wb}$।
+    \item[$\blacktriangleright$] $\text{B}$ চৌম্বক ক্ষেত্রে $\text{A}$ ক্ষেত্রফলের কোনো কুণ্ডলী অবস্থিত হলে চৌম্বক ফ্লাক্স $\phi = \text{B.A} \cos \theta$।
+    \item[$\blacktriangleright$] মাইকেল ফ্যারাডে 1831 সালে তাড়িতচৌম্বকীয় আবেশ আবিষ্কার করেন।
+    \item[$\blacktriangleright$] ফ্যারাডের দ্বিতীয় সূত্রের গাণিতিক রূপ দেন নিউম্যান।
+    \item[$\blacktriangleright$] ফ্যারাডে তড়িৎ চৌম্বকীয় আবেশের দুটি সূত্র আবিষ্কার করেছেন।
+    \item[$\blacktriangleright$] যে যন্ত্রের সাহায্যে বিভব পার্থক্যের মান পরিবর্তন করা যায় তাকে ট্রান্সফরমার বলে।
+    \item[$\blacktriangleright$] কোনো তড়িৎকোষবিহীন কুণ্ডলীর দিকে একটি দণ্ডচুম্বক সরাতে যদি $5\text{ J}$ কাজ করতে হয় তাহলে এতে $5\text{ J}$ পরিমাণ তড়িৎ শক্তি উৎপন্ন হয়।
+    \item[$\blacktriangleright$] কোন কুণ্ডলীতে $0.5\text{ A/s}$ হারে প্রবাহমাত্রার পরিবর্তনের দ্বারা যদি $1$ ভোল্ট তড়িৎচালক বল আবিষ্ট হয় তাহলে ঐ কুণ্ডলীর স্বাবেশ গুণাঙ্ক $2\text{ H}$।
+    \item[$\blacktriangleright$] $\text{N}$ পাক সংখ্যার কুণ্ডলীর প্রতি পাকের সাথে জড়িত ফ্লাক্স সংশ্লেষ $\phi$ হলে কুণ্ডলীর মোট ফ্লাক্সের পরিমাণ $\text{N}\phi$।
+    \item[$\blacktriangleright$] পারস্পরিক আবেশ গুণাঙ্কের একক হেনরী।
+    \item[$\blacktriangleright$] একটা কুণ্ডলীতে তড়িৎ প্রবাহের পরিবর্তনের হার $30\text{ A.s}^{-1}$ হলে $8\text{V}$ তড়িৎচালক বল আবিষ্ট হয়। কুণ্ডলীর স্বকীয় আবেশ গুণাঙ্ক $267\text{ mH}$।
+    \item[$\blacktriangleright$] কোন মুখ্য কুণ্ডলীতে $0.05\text{ s}$ এ তড়িৎ প্রবাহমাত্রা $6\text{ A}$ থেকে $1\text{ A}$ এ আনলে গৌণ কুণ্ডলীতে $5\text{ V}$ তড়িৎচালক শক্তি আবিষ্ট হয়। কুণ্ডলীর পারস্পরিক আবেশ গুণাঙ্ক $0.05\text{ H}$।
+    \item[$\blacktriangleright$] $0.02\text{ m}$ ব্যাসার্ধের এবং $10$ পাকের একটি গোলাকার কুণ্ডলীর বায়ু মাধ্যমে স্বাবেশ গুণাঙ্কের মান $3.94\text{ }\mu\text{H}$।
+    \item[$\blacktriangleright$] ঘূর্ণায়মান কোনো বস্তুর কম্পাঙ্ক $20\text{ Hz}$ হলে এর কৌণিক কম্পাঙ্ক $125\text{ rad s}^{-1}$।
+    \item[$\blacktriangleright$] কোনো কুণ্ডলী পূর্ণ একবার ঘুরলে $\theta$ এর মান $0^\circ$ থেকে $360^\circ$ হয়।
+    \item[$\blacktriangleright$] একটি ট্রান্সফরমার মুখ্য কুণ্ডলীর পাক সংখ্যা $30$, ভোল্টেজ $210\text{ V}$, এর গৌণ কুণ্ডলীর ভোল্টেজ $700\text{ V}$ হলে, পাকসংখ্যা $100$।
+    \item[$\blacktriangleright$] একটি দিক পরিবর্তী প্রবাহ $\text{I} = 50 \sin 200\pi\text{t}$, শীর্ষমানে পৌঁছাতে $2.5 \times 10^{-3}\text{ s}$ সময় লাগবে।
+    \item[$\blacktriangleright$] যে যন্ত্রের সাহায্যে যান্ত্রিক শক্তিকে পরিবর্তী তড়িৎ শক্তিতে পরিণত করা যায় তাকে জেনারেটর বলে।
+    \item[$\blacktriangleright$] বাংলাদেশে যে দিক পরিবর্তী বিদ্যুৎ সরবরাহ করা হয় তার কম্পাঙ্ক $50\text{ Hz}$।
+    \item[$\blacktriangleright$] তড়িৎ প্রবাহের শীর্ষমান $7\text{ A}$ হলে মূল গড় বর্গ প্রবাহের মান $4.95\text{ A}$।
+    \item[$\blacktriangleright$] দিক পরিবর্তী প্রবাহের বর্গমূলীয় গড় মান শীর্ষমানের শতকরা $70.70\%$ ভাগ।
+    \item[$\blacktriangleright$] কোনো দিক পরিবর্তী তড়িৎচালক বলের গড় বর্গমূল মান $20\text{ volt}$ হলে শীর্ষমান $28.2\text{ volt}$।
+    \item[$\blacktriangleright$] কোনো বিশুদ্ধ রোধ $\text{R}$ এর মধ্যে দিয়ে $\text{I}$ মানের সমপ্রবাহ চললে প্রতি সেকেন্ডে তাপ উৎপাদনের হার $\text{I}^2\text{R}$।
+    \item[$\blacktriangleright$] পূর্ণ চক্রের জন্য দিক পরিবর্তী প্রবাহের গড় বর্গের বর্গমূল মানের সমীকরণ $\text{I}_{\text{rms}} = 0.707\text{ I}_0$।
+    \item[$\blacktriangleright$] কোন পর্যায়বৃত্ত তড়িৎচালক বলের শীর্ষমান $30\text{ V}$ হলে এর গড় তড়িৎচালক বলের মান $19.11\text{ V}$।
+    \item[$\blacktriangleright$] সাইন সদৃশ কোন তরঙ্গের শীর্ষমান ও গড় বর্গের বর্গমূলের অনুপাত $1.41$।
+    \item[$\blacktriangleright$] কোনো পরিবর্তী উৎসের তড়িৎচালক শক্তির সর্বোচ্চ মান $100\text{ V}$ হলে কার্যকর মান $70.7\text{ V}$।
+    \item[$\blacktriangleright$] কোন দিক পরিবর্তিত তড়িৎচালক শক্তির শীর্ষ মান $20\text{ V}$ হলে তার গড় বর্গের বর্গমূলের মান $14.14\text{ V}$।
+    \item[$\blacktriangleright$] অর্ধচক্রের জন্য প্রবাহের গড় মান $1.6\text{ A}$ হলে শীর্ষ মান $2.512\text{ A}$।
+    \item[$\blacktriangleright$] কোনো পর্যায়বৃত্ত তড়িৎচালক বলের শীর্ষমান $20\text{V}$ হলে এর গড় তড়িৎচালক বল $12.74\text{ V}$।
+    \item[$\blacktriangleright$] মাইকেল ফ্যারাডে 1831 সালে তড়িৎ চৌম্বকীয় আবেশ আবিষ্কার করেন।
+\end{itemize}
+
+\bigskip
+\bigskip
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize সার-সংক্ষেপ | Summary}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent \textbf{ফার্মাটের নীতি :} ফার্মাটের নীতিটি হলো— একটি নির্দিষ্ট বিন্দু হতে অপর একটি নির্দিষ্ট বিন্দুতে পরিভ্রমণকালে আলোক রশ্মি এমন একটি পথ অনুসরণ করে যা অতিক্রমণীয় সময় নিকটবর্তী অন্যান্য পথের তুলনায় হয় সর্বনিম্ন বা অবম নতুবা সর্বোচ্চ বা চরম অথবা অপরিবর্তিত তথা স্থির থাকে।
+
+\noindent \textbf{আলোক পথ :} কোনো মাধ্যমে একটি নির্দিষ্ট জ্যামিতিক পথ অতিক্রম করতে আলোকের যে সময় লাগে ঠিক সেই সময়ে শূন্য বা বায়ু মাধ্যমের মধ্যদিয়ে আলোক যে পরিমাণ পথ অতিক্রম করতে পারে সে পথকে আলোক পথ বলে।
+
+\noindent \textbf{আলোর প্রতিসরণ :} আলোকরশ্মি একস্বচ্ছ মাধ্যম থেকে অন্য স্বচ্ছ মাধ্যমে গমনের সময় মাধ্যমদ্বয়ের বিভেদতলে তীর্যকভাবে আপতিত হলে আপতিত রশ্মির দিক পরিবর্তন হয়। আলোকরশ্মির এ দিক পরিবর্তন হওয়াকে আলোর প্রতিসরণ বলে।
+
+\noindent \textbf{দ্বি-প্রতিসরণ :} এমন কতগুলো কেলাস আছে যাদের মধ্যদিয়ে আলোক রশ্মি গমন করলে এটি দুটি প্রতিসৃত রশ্মিতে বিভক্ত হয়। এ পদ্ধতিকে দ্বৈত বা দ্বি-প্রতিসরণ বলে।
+
+\noindent \textbf{লেন্স :} দুটি গোলীয় অথবা একটি গোলীয় ও একটি সমতল অথবা দুটি বেলনাকৃতি অথবা একটি বেলনাকৃতি ও একটি সমতল পৃষ্ঠ দ্বারা সীমাবদ্ধ কোনো স্বচ্ছ প্রতিসারক মাধ্যমকে লেন্স বলে।
+
+\noindent \textbf{উন্মেষ :} লেন্সের প্রধান ছেদের প্রান্তদ্বয় বক্রতার কেন্দ্রে যে কোণ সৃষ্টি করে তাকে লেন্সের উন্মেষ বলে।
+
+\noindent \textbf{লেন্সের বক্রতার কেন্দ্র :} লেন্সের কোনো পৃষ্ঠ যে গোলকের অংশ সেই গোলকের কেন্দ্রকে লেন্সের ঐ পৃষ্ঠের বক্রতার কেন্দ্র বলে।
+
+\noindent \textbf{ফোকাস তল :} কোনো লেন্সের প্রধান ফোকাসের মধ্য দিয়ে প্রধান অক্ষের উপর যে সমতল কল্পনা করা যায় তাকে ফোকাস তল বলে।
+
+\noindent \textbf{বক্রতার ব্যাসার্ধ :} লেন্সের কোনো পৃষ্ঠ যে গোলকের অংশ সেই গোলকের ব্যাসার্ধকে লেন্সের ঐ পৃষ্ঠের বক্রতার ব্যাসার্ধ বলে। লেন্সে দুটি বক্রতার ব্যাসার্ধ থাকে। এদেরকে $r_1$ এবং $r_2$ দ্বারা সূচিত করা হয়।
+
+\noindent \textbf{প্রধান ফোকাস :} গোলীয় দর্পণে আপতিত প্রধান অক্ষের নিকটবর্তী সমান্তরাল রশ্মিগুচ্ছ প্রতিফলনের পর প্রধান অক্ষের উপর যে বিন্দুতে মিলিত হয় বা যে বিন্দু থেকে অপসৃত হয় বলে মনে হয় তাকে প্রধান ফোকাস বলে।
+
+\noindent \textbf{ফোকাস দূরত্ব :} আলোক কেন্দ্র থেকে প্রধান ফোকাস বা দ্বিতীয় প্রধান ফোকাস পর্যন্ত দূরত্বই হলো ফোকাস দূরত্ব।
+
+\noindent \textbf{লেন্সের ক্ষমতা :} লেন্সের ক্ষমতা বলতে একটি লেন্স আপতিত আলোক রশ্মিকে কতখানি অভিসারিত বা অপসারিত করতে পারে তাকে বোঝায়। অর্থাৎ কোন লেন্সের ফোকাস দূরত্বের বিপরীত সংখ্যাকে লেন্সের ক্ষমতা বলে।
+
+\noindent \textbf{অবতল দর্পণ :} কোনো গোলকের অবতল পৃষ্ঠ যদি প্রতিফলকরূপে কাজ করে অর্থাৎ আলোর নিয়মিত প্রতিফলন যদি গোলীয় দর্পণের অবতল পৃষ্ঠ হতে সংঘটিত হয় তবে সে দর্পণকে অবতল দর্পণ বলে।
+
+\noindent \textbf{সমতল দর্পণ :} কোনো সমতল পৃষ্ঠ যদি মসৃণ হয় এবং তাতে আলোর নিয়মিত প্রতিফলন ঘটে তবে তাকে সমতল দর্পণ বলে।
+
+\noindent \textbf{কৌণিক বিবর্ধন :} বিম্ব দ্বারা সৃষ্ট দৃষ্টিকোণ ও বস্তু দ্বারা সৃষ্ট দৃষ্টিকোণের অনুপাতই কৌণিক বিবর্ধন।
+
+\noindent \textbf{বিবর্ধন :} প্রতিবিম্বের দৈর্ঘ্য এবং লক্ষ্যবস্তুর দৈর্ঘ্যের অনুপাতকে রৈখিক বিবর্ধন বা বিবর্ধন বলে। আবার, প্রতিবিম্বের দূরত্ব এবং লক্ষ্যবস্তুর দূরত্বের অনুপাতকেও বিবর্ধন বলে।
+
+\noindent \textbf{বিবর্ধক :} বিবর্ধক বা অ্যাম্প্লিফায়ার এক ধরনের ইলেকট্রনিক ডিভাইস বা কৌশল যার ইনপুট বর্তনীতে দুর্বল সংকেত প্রয়োগ করে বহিঃবর্তনী হতে বহুগুণ বিবর্ধিত সংকেত পাওয়া যায়।
+
+\noindent \textbf{ডায়াপ্টার :} ডায়াপ্টার হলো লেন্সের ক্ষমতার একক।
+
+\noindent \textbf{অণুবীক্ষণ যন্ত্র :} যে যন্ত্রের সাহায্যে চোখের নিকটবর্তী অতিক্ষুদ্র বস্তুকে বড় করে দেখা যায় তা হলো অণুবীক্ষণ যন্ত্র।
+
+\noindent \textbf{দেহ নল :} অণুবীক্ষণ যন্ত্রের বাহুর সাথে একটি ফাঁপা নল লাগানো থাকে, এ ফাঁপা নলটিই হলো দেহ নল।
+
+\noindent \textbf{নোজ পিস বা লেন্স ধারক :} দেহ নলের নিচের প্রান্তে একটি ধাতব চাক্তি সংযুক্ত থাকে যা নোজ পিস বা লেন্স ধারক নামে পরিচিত।
+
+\noindent \textbf{দূরবীক্ষণ যন্ত্র :} দূরের বস্তুকে ভালোভাবে পর্যবেক্ষণের জন্য যে আলোক যন্ত্র ব্যবহৃত হয়, তাকে দূরবীক্ষণ যন্ত্র বলে।
+
+\noindent \textbf{দৃষ্টিকোণ :} একটি বস্তু চোখে যে কোণ উৎপন্ন করে তাকে দৃষ্টিকোণ বা বীক্ষণ কোণ বলে।
+
+\noindent \textbf{অভিনেত্র :} অণুবীক্ষণ বা দূরবীক্ষণ যন্ত্রের যে লেন্সটির পশ্চাতে বা পেছনে চোখ রাখতে হয় সেই লেন্সই অভিনেত্ৰ।
+
+\noindent \textbf{অভিলক্ষ্য :} অণুবীক্ষণ বা দূরবীক্ষণ যন্ত্রের ক্ষেত্রে লক্ষ্যবস্তুর দিকে যে লেন্সটি থাকে তাকে অভিলক্ষ্য বলা হয়।
+
+\noindent \textbf{প্রিজম কোণ :} প্রতিসারক তলদ্বয় যে কোণে পরস্পরকে ছেদ করে তাকে প্রিজম কোণ বলে।
+
+\noindent \textbf{বর্ণালি :} সাদা আলোক রশ্মি বিচ্ছুরণের ফলে পর্দার উপর বিভিন্ন রঙের যে পট্টি পাওয়া যায় তাই বর্ণালি।
+
+\bigskip
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] শূন্য মাধ্যমে আলোর বেগ $3 \times 10^8\text{ ms}^{-1}$।
+    \item[$\blacktriangleright$] ফার্মাটের নীতির প্রস্তাবনা করেন পিয়ারে ফার্মাট।
+    \item[$\blacktriangleright$] একটি পুকুরের আপাত গভীরতা $12\text{ ফুট}$। পানির প্রতিসরাঙ্ক $\frac{4}{3}$ হলে পুকুরের প্রকৃত গভীরতা $16\text{ ফুট}$।
+    \item[$\blacktriangleright$] আলোকরশ্মি বায়ু থেকে কাচে $60^\circ$ কোণে আপতিত হলে $35.26^\circ$ কোণে প্রতিসৃত হবে।
+    \item[$\blacktriangleright$] একটি জলাশয়ের প্রকৃত গভীরতা $6\text{ m}$। পানির প্রতিসরাঙ্ক $\frac{4}{3}$ হলে আপাত গভীরতা $4.5\text{ m}$।
+    \item[$\blacktriangleright$] এক টুকরা প্লাস্টিকের মধ্যে আলোর গতিবেগ $2 \times 10^8\text{ m/s}$ হলে plastic-এর পরম প্রতিসরাঙ্ক $1.5$।
+    \item[$\blacktriangleright$] বায়ু থেকে কোন মাধ্যমে আলোকরশ্মি প্রবেশের পর আলোর বেগ $15\%$ হ্রাস পেলে মাধ্যমের প্রতিসরাঙ্ক $1.18$।
+    \item[$\blacktriangleright$] লক্ষ্যবস্তু প্রধান ও বক্রতার কেন্দ্রের মধ্যে থাকলে বিম্ব অসীমে গঠিত হয়।
+    \item[$\blacktriangleright$] একটি উভোত্তল লেন্সের বক্রতার ব্যাসার্ধ যথাক্রমে $30\text{ cm}$ এবং $20\text{ cm}$ হলে ফোকাস দূরত্ব $-23.1\text{ cm}$।
+    \item[$\blacktriangleright$] $4\text{ D}$ ক্ষমতার একটি কাচ লেন্স এর পৃষ্ঠ পানিতে ডুবালে লেন্সটির ফোকাস দূরত্ব $25\text{ cm}$।
+    \item[$\blacktriangleright$] লেন্সের দুটি প্রধান ফোকাস থাকে।
+    \item[$\blacktriangleright$] $10\text{ cm}$ ফোকাস দূরত্বের অবতল লেন্সের ক্ষমতা $-10\text{ d}$।
+    \item[$\blacktriangleright$] একটি উত্তল লেন্সের ক্ষমতা $\frac{1}{\text{x}}$ ডায়োপ্টার হলে, তার ফোকাস দূরত্ব $\text{x m}$।
+    \item[$\blacktriangleright$] $1.6$ প্রতিসরাঙ্কের সমতল উত্তল লেন্সের বক্রতার ব্যাসার্ধ $60\text{ cm}$ হলে এর ক্ষমতা $2\text{ D}$।
+    \item[$\blacktriangleright$] $\text{f}$ ফোকাস দূরত্বের দুটি সম উত্তল ও অবতল লেন্সের সংযোগের জন্য ফোকাস দূরত্ব $\infty$ হবে।
+    \item[$\blacktriangleright$] $25\text{ cm}$ ফোকাস দূরত্বের একটি অবতল লেন্সের ক্ষমতা $\frac{1}{\text{F}_1} = -\sum \frac{1}{\text{f}_1}$।
+    \item[$\blacktriangleright$] একটি বিবর্ধক কাচের ফোকাস দূরত্ব $0.15\text{ m}$, চোখ ও কাচের মধ্যবর্তী দূরত্ব $0.10\text{ m}$ হলে বিবর্ধন $2.0$।
+    \item[$\blacktriangleright$] একটি জটিল অণুবীক্ষণ যন্ত্রের অভিলক্ষ্য ও অভিনেত্রের বিবর্ধন যথাক্রমে $54$ ও $9$ হলে যন্ত্রের মোট বিবর্ধন $486$।
+    \item[$\blacktriangleright$] দূরবীক্ষণ যন্ত্র সাধারণতঃ দুই ধরনের।
+    \item[$\blacktriangleright$] নভোদূরবীক্ষণ যন্ত্রের অভিনেত্রের লেন্স ছোট এবং খাটো দিয়ে তৈরি।
+    \item[$\blacktriangleright$] একটি নভোদূরবীক্ষণ যন্ত্রের লেন্স দুটির ক্ষমতা $0.5\text{ D}$ এবং $20\text{ D}$। যন্ত্রটির বিবর্ধন ক্ষমতা $40$।
+    \item[$\blacktriangleright$] একটি নভো দূরবীক্ষণ যন্ত্রের বিবর্ধন ক্ষমতা $20$ এবং দৈর্ঘ্য $16\text{ cm}$ হলে অভিলক্ষ্য লেন্সের ফোকাস দূরত্ব $15.24\text{ cm}$।
+    \item[$\blacktriangleright$] $85^\circ$ প্রিজম কোণবিশিষ্ট একটি প্রিজমের ন্যূনতম চ্যুতিও $38^\circ$ হলে প্রতিসরাঙ্ক $1.535$।
+    \item[$\blacktriangleright$] $1.6$ প্রতিসরাঙ্কবিশিষ্ট সরু প্রিজমের ভেতর দিয়ে যাওয়ার সময় আলোকরশ্মির $6^\circ$ চ্যুতি ঘটলে প্রিজম কোণ $10^\circ$ হবে?
+    \item[$\blacktriangleright$] যে মাধ্যমে আলোর বিচ্ছুরণ ঘটে তাকে বিচ্ছুরক মাধ্যম বলে।
+    \item[$\blacktriangleright$] লাল আলোর চেয়ে বেগুনী আলোর ক্ষেত্রে চ্যুতি $1.8$ গুণ বেশি।
+    \item[$\blacktriangleright$] পাতলা প্রিজমের ক্ষেত্রে চ্যুতি কোণ, $\delta = \text{A}(\mu - 1)$ হবে।
+    \item[$\blacktriangleright$] গ্যালিলিও সরল অণুবীক্ষণ যন্ত্র আবিষ্কার করেন।
+    \item[$\blacktriangleright$] জটিল অণুবীক্ষণ যন্ত্রে চূড়ান্ত বিম্ব অবাস্তব ও উল্টো হয়।
+    \item[$\blacktriangleright$] ফার্মাটের নীতির সাহায্যে আলোর সরল রৈখিক গতি, প্রতিফলন ও প্রতিসরণ-এর সূত্র ব্যাখ্যা করা যায়।
+    \item[$\blacktriangleright$] প্রিজমের ক্ষেত্রে, আপতিত রশ্মি ও নির্গত রশ্মির অন্তর্ভূক্ত কোণকে চ্যুতি কোণ বলে।
+    \item[$\blacktriangleright$] জটিল অণুবীক্ষণ যন্ত্রে দুটি উত্তল লেন্স থাকে।
+    \item[$\blacktriangleright$] উত্তল লেন্সের ক্ষেত্রে যখন $\text{u} > \text{f}$ তখন প্রতিবিম্ব বাস্তব আবার যখন $\text{u} < \text{f}$ তখন প্রতিবিম্ব অবাস্তব হবে।
+    \item[$\blacktriangleright$] প্রতিসরাঙ্ক মাধ্যমের প্রকৃতি ও আলোর রঙের উপর নির্ভর করে।
+    \item[$\blacktriangleright$] যদি $\text{a}$ মাধ্যমে আলোর বেগ $\text{b}$ মাধ্যমে আলোর বেগের চেয়ে বেশি হয়, তবে $_a\mu_b > 1$ হবে।
+    \item[$\blacktriangleright$] আলোকীয় পথ $(\text{L}_0) = \text{মাধ্যমের প্রতিসরাঙ্ক } (\mu) \times \text{জ্যামিতিক পথ } (\text{l})$।
+    \item[$\blacktriangleright$] শূন্য মাধ্যমে আলোর বেগ সবচেয়ে বেশি।
+    \item[$\blacktriangleright$] $_a\mu_b = 1$ হলে আলোকরশ্মির দিক অপরিবর্তিত থাকে।
+    \item[$\blacktriangleright$] আলোক রশ্মি বেগুনী আলোর দিকে বেশি চ্যুতি হয়।
+    \item[$\blacktriangleright$] উত্তল লেন্স লক্ষ্যবস্তু $\text{f}$ দূরত্বে থাকলে বিম্বের আকৃতি অত্যন্ত বিবর্ধিত হবে।
+\end{itemize}
+
+\bigskip
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize সার-সংক্ষেপ | Summary}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent \textbf{তড়িৎ চৌম্বকীয় তরঙ্গ :} তড়িৎ চৌম্বকীয় তরঙ্গ হলো শূন্যস্থান দিয়ে আলোর দ্রুতিতে গতিশীল তড়িৎ ও চৌম্বক আলোড়ন, যাতে তড়িৎ ও চৌম্বক ক্ষেত্র পরস্পর লম্ব এবং এরা উভয়ে তরঙ্গ সঞ্চালনের অভিমুখের সাথে লম্ব বরাবর থাকে।
+
+\noindent \textbf{আলোক বর্ষ :} আলোকবর্ষ হচ্ছে দূরত্বের একক। আলো শূন্যস্থানে এক বছরে যে পথ অতিক্রম করে তাই আলোকবর্ষ।
+
+\noindent \textbf{অগ্রগামী তরঙ্গ :} যদি কোনো তরঙ্গ সময়ের সাথে সাথে নির্দিষ্ট দিকে নির্দিষ্ট বেগে চলমান থাকে তাকে অগ্রগামী তরঙ্গ বলে।
+
+\noindent \textbf{পয়েন্টিং ভেক্টর :} কোনো তড়িৎ চৌম্বক তরঙ্গের গতি পথে লম্বভাবে স্থাপিত কোনো একক ক্ষেত্রফলের মধ্য দিয়ে যে পরিমাণ শক্তি অতিক্রম করে তাকে পয়েন্টিং ভেক্টর বলে।
+
+\noindent \textbf{তড়িৎ চৌম্বকীয় বর্ণালি :} তড়িৎ চৌম্বক ক্ষেত্রের পূর্ণাঙ্গ পরিবর্তনের ফলে সৃষ্ট তড়িৎ চৌম্বকীয় বিকিরণ যে বর্ণালি সৃষ্টি করে তাকে তড়িৎ চৌম্বকীয় বর্ণালি বলা হয়।
+
+\noindent \textbf{সৌর বর্ণালি :} সূর্য থেকে আগত আলোকে বিশ্লেষণ করা হলে যে বর্ণালি পাওয়া যায় তাকে সৌর বর্ণালি বলে।
+
+\noindent \textbf{তরঙ্গ মুখ :} কোনো তরঙ্গের উপর অবস্থিত সমদশা সম্পন্ন কণাগুলোর সঞ্চারপথকে তরঙ্গমুখ বলে।
+
+\noindent \textbf{আলোর তরঙ্গ মুখ :} কোনো আলোক তরঙ্গের উপর অবস্থিত সমদশা সম্পন্ন কণাগুলোর সঞ্চারপথকে উক্ত আলোক তরঙ্গের তরঙ্গমুখ বলে।
+
+\noindent \textbf{আলোর ব্যতিচার :} দুটি সুসংগত উৎস হতে নিঃসৃত সমান কম্পাঙ্ক ও বিস্তারের দুটি আলোক তরঙ্গ কোনো মাধ্যমের একটি বিন্দুর মধ্য দিয়ে একই সাথে গমন করলে তরঙ্গ দুটির উপরিপাতনের ফলে বিন্দুটি কখনও কখনও খুব উজ্জ্বল ও কখনও কখনও অন্ধকার দেখায়। আলোকের এ ঘটনাই আলোর ব্যতিচার।
+
+\noindent \textbf{গঠনমূলক ব্যতিচার :} দুটি উৎস হতে সমান কম্পাঙ্ক ও বিস্তারের দুটি আলোক তরঙ্গের উপরিপাতনের ফলে উজ্জ্বল বিন্দু পাওয়া গেলে তাকে গঠনমূলক ব্যতিচার বলে।
+
+\noindent \textbf{ধ্বংসাত্মক ব্যতিচার :} দুটি উৎস হতে সমান কম্পাঙ্ক ও বিস্তারের দুটি আলোক তরঙ্গের উপরিপাতনের ফলে অন্ধকার বিন্দু পাওয়া গেলে তাকে ধ্বংসাত্মক ব্যতিচার বলে।
+
+\noindent \textbf{গৌণ উৎস :} কোনো তরঙ্গমুখের প্রতিটি বিন্দু এক একটি গৌণ তরঙ্গের উৎস হিসেবে গণ্য হয়, এটিই গৌণ উৎস।
+
+\noindent \textbf{গোলকীয় তরঙ্গমুখ :} তরঙ্গস্থিত সমদশাসম্পন্ন কণাগুলোর সঞ্চারপথ গোলকীয় হলে তাকে গোলকীয় তরঙ্গমুখ বলে।
+
+\noindent \textbf{অপবর্তন :} কোনো প্রতিবন্ধকের ধার ঘেঁষে বা সরু ছিদ্রের মধ্য দিয়ে যাওয়ার সময় আলো কিছুটা বেঁকে যাওয়ার ঘটনাই অপবর্তন।
+
+\noindent \textbf{অপবর্তন গ্রেটিং :} পাশাপাশি স্থাপিত অনেকগুলো সমপ্রস্থের ও সম দূরত্বের সমান্তরাল সরু চিরের সমষ্টিকে অপবর্তন গ্রেটিং বলে।
+
+\noindent \textbf{গ্রেটিং ধ্রুবক :} গ্রেটিং এর একটি চিরের শুরু থেকে পরবর্তী চিরের শুরু পর্যন্ত দূরত্বকে গ্রেটিং ধ্রুবক বলে।
+
+\noindent \textbf{ফ্রেনেল শ্রেণির অপবর্তন :} যখন উৎস এবং পর্দা তাদের মধ্যবর্তী বাধা হতে অল্প দূরত্বের মধ্যে অবস্থান করে তখন ঐ বাধার দরুন পর্দায় আলোকের যে অপবর্তন পরিলক্ষিত হয় তাকে ফ্রেনেল শ্রেণির অপবর্তন বলে।
+
+\noindent \textbf{আলোর সমবর্তন :} যে প্রক্রিয়ায় বিভিন্ন তলে কম্পনমান আলোকে একটি নির্দিষ্ট তল বরাবর কম্পনমান করা যায় সেই প্রক্রিয়াই হলো আলোর সমবর্তন।
+
+\noindent \textbf{সমবর্তন কোণ :} কোনো প্রতিফলক মাধ্যমে আপতন কোণ ধীরে ধীরে পরিবর্তন করলে এমন একটি কোণ পাওয়া যাবে যার জন্য সমবর্তন সর্বাধিক হবে, সেই কোণটিকে সমবর্তন কোণ বলে।
+
+\noindent \textbf{সমবর্তিত আলো :} একটি তলে বা এর সমান্তরাল তলে কম্পনমান নির্দিষ্ট তরঙ্গদৈর্ঘ্যবিশিষ্ট আলোককে সমবর্তিত আলো বলে।
+
+\noindent \textbf{সমবর্তন তল :} কম্পন তলের সাথে যে তলটি লম্বভাবে অবস্থান করে তাই সমবর্তন তল।
+
+\noindent \textbf{আলোর দ্বি-প্রতিসরণ :} যেসব কেলাসের মধ্য দিয়ে আলোর রশ্মি গমন করলে আলো দুটি প্রতিসৃত রশ্মিতে বিভক্ত হয় যে ঘটনাকে দ্বি-প্রতিসরণ বলে।
+
+\noindent \textbf{চির :} দৈর্ঘ্যের তুলনায় প্রস্থ অনেক ছোট এমন আয়তাকার সরু ছিদ্র পথকে চির বলে।
+
+\noindent \textbf{ম্যালাসের সূত্র :} বিশ্লেষকের মধ্য দিয়ে সমবর্তিত আলো গমনের ফলে এর তীব্রতা সমবর্তক ও বিশ্লেষকের নিঃসরণ তলের মধ্যবর্তী কোণের $\text{cosine}$-এর বর্গের সমানুপাতিক।
+
+\bigskip
+\bigskip
+
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] একটি তরঙ্গের দুটি বিন্দুর মধ্যে দশা পার্থক্য $90^\circ$ বা $\frac{\pi}{2}$ হলে পথ পার্থক্য $\frac{\lambda}{4}$ হবে।
+    \item[$\blacktriangleright$] ব্যতিচারের ক্ষেত্রে ডোরার প্রস্থ তরঙ্গদৈর্ঘ্যের সমানুপাতিক।
+    \item[$\blacktriangleright$] ম্যাগনেট্রন বাল্ব একটি মাইক্রোওয়েভ তরঙ্গ নিঃসরণকারী উৎস।
+    \item[$\blacktriangleright$] পথ পার্থক্য $\text{x}$ এবং দশা পার্থক্য $\phi$ এর মধ্যে সম্পর্ক হলো, $\frac{\text{x}}{\lambda} = \frac{\phi}{2\pi}$।
+    \item[$\blacktriangleright$] দ্বি-চির থেকে পর্দার দূরত্ব বৃদ্ধি করলে ডোরাপ্রস্থ বৃদ্ধি পায়।
+    \item[$\blacktriangleright$] মাইক্রোওয়েভ ওয়্যারলেসে, রান্নাতে রান্নার জন্য ও রাডারে ব্যবহৃত হয়।
+    \item[$\blacktriangleright$] আলোর ব্যতিচারের শর্ত (i) আলোক উৎস দুটি সুসংগত হতে হবে, (ii) উৎস দুটি ক্ষুদ্র, সূক্ষ্ম ও কাছাকাছি হতে হবে।
+    \item[$\blacktriangleright$] 1801 সালে টমাস ইয়ং দ্বি-চির পরীক্ষার মাধ্যমে আলোর ব্যতিচার প্রদর্শন করেন।
+    \item[$\blacktriangleright$] প্রিজমে আলোর বিচ্ছুরণের ক্ষেত্রে বেগুনী বর্ণের রশ্মির বিচ্যুতি বেশি এবং লাল বর্ণের বিচ্যুতি কম কিন্তু গ্রেটিংয়ের ক্ষেত্রে বেগুনী বর্ণের রশ্মির বিচ্যুতি কম এবং লাল বর্ণের বিচ্যুতি বেশি।
+    \item[$\blacktriangleright$] সূর্যরশ্মির দৃষ্টিগোচরের সাতটি বর্ণের আলোর সজ্জাকে সৌর বর্ণালি বলে।
+    \item[$\blacktriangleright$] আলোর প্রতিফলন, প্রতিসরণ, ব্যতিচার আলোর তরঙ্গ তত্ত্বের সাহায্যে ব্যাখ্যা করা যায়।
+    \item[$\blacktriangleright$] আলো এক প্রকার তড়িৎ চুম্বকীয় তরঙ্গ (আড়তরঙ্গ)।
+    \item[$\blacktriangleright$] দ্বি-চির পরীক্ষায় চিরগুলোর দূরত্ব অর্ধেক এবং চির ও পর্দার দূরত্ব দ্বিগুণ করা হলে ডোরা প্রস্থ চারগুণ হবে।
+    \item[$\blacktriangleright$] ফ্রনহফার শ্রেণির অপবর্তন সৃষ্টি করা যায় গ্রেটিং দ্বারা, একক চির দ্বারা, যুগ্ম চির দ্বারা।
+    \item[$\blacktriangleright$] বস্তু তরঙ্গ দ্বারা কণার দ্বৈত আচরণ ব্যাখ্যা করা যায়।
+    \item[$\blacktriangleright$] সৌর বর্ণালীর তরঙ্গ দৈর্ঘ্যের সীমা $4000\text{ }\text{Å} - 7000\text{ }\text{Å}$।
+    \item[$\blacktriangleright$] মানুষের শরীরে ভিটামিন $\text{D}$ তৈরির কাজে অতিবেগুনি রশ্মি ব্যবহৃত হয়।
+\end{itemize}
+
+\bigskip
+
+\noindent \textbf{{\footnotesize [\textit{চিত্র}]} প্রতীক ও এককসহ গুরুত্বপূর্ণ सूत्रাবলি | Important Formulas with Symbols \& Units} \hfill {\footnotesize [\textit{চিত্র}]}
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & & $\text{E}_0, \text{E} = \text{তড়িৎক্ষেত্র}$ & ভোল্ট/মিটার ($\text{V m}^{-1}$) \\ \cline{3-4} 
+\textbf{১.} & $\text{c} = \frac{\text{E}_0}{\text{B}_0} = \frac{\text{E}}{\text{B}}$ & $\varepsilon_0 = \text{শূন্য মাধ্যমে তড়িৎ ভেদনযোগ্যতা}$ & \begin{tabular}[c]{@{}l@{}}কুলম্ব$^2$/নিউটন-মিটার$^2$\\ ($\text{C}^2\text{N}^{-1}\text{m}^{-2}$)\end{tabular} \\ \hline
+ & & $\text{B}_0, \text{B} = \text{চৌম্বক ক্ষেত্র}$ & টেসলা ($\text{T}$) \\ \cline{3-4} 
+\textbf{২.} & $\text{c} = \frac{1}{\sqrt{\mu_0\varepsilon_0}}$ & $\mu_0 = \text{শূন্য মাধ্যমে চৌম্বক প্রবেশ্যতা}$ & নিউটন/অ্যাম্পিয়ার$^2$ ($\text{N A}^{-2}$) \\ \hline
+ & प्रतिসরাঙ্ক ও আলোর বেগের মধ্যে সম্পর্ক, & $\mu = \text{মাধ্যমের প্রতিসরাঙ্ক}$ & একক নেই \\ \cline{3-4} 
+\textbf{৩.} & \quad $_a\mu_b = \frac{\text{c}_a}{\text{c}_b}$ & $\text{c}_a = \text{a মাধ্যমে আলোর বেগ, } \text{c}_b = \text{b মাধ্যমে আলোর বেগ}$ & মিটার/সে. ($\text{m s}^{-1}$) \\ \hline
+\textbf{৪.} & দশা পার্থক্য, $\delta = \frac{2\pi}{\lambda} \times \text{x}$ & $\lambda = \text{তরঙ্গ দৈর্ঘ্য, } \text{x} = \text{পথ পার্থক্য}$ & মিটার ($\text{m}$) \\ \hline
+ & & $\text{d} = \text{চির দুটির মধ্যবর্তী দূরত্ব, } \text{D} = \text{চির থেকে পর্দার দূরত্ব}$ & \\ \cline{3-4} 
+\textbf{৫.} & কেন্দ্রীয় চরম থেকে দূরত্ব, $\text{x}_\text{n} = \text{n}\lambda \frac{\text{D}}{\text{d}}$ & $\text{x}_\text{n} = \text{কেন্দ্রীয় চরম থেকে দূরত্ব, } \text{n} = \text{ডোরার ক্রম}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{৬.} & ডোরা ব্যবধান, $\Delta\text{x} = \lambda \frac{\text{D}}{\text{d}}$ & $\Delta\text{x} = \text{ডোরা ব্যবধান}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{৭.} & উজ্জ্বল ডোরার প্রস্থ, $\text{x} = \lambda \frac{\text{D}}{2\text{d}}$ & $\text{x} = \text{ডোরার প্রস্থ, } \lambda = \text{তরঙ্গ দৈর্ঘ্য}$ & meter ($\text{m}$) \\ \hline
+ & & $\text{a} = \text{চিরের প্রস্থ, } \lambda = \text{তরঙ্গ দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+\textbf{৮.} & একক চিরে চরমের শর্ত, $\text{a} \sin \theta = (2\text{n} + 1)\frac{\lambda}{2}$ & $\theta = \text{অপবর্তন কোণ}$ & ডিগ্রি ($^\circ$) \\ \hline
+\textbf{৯.} & একক চিরে অবমের শর্ত, $\text{a} \sin \theta = \text{n}\lambda$ & $\text{a} = \text{চিরের প্রস্থ, } \lambda = \text{তরঙ্গ দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{১০.} & গ্রেটিং সমীকরণ, $\text{d} \sin \theta = \text{n}\lambda$ & $\text{d} = \text{গ্রেটিং ধ্রুবক, } \lambda = \text{তরঙ্গ দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \hline
+\end{tabular}
+}
+
+\bigskip
+\bigskip
+
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize প্রতীক ও এককসহ গুরুত্বপূর্ণ সূত্রাবলি | Important Formulas with Symbols \& Units}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & & $\text{d} = \text{দূরত্ব}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+ & & $\text{v} = \text{বেগ}$ & মিটার/সে. ($\text{m s}^{-1}$) \\ \cline{3-4} 
+\textbf{১.} & ব্যতিচার নকশার অপসারণ, $\text{n} = \frac{2\text{dv}^2}{\lambda\text{c}^2}$ & $\lambda = \text{তরঙ্গ দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+ & & $\text{c} = \text{আলোর বেগ}$ & মিটার/সে. ($\text{m s}^{-1}$) \\ \hline
+\textbf{২.} & কাল দীর্ঘায়ন, $\text{t} = \frac{\text{t}_0}{\sqrt{1 - \frac{\text{v}^2}{\text{c}^2}}}$ & $\text{t}, \text{t}_0 = \text{সময়}$ & বছর ($\text{yr}$) \\ \hline
+\textbf{৩.} & দৈর্ঘ্য সংকোচন, $\text{L} = \text{L}_0 \sqrt{1 - \frac{\text{v}^2}{\text{c}^2}}$ & $\text{L}, \text{L}_0 = \text{দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{৪.} & গতিশীল ভর, $\text{m} = \frac{\text{m}_0}{\sqrt{1 - \frac{\text{v}^2}{\text{c}^2}}}$ & $\text{m}, \text{m}_0 = \text{ভর}$ & কেজি ($\text{kg}$) \\ \hline
+\textbf{৫.} & গতিশক্তি, $\text{K} = (\text{m} - \text{m}_0) \text{c}^2$ & $\text{K} = \text{গতিশক্তি}$ & জুল ($\text{Joule, eV}$) \\ \hline
+\textbf{৬.} & ভর-শক্তি সম্পর্ক, $\text{E} = \text{mc}^2$ & $\text{E} = \text{মোট শক্তি}$ & জুল ($\text{Joule, eV, MeV}$) \\ \hline
+ & & $\text{h} = \text{প্লাঙ্কের ধ্রুবক}$ & জুল/সে. ($\text{J-s}$) \\ \cline{3-4} 
+\textbf{৭.} & ফোটনের শক্তি, $\text{E} = \text{hf} = \frac{\text{hc}}{\lambda}$ & $\text{f} = \text{কম্পাঙ্ক}$ & হার্জ ($\text{Hz}$) \\ \hline
+\textbf{৮.} & ফোটনের ভরবেগ, $\text{p} = \frac{\text{h}}{\lambda} = \frac{\text{E}}{\text{c}}$ & & \\ \hline
+ & $\text{K}_{\text{max}} = \text{eV}_0$ & $\text{e} = \text{ইলেকট্রনের চার্জ}$ & কুলম্ব ($\text{C}$) \\ \cline{3-4} 
+\textbf{৯.} & বা, $\frac{1}{2}\text{mv}_{\text{max}}^2 = \text{eV}_0$ বা, $\text{v}_{\text{max}} = \sqrt{\frac{2\text{eV}_0}{\text{m}}}$ & $\text{V}_0 = \text{নিবৃত্তি বিভব}$ & ভোল্ট ($\text{Volt}$) \\ \hline
+ & & $\text{W}_0 = \text{কার্যাপেক্ষক}$ & জুল ($\text{Joule, eV}$) \\ \cline{3-4} 
+\textbf{১০.} & কার্যাপেক্ষক, $\text{W}_0 = \text{hf}_0 = \frac{\text{hc}}{\lambda_0}$ & $\lambda_0 = \text{সূচন তরঙ্গ দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \hline
+ & $\text{E} = \text{K}_{\text{max}} + \text{W}_0$ & & \\ 
+\textbf{১১.} & $\text{hf} = \frac{1}{2}\text{mv}_{\text{max}}^2 + \text{hf}_0$ & $\text{f}_0 = \text{সূচন কম্পাঙ্ক}$ & হার্জ ($\text{Hz}$) \\ 
+ & $\frac{\text{hc}}{\lambda} = \text{K}_{\text{max}} + \frac{\text{hc}}{\lambda_0}$ & & \\ \hline
+\textbf{১২.} & দ্য ব্রগলী তরঙ্গ দৈর্ঘ্য, $\lambda = \frac{\text{h}}{\text{mv}}$ & $\lambda = \text{তরঙ্গ দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \hline
+ & কম্পটন তরঙ্গ দৈর্ঘ্য, & $\lambda, \lambda_0, \lambda_1 = \text{তরঙ্গ দৈর্ঘ্য}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+\textbf{১৩.} & $\Delta\lambda = \lambda_1 - \lambda_0 = 2\lambda_0 \sin^2 \frac{\phi}{2} = \frac{\text{h}}{\text{m}_0\text{c}} (1 - \cos \phi)$ & $\text{m}_0 = \text{ভর}$ & কেজি ($\text{kg}$) \\ \hline
+ & & $\text{p} = \text{ভরবেগ}$ & কেজি-মি./সে. ($\text{kgms}^{-1}$) \\ \cline{3-4} 
+\textbf{১৪.} & অনিশ্চয়তা নীতি, $\Delta \text{x} \, \Delta \text{p} \ge \frac{1}{2} \cdot \frac{\text{h}}{2\pi}$ & $\text{h} = \text{প্লাঙ্কের ধ্রুবক}$ & জুল-সে. ($\text{J-s}$) \\ \hline
+\end{tabular}
+}
+
+\bigskip
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize সার-সংক্ষেপ | Summary}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent \textbf{জড় কাঠামো :} যেসব প্রসঙ্গ কাঠামোতে জড়তার সূত্র এবং নিউটনের গতির প্রথম সূত্র প্রযোজ্য হয় তাকে জড় কাঠামো বা জড়তার কাঠামো বলে।
+
+\noindent \textbf{অজড় কাঠামো :} যেসব প্রসঙ্গ কাঠামোতে নিউটনের গতির সূত্র প্রযোজ্য নয় সেসব কাঠামোই অজড় কাঠামো।
+
+\noindent \textbf{আইনস্টাইনের দ্বিতীয় স্বীকার্য :} আইনস্টাইনের দ্বিতীয় স্বীকার্যটি হলো— সকল জড় প্রসঙ্গ কাঠামোতে শূন্যস্থানে আলোর বেগ সর্বদা ধ্রুব থাকে।
+
+\noindent \textbf{গ্যালিলীয় রূপান্তর :} চিরায়ত পদার্থবিজ্ঞানের যেসব সমীকরণ পরস্পরের সাপেক্ষে ধ্রুববেগে গতিশীল দুটি প্রসঙ্গ কাঠামোর সময় ও স্থানাঙ্কের মধ্যে সম্পর্ক স্থাপন করে তাদের গ্যালিলীয় রূপান্তর বলা হয়।
+
+\noindent \textbf{লরেঞ্জ রূপান্তর :} সময় সার্বভৌম নয় গণ্য করে এবং আপেক্ষিকতার বিশেষ তত্ত্বের মৌলিক স্বীকার্য দুটি মেনে চলে পরস্পরের সাপেক্ষে ধ্রুববেগে গতিশীল দুটি প্রসঙ্গ কাঠামোর স্থানাঙ্ক ও সময়ের মধ্যে সম্পর্ক স্থাপনকারী যেসব সমীকরণ পাওয়া যায় তাদেরেকে লরেঞ্জ রূপান্তর বলে।
+
+\noindent \textbf{আপেক্ষিকতা :} আইনস্টাইনের মতে, স্থান, কাল এবং ভর এদের কোনোটিই নিরপেক্ষ বা পরম নয়, প্রত্যেকটি অন্য কিছুর সাপেক্ষে বিবেচিত হয়। কোনো বিষয় অন্য কিছুর সাপেক্ষে বিবেচিত হওয়াই আপেক্ষিকতা।
+
+\noindent \textbf{ভরের আপেক্ষিকতা :} বস্তুর নিশ্চল ভরের তুলনায় চলমান বা গতিশীল ভর বেশি হওয়ার घटनाকে ভরের আপেক্ষিকতা বলে।
+
+\noindent \textbf{দৈর্ঘ্য সংকোচন :} কোনো বস্তুর গতিশীল অবস্থার দৈর্ঘ্য ঐ বস্তুর স্থির অবস্থার চেয়ে ছোট হওয়াকে দৈর্ঘ্য সংকোচন বলে।
+
+\noindent \textbf{কাল দীর্ঘায়ন :} কোনো পর্যবেক্ষকের সাপেক্ষে গতিশীল অবস্থায় সংঘটিত দুটি ঘটনার মধ্যবর্তী কাল ব্যবধান ঐ পর্যবেক্ষকের সাপেক্ষে নিশ্চল অবস্থায় সংঘটিত ঐ একই ঘটনাদ্বয়ের মধ্যবর্তী কাল ব্যবধানের চেয়ে বেশি হবে, এ ঘটনাকে কাল দীর্ঘায়ন বলে।
+
+\noindent \textbf{মৌলিক বল :} যে সকল বল অন্য কোনো বল থেকে উৎপন্ন হয়নি এবং অন্যকোনো বলের রূপও নয় বা রূপান্তরও নয়, সেসব বলকে মৌলিক বল বলা হয়।
+
+\noindent \textbf{এক্স-রে :} দ্রুত গতিসম্পন্ন ইলেকট্রন কোনো ধাতব পাতে আঘাত করলে তা থেকে উচ্চ ভেদন ক্ষমতাসম্পন্ন অজানা প্রকৃতির এক প্রকার বিকিরণ উৎপন্ন হয়। এ বিকিরণকে বলা হয় এক্স-রে বা রঞ্জন রশ্মি।
+
+\noindent \textbf{ক্ষরণ নল :} নিম্নচাপে বায়ুর মধ্য দিয়ে তড়িৎ ক্ষরণের পরীক্ষা চালানোর জন্য প্রায় $4\text{ cm}$ ব্যাসের $30\text{ cm}$ লম্বা যে কাচনল ব্যবহার করা হয় তাকে ক্ষরণ নল বলে।
+
+\noindent \textbf{ফোটোইলেকট্রন :} যথাযথ উচ্চ কম্পাঙ্কের আলোক রশ্মি কোনো ধাতব পৃষ্ঠে আপতিত হলে তা থেকে ইলেকট্রন নিঃসৃত হয়, এই ইলেকট্রনকে ফোটোইলেকট্রন বলে।
+
+\noindent \textbf{নিবৃত্তি বিভব :} ক্যাথোড প্লেটের সাপেক্ষে অ্যানোড প্লেটে যে ন্যূনতম ঋণ বিভব দিলে আলোক তড়িৎ প্রবাহমাত্রা সদ্য বন্ধ হয়ে যায় সেই বিভবই নিবৃত্তি বিভব।
+
+\noindent \textbf{ফোটোইলেকট্রিক সেল :} যে যন্ত্রের সাহায্যে আলোক তড়িৎ ক্রিয়ার ভিত্তিতে আলোক শক্তিকে বিদ্যুৎ শক্তিতে রূপান্তরিত করা যায়, তাকে আলোক তড়িৎ কোষ বা ফোটোইলেকট্রিক সেল বলে।
+
+\noindent \textbf{তরঙ্গ কণা দ্বৈততা :} তরঙ্গ কণা দ্বৈততা হলো এমন একটি ধারণা যাতে উল্লেখ করা হয় যে, সকল শক্তি তরঙ্গ সদৃশ এবং কণা সদৃশ উভয় ধর্ম প্রদর্শন করে।
+
+\noindent \textbf{কার্যাপেক্ষক :} কোনো ধাতব পৃষ্ঠ হতে শূন্য বেগ সম্পন্ন ইলেকট্রন নির্গত করতে যতটুকু শক্তির প্রয়োজন তাকে ঐ ধাতুর কার্যাপেক্ষক বলে।
+
+\noindent \textbf{আলোক তড়িৎ ক্রিয়া :} উচ্চ কম্পাঙ্কবিশিষ্ট আলোকরশ্মি কোনো ধাতবপৃষ্ঠে আপতিত হলে তা থেকে ইলেকট্রন নিঃসৃত হয়, এ ঘটনাকে আলোক তড়িৎ ক্রিয়া বলে।
+
+\noindent \textbf{দ্য ব্রগলী তরঙ্গদৈর্ঘ্য :} প্রত্যেকটি চলমান পদার্থ কণার সাথে একটি তরঙ্গ যুক্ত থাকে। আবিষ্কারকের নামানুসারে এই তরঙ্গ দ্য ব্রগলী 'বস্তু তরঙ্গ' নামে পরিচিত এবং এই তরঙ্গের তরঙ্গদৈর্ঘ্যকে দ্য ব্রগলী তরঙ্গদৈর্ঘ্য বলে।
+
+\noindent \textbf{দ্য ব্রগলী বস্তু তরঙ্গ :} প্রত্যেকটি চলমান পদার্থ কণার সাথে যে তরঙ্গ যুক্ত থাকে তাকে দ্য ব্রগলী বস্তু তরঙ্গ বলে।
+
+\noindent \textbf{কম্পটন ক্রিয়া বা প্রভাব :} একবর্ণী এক্স রশ্মির দরুন বিক্ষিপ্ত বিকিরণের তরঙ্গদৈর্ঘ্য তথা কম্পাঙ্কের পরিবর্তন ঘটার ক্রিয়াকে কম্পটন প্রভাব বলে।
+
+\bigskip
+\bigskip
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] ১৯০০ সালের আগ পর্যন্ত পদার্থবিজ্ঞানকে চিরায়ত ও সনাতনী পদার্থবিজ্ঞান নামে অভিহিত করা হয়।
+    \item[$\blacktriangleright$] মাইকেলসন-মোরলের পরীক্ষায় আলোকরশ্মি কাচ প্লেটে ৪৫° কোণে আপতিত হয়।
+    \item[$\blacktriangleright$] পৃথিবীর কক্ষপথের বেগ $30\text{ km s}^{-1}$।
+    \item[$\blacktriangleright$] আপেক্ষিক তত্ত্বের জনক আইনস্টাইন।
+    \item[$\blacktriangleright$] আপেক্ষিক তত্ত্ব মূলত ২ ভাগে বিভক্ত।
+    \item[$\blacktriangleright$] আলবার্ট আইনস্টাইনের আপেক্ষিক তত্ত্ব 1905 সালে প্রকাশিত হয়।
+    \item[$\blacktriangleright$] গ্যালিলিও রূপান্তরের অপর নাম নিউটনীয় রূপান্তর।
+    \item[$\blacktriangleright$] $30\text{ বছর বয়সী একজন নভোচারী } 2.4 \times 10^8\text{ m s}^{-1}\text{ বেগে গতিশীল রকেটে চড়ে মহাকাশে গেলেন। পৃথিবীর হিসেবে } 50\text{ বছর পর}$ পৃথিবীতে ফিরে আসলে তার বয়স $60\text{ বছর হবে।}$
+    \item[$\blacktriangleright$] ভর-শক্তি সম্পর্ক আইনস্টাইন আবিষ্কার করেন।
+    \item[$\blacktriangleright$] একটি ইলেকট্রন ও প্রোটনের মধ্যকার মহাকর্ষ বল $3.6 \times 10^{-47}\text{ N}$।
+    \item[$\blacktriangleright$] তাড়িতচৌম্বক বলের পাল্লা অসীম।
+    \item[$\blacktriangleright$] লোহার ঘনত্ব $7.8 \times 10^3\text{ kg m}^{-3}\text{ হলে } 0.2\text{ c বেগে চলমান নভোযানে এর ঘনত্ব } 8.12 \times 10^3\text{ kg m}^{-3}\text{ হবে।}$
+    \item[$\blacktriangleright$] প্ল্যাঙ্ক ধ্রুবকের মান $6.63 \times 10^{-34}\text{ J s}$।
+    \item[$\blacktriangleright$] কোয়ান্টাম তত্ত্বানুসারে শক্তি যে গুচ্ছ বা প্যাকেট আকারে নির্গত হয় তার নাম কোয়ান্টাম।
+    \item[$\blacktriangleright$] ইলেকট্রনের বেগ এবং প্রযুক্ত বিভব পার্থক্যের মধ্যে সম্পর্ক $\text{v} = \sqrt{\frac{2\text{eV}}{\text{m}}}$।
+    \item[$\blacktriangleright$] এক্স-রে এর বেগ $3 \times 10^8\text{ m s}^{-1}$।
+    \item[$\blacktriangleright$] সর্বপ্রথম ফোটোতড়িৎ ক্রিয়া আবিষ্কার করেন স্মিথ।
+    \item[$\blacktriangleright$] পটাশিয়ামের কার্য আপেক্ষক $2.30\text{ eV}$।
+    \item[$\blacktriangleright$] সোডিয়ামের সূচন তরঙ্গদৈর্ঘ্য $6800\text{ }\text{Å}\text{ হলে এর কার্য আপেক্ষক } 2.93 \times 10^{-19}\text{ J}$।
+    \item[$\blacktriangleright$] ইলেকট্রনের ভরবেগ $4 \times 10^{-24}\text{ kg m s}^{-1}\text{ হলে ডি. ব্রগলী তরঙ্গ দৈর্ঘ্য } 1.65\text{ }\text{Å}$।
+    \item[$\blacktriangleright$] ইলেকট্রনের কম্পটন তরঙ্গদৈর্ঘ্য $0.02468\text{ }\text{Å}$।
+    \item[$\blacktriangleright$] হাইজেনবার্গের অনিশ্চয়তার নীতির সাহায্যে পরিমাপকৃত ত্রুটির গুণফলের একক $\text{Js}$।
+    \item[$\blacktriangleright$] $1\text{ a.m.u} = 1.66057 \times 10^{-27}\text{ kg} = 931\text{ MeV}$
+    \item[$\blacktriangleright$] কোনো বস্তুর দ্রুতি $2.6 \times 10^8\text{ ms}^{-1}\text{ হলে এর মোট শক্তি স্থিতাবস্থার শক্তির দ্বিগুণ।}$
+    \item[$\blacktriangleright$] ফোটনের বৈশিষ্ট্য হলো— (i) এর দ্য ব্রগলী তরঙ্গদৈর্ঘ্য আছে। (ii) এর স্থির ভর নেই। (iii) এটি শূন্যস্থানে আলোর বেগে যায়।
+    \item[$\blacktriangleright$] আপেক্ষিক তত্ত্ব অনুসারে শূন্য মাধ্যমে আলোর দ্রুতি ধ্রুবক।
+    \item[$\blacktriangleright$] কোনো धातবপৃষ্ঠ থেকে ইলেকট্রন মুক্ত করতে যতটুকু শক্তির প্রয়োজন হয় তাকে ধাতুর কার্যাপেক্ষক বলে।
+    \item[$\blacktriangleright$] হাইজেনবার্গ এর মতে একটি কণার অবস্থান ও ভরবেগ এবং শক্তি ও সময় একই সাথে জানা সম্ভব নয়।
+    \item[$\blacktriangleright$] ফোটনের ভরবেগ হবে, $\text{p} = \frac{\text{h}}{\lambda}$।
+    \item[$\blacktriangleright$] আপেক্ষিকতা অনুসারে কোনো বস্তুর স্থির ভর $\text{m}_0$ ও গতিশীল ভর $\text{m}$ হলে গতিশক্তি হবে, $\text{K} = (\text{m} - \text{m}_0)\text{c}^2$।
+    \item[$\blacktriangleright$] চিরায়ত বলবিদ্যা মতে স্থান, কাল, ভর, ধ্রুবক।
+    \item[$\blacktriangleright$] $\frac{\sqrt{3}}{2}\text{c}$ দ্রুতিতে চলতে থাকলে বস্তুর দৈর্ঘ্য অর্ধেক হয়ে যায়।
+    \item[$\blacktriangleright$] ফোটন বিদ্যুৎ ক্ষেত্র দ্বারা প্রভাবিত হয় না।
+    \item[$\blacktriangleright$] আপেক্ষিক তত্ত্বানুসারে গতিশীলতার দরুন বস্তুর দৈর্ঘ্য হ্রাস পায় কিন্তু ভর বৃদ্ধি পায়।
+    \item[$\blacktriangleright$] কম্পটন ক্রিয়ায় আলোর তরঙ্গ ও কণাধর্ম প্রকাশ পায়।
+    \item[$\blacktriangleright$] আলোক তড়িৎ ক্রিয়ায় আপতিত আলোক রশ্মির কম্পাঙ্ক বেশি হলে নির্গত ইলেকট্রনের বেগ বেশি হবে।
+    \item[$\blacktriangleright$] সর্বপ্রথম ফোটন তড়িৎ ক্রিয়া আবিষ্কার করেন স্মিথ।
+    \item[$\blacktriangleright$] এক্স-রে তড়িৎ চুম্বকীয় তরঙ্গ, সরলরেখায় চলে, চার্জ নিরপেক্ষ।
+    \item[$\blacktriangleright$] প্রসঙ্গ কাঠামো ত্রিমাত্রিক স্থানে কল্পনা করা যায়।
+    \item[$\blacktriangleright$] পৃথিবীর কক্ষপথের বেগ $30\text{ km s}^{-1}$।
+    \item[$\blacktriangleright$] গতিশীল মহাশূন্যযানে ঘড়ি পৃথিবীতে অবস্থিত ঘড়ির তুলনায় ধীরে চলে, একে কাল প্রসারণ বলে।
+\end{itemize}
+
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] $\gamma$-ray এর কোনো ভর নেই।
+    \item[$\blacktriangleright$] হাইড্রোজেন ফিশনের ফলে হিলিয়ামের সৃষ্টি হয়।
+    \item[$\blacktriangleright$] $\beta$-ray ঋণাত্মক চার্জ বহন করে।
+    \item[$\blacktriangleright$] তেজস্ক্রিয়তা একটি নিউক্লীয় ঘটনা।
+    \item[$\blacktriangleright$] এক্স রশ্মির ভেদন ক্ষমতা অত্যধিক কিন্তু গামা রশ্মির ভেদন ক্ষমতা সর্বাধিক।
+    \item[$\blacktriangleright$] জড় পদার্থের ভিতরে পরমাণুগুলো গতিশীল থাকে।
+    \item[$\blacktriangleright$] 'পরমাণু একটি ধনাত্মক তড়িৎআহিত গোলক' মতবাদটি থমসনের।
+    \item[$\blacktriangleright$] রাদারফোর্ড $\alpha$ কণিকা পরীক্ষার জন্য পোলোনিয়াম ব্যবহার করেন।
+    \item[$\blacktriangleright$] পরমাণুর ব্যাসার্ধ $10^{-8}\text{ cm}$ পর্যায়ের।
+    \item[$\blacktriangleright$] নিউক্লিয়াসের ব্যাসার্ধ $10^{-13}\text{ cm} - 10^{-14}\text{ cm}$ পর্যায়ের।
+    \item[$\blacktriangleright$] ইলেকট্রন উচ্চ শক্তিস্তর থেকে নিম্ন শক্তিস্তরে গেলে শক্তির বিকিরণ ঘটে।
+    \item[$\blacktriangleright$] বোর কোয়ান্টাম তত্ত্বের প্রসারণ ঘটিয়ে পরমাণুর বর্ণালি ব্যাখ্যা করেন।
+    \item[$\blacktriangleright$] রাদারফোর্ডের মডেলকে সৌরজগতের সাথে তুলনা করা হয়।
+    \item[$\blacktriangleright$] নিউক্লিয়াসের অভ্যন্তরে মেসন কণিকার সন্ধান পাওয়া যায়।
+    \item[$\blacktriangleright$] মেসন কণার অস্তিত্ব মহাজাগতিক রশ্মির সাহায্যে জানা যায়।
+    \item[$\blacktriangleright$] পজিট্রন একটি অ্যান্টি ইলেকট্রন।
+    \item[$\blacktriangleright$] তেজস্ক্রিয় ভাঙনের সময় $\beta$-রশ্মির সাথে $\gamma$-রশ্মিও নির্গত হয়।
+    \item[$\blacktriangleright$] প্রোটন ও নিউট্রনকে একত্রে নিউক্লিয়ন বলা হয়।
+    \item[$\blacktriangleright$] $_{92}^{235}\text{U}$ কে নিউট্রন দ্বারা আঘাত করলে ৩টি নিউট্রন এবং বিপুল পরিমাণ শক্তি উৎপন্ন হয়।
+    \item[$\blacktriangleright$] ইলেকট্রনের উপর প্রযুক্ত কেন্দ্রমুখী বল $\text{F}_\text{c} = \frac{\text{mv}^2}{\text{r}}$।
+    \item[$\blacktriangleright$] তেজস্ক্রিয় পদার্থের গড় আয়ু অর্ধায়ুর সমানুপাতিক $\left(\text{T}_{\frac{1}{2}} = 0.693\text{ }\tau\right)$।
+\end{itemize}
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize প্রতীক ও এককসহ গুরুত্বপূর্ণ সূত্রাবলি | Important Formulas with Symbols \& Units}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি ও একক}} \\ \hline
+\textbf{১.} & \begin{tabular}[c]{@{}l@{}}হাইড্রোজেন পরমাণুর n-তম বোর কক্ষের ব্যাসার্ধ,\\ $\text{r}_\text{n} = \frac{\text{n}^2\text{h}^2\varepsilon_0}{\pi\text{m}\text{e}^2}$ এবং $\text{r}_\text{n} = \text{n}^2 \times \text{r}_1$\end{tabular} & \begin{tabular}[c]{@{}l@{}}$\text{h} = \text{প্লাঙ্কের ধ্রুবক (J-s)}$\\ $\varepsilon_0 = \text{শূন্য মাধ্যমের ভেদনযোগ্যতা }(\text{N}^{-1}\text{m}^{-2}\text{C}^2)$\end{tabular} \\ \hline
+\textbf{২.} & \begin{tabular}[c]{@{}l@{}}হাইড্রোজেন পরমাণুর n-তম বোর কক্ষের শক্তি,\\ $\text{E}_\text{n} = \frac{-\text{m}\text{e}^4}{8\text{n}^2\text{h}^2\varepsilon_0^2}$ এবং $\text{E}_\text{n} = \frac{\text{E}_1}{\text{n}^2}$\end{tabular} & \begin{tabular}[c]{@{}l@{}}$\text{m} = \text{ইলেকট্রনের ভর (kg)}$\\ $\text{e} = \text{ইলেকট্রনের চার্জ (c)}$\\ $\text{r} = \text{ব্যাসার্ধ (m)}$\end{tabular} \\ \hline
+\textbf{৩.} & কৌণিক ভরবেগ, $\text{L} = \frac{\text{nh}}{2\pi}$ & \begin{tabular}[c]{@{}l@{}}$\text{E} = \text{শক্তি (J, eV, MeV)}$\\ $\text{L} = \text{কৌণিক ভরবেগ }(\text{kg m}^2\text{ s}^{-1})$\end{tabular} \\ \hline
+\textbf{৪.} & কক্ষপথে ইলেকট্রনের বেগ, $\text{v} = \frac{\text{nh}}{2\pi\text{mr}}$ বা, $\text{v} = \frac{\text{e}}{\sqrt{4\pi\text{m}\varepsilon_0\text{r}}}$ & \begin{tabular}[c]{@{}l@{}}$\text{v} = \text{বেগ }(\text{m s}^{-1})$\\ $\text{f} = \text{কম্পাঙ্ক (Hz)}$\end{tabular} \\ \hline
+\textbf{৫.} & বিকিরিত বা শোষিত শক্তি, $\text{E} = \text{E}_2 - \text{E}_1 = \text{hf}$ & $\text{c} = \text{আলোর বেগ }(\text{m s}^{-1})$ \\ \hline
+\textbf{৬.} & কম্পাঙ্ক, $\text{f} = \frac{\text{m}\text{e}^4}{8\text{h}^3\varepsilon_0^2}\left(\frac{1}{\text{n}_1^2} - \frac{1}{\text{n}_2^2}\right)$ & $\text{R} = \text{রিডবার্গ ধ্রুবক }(\text{m}^{-1})$ \\ \hline
+\textbf{৭.} & রিডবার্গ ধ্রুবক, $\text{R} = \frac{\text{m}\text{e}^4}{8\text{h}^3\varepsilon_0^2\text{c}}$ & \begin{tabular}[c]{@{}l@{}}$\lambda = \text{অবক্ষয় ধ্রুবক (সময়}^{-1}\text{, s}^{-1}\text{, min}^{-1}\text{, hr}^{-1}\text{,}$\\ $\text{day}^{-1}\text{, year}^{-1})$\end{tabular} \\ \hline
+\textbf{৮.} & অক্ষত পরমাণুর সংখ্যা, $\text{N} = \text{N}_0\text{e}^{-\lambda\text{t}}$ & $\text{t} = \text{সময় (s, min, hr, day, year)}$ \\ \hline
+\end{tabular}
+
+\bigskip
+\bigskip
+
+
+\bigskip
+
+\noindent \textbf{■ এক নজরে প্রতিটি গেইটের নাম, প্রতীক, আউটপুট, ফাংশন ও সত্যক সারণি দেখানো হলো :}
+
+\bigskip
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{গেইটের নাম} & \textbf{প্রতীক} & \textbf{আউটপুট ফাংশন} & \textbf{সত্যক সারণি} \\ \hline
+ & & & 
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{ইনপুট}} & \textbf{আউটপুট} \\ \hline
+A & B & \textbf{Y = AB} \\ \hline
+0 & 0 & 0 \\ \hline
+0 & 1 & 0 \\ \hline
+1 & 0 & 0 \\ \hline
+1 & 1 & 1 \\ \hline
+\end{tabular} \\ 
+\textbf{AND গেইট} & 
+\begin{minipage}{3.5cm}
+\centering
+\begin{tikzpicture}[scale=0.7, baseline={           ([yshift=-0.6ex]current bounding box.center)}]
+\draw[thick] (0,0) -- (0,1) arc[start angle=90, end angle=-90, radius=0.5] -- cycle;
+\draw[thick] (-0.6,0.25) -- (0,0.25) node[left,pos=0] {\small B};
+\draw[thick] (-0.6,0.75) -- (0,0.75) node[left,pos=0] {\small A};
+\draw[thick] (0.5,0.5) -- (1.2,0.5) node[right] {\small Y=AB};
+\end{tikzpicture}
+\end{minipage} & $\text{Y} = \text{AB}$ & \\ \hline
+
+ & & & 
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{ইনপুট}} & \textbf{আউটপুট} \\ \hline
+A & B & \textbf{Y = A + B} \\ \hline
+0 & 0 & 0 \\ \hline
+0 & 1 & 1 \\ \hline
+1 & 0 & 1 \\ \hline
+1 & 1 & 1 \\ \hline
+\end{tabular} \\ 
+\textbf{OR গেইট} & 
+\begin{minipage}{3.5cm}
+\centering
+\begin{tikzpicture}[scale=0.7, baseline={           ([yshift=-0.6ex]current bounding box.center)}]
+\draw[thick] (0,0) to[out=25,in=155] (0,1) to[out=-25,in=115] (0.8,0.5) to[out=-115,in=25] (0,0);
+\draw[thick] (-0.6,0.25) -- (0.04,0.25) node[left,pos=0] {\small B};
+\draw[thick] (-0.6,0.75) -- (0.04,0.75) node[left,pos=0] {\small A};
+\draw[thick] (0.8,0.5) -- (1.4,0.5) node[right] {\small Y=A+B};
+\end{tikzpicture}
+\end{minipage} & $\text{Y} = \text{A} + \text{B}$ & \\ \hline
+
+ & & & 
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ইনপুট} & \textbf{আউটপুট} \\ \hline
+A & \textbf{Y} = $\mathbf{\bar{A}}$ \\ \hline
+0 & 1 \\ \hline
+1 & 0 \\ \hline
+\end{tabular} \\ 
+\textbf{NOT গেইট} & 
+\begin{minipage}{3.5cm}
+\centering
+\begin{tikzpicture}[scale=0.7, baseline={           ([yshift=-0.6ex]current bounding box.center)}]
+\draw[thick] (0,0.1) -- (0,0.9) -- (0.6,0.5) -- cycle;
+\draw[thick] (0.68,0.5) circle (0.08);
+\draw[thick] (-0.6,0.5) -- (0,0.5) node[left,pos=0] {\small A};
+\draw[thick] (0.76,0.5) -- (1.4,0.5) node[right] {\small Y=$\overline{\text{A}}$};
+\end{tikzpicture}
+\end{minipage} & $\text{Y} = \mathbf{\bar{A}}$ & \\ \hline
+
+\textbf{NAND গেইট} & 
+\begin{minipage}{3.5cm}
+\centering
+\begin{tikzpicture}[scale=0.7, baseline={           ([yshift=-0.6ex]current bounding box.center)}]
+\draw[thick] (0,0) -- (0,1) arc[start angle=90, end angle=-90, radius=0.5] -- cycle;
+\draw[thick] (0.58,0.5) circle (0.08);
+\draw[thick] (-0.6,0.25) -- (0,0.25) node[left,pos=0] {\small B};
+\draw[thick] (-0.6,0.75) -- (0,0.75) node[left,pos=0] {\small A};
+\draw[thick] (0.66,0.5) -- (1.3,0.5) node[right] {\small Y=$\overline{\text{AB}}$};
+\end{tikzpicture}
+\end{minipage} & $\text{Y} = \overline{\text{AB}}$ & 
+\begin{tabular}{|c|c|c|c|}
+\hline
+A & B & AB & \textbf{Y} = $\mathbf{\overline{AB}}$ \\ \hline
+0 & 0 & 0 & 1 \\ \hline
+0 & 1 & 0 & 1 \\ \hline
+1 & 0 & 0 & 1 \\ \hline
+1 & 1 & 1 & 0 \\ \hline
+\end{tabular} \\ \hline
+
+\textbf{NOR গেইট} & 
+\begin{minipage}{3.5cm}
+\centering
+\begin{tikzpicture}[scale=0.7, baseline={           ([yshift=-0.6ex]current bounding box.center)}]
+\draw[thick] (0,0) to[out=25,in=155] (0,1) to[out=-25,in=115] (0.8,0.5) to[out=-115,in=25] (0,0);
+\draw[thick] (0.88,0.5) circle (0.08);
+\draw[thick] (-0.6,0.25) -- (0.04,0.25) node[left,pos=0] {\small B};
+\draw[thick] (-0.6,0.75) -- (0.04,0.75) node[left,pos=0] {\small A};
+\draw[thick] (0.96,0.5) -- (1.5,0.5) node[right] {\small Y=$\overline{\text{A+B}}$};
+\end{tikzpicture}
+\end{minipage} & $\text{Y} = \overline{\text{A} + \text{B}}$ & 
+\begin{tabular}{|c|c|c|c|}
+\hline
+A & B & A+B & \textbf{Y} = $\mathbf{\overline{A+B}}$ \\ \hline
+0 & 0 & 0 & 1 \\ \hline
+0 & 1 & 1 & 0 \\ \hline
+1 & 0 & 1 & 0 \\ \hline
+1 & 1 & 1 & 0 \\ \hline
+\end{tabular} \\ \hline
+
+ & & $\text{Y} = \text{A} \oplus \text{B}$ & 
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{ইনপুট}} & \textbf{আউটপুট} \\ \hline
+A & B & \textbf{Y = A} $\mathbf{\oplus}$ \textbf{B} \\ \hline
+0 & 0 & 0 \\ \hline
+0 & 1 & 1 \\ \hline
+1 & 0 & 1 \\ \hline
+1 & 1 & 0 \\ \hline
+\end{tabular} \\ 
+\textbf{XOR গেইট} & 
+\begin{minipage}{3.5cm}
+\centering
+\begin{tikzpicture}[scale=0.7, baseline={           ([yshift=-0.6ex]current bounding box.center)}]
+\draw[thick] (-0.12,0) to[out=25,in=155] (-0.12,1);
+\draw[thick] (0,0) to[out=25,in=155] (0,1) to[out=-25,in=115] (0.8,0.5) to[out=-115,in=25] (0,0);
+\draw[thick] (-0.6,0.25) -- (-0.06,0.25) node[left,pos=0] {\small B};
+\draw[thick] (-0.6,0.75) -- (-0.06,0.75) node[left,pos=0] {\small A};
+\draw[thick] (0.8,0.5) -- (1.5,0.5) node[right] {\small Y=A$\oplus$B};
+\end{tikzpicture}
+\end{minipage} & $= \mathbf{\bar{A}}\text{B} + \text{A}\mathbf{\bar{B}}$ & \\ \hline
+
+ & & $\text{Y} = \overline{\text{A} \oplus \text{B}}$ & 
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{ইনপুট}} & \textbf{আউটপুট} \\ \hline
+A & B & \textbf{Y = A} $\mathbf{\oplus}$ \textbf{B} \\ \hline
+0 & 0 & 1 \\ \hline
+0 & 1 & 0 \\ \hline
+1 & 0 & 0 \\ \hline
+1 & 1 & 1 \\ \hline
+\end{tabular} \\ 
+\textbf{XNOR গেইট} & 
+\begin{minipage}{3.5cm}
+\centering
+\begin{tikzpicture}[scale=0.7, baseline={           ([yshift=-0.6ex]current bounding box.center)}]
+\draw[thick] (-0.12,0) to[out=25,in=155] (-0.12,1);
+\draw[thick] (0,0) to[out=25,in=155] (0,1) to[out=-25,in=115] (0.8,0.5) to[out=-115,in=25] (0,0);
+\draw[thick] (0.88,0.5) circle (0.08);
+\draw[thick] (-0.6,0.25) -- (-0.06,0.25) node[left,pos=0] {\small B};
+\draw[thick] (-0.6,0.75) -- (-0.06,0.75) node[left,pos=0] {\small A};
+\draw[thick] (0.96,0.5) -- (1.6,0.5) node[right] {\small Y=$\overline{\text{A}\oplus\text{B}}$};
+\end{tikzpicture}
+\end{minipage} & $= \text{AB} + \mathbf{\bar{A}}\mathbf{\bar{B}}$ & \\ \hline
+\end{tabular}
+
+\bigskip
+\bigskip
+
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] পরিবাহীর আপেক্ষিক রোধ $10^{-8}\text{ }\Omega\text{m}$।
+    \item[$\blacktriangleright$] অ্যান্টিমনি একটি অর্ধপরিবাহী পদার্থ।
+    \item[$\blacktriangleright$] $(225)_{10}$ এর অক্টাল মান $(341)_8$।
+    \item[$\blacktriangleright$] $\text{NOT}$, $\text{OR}$ ও $\text{AND}$ গেট মৌলিক লজিক গেট।
+    \item[$\blacktriangleright$] পরিবাহীতে যোজনী ব্যান্ড এবং পরিবহন ব্যান্ডের মধ্যে শক্তি ফাঁক শূন্য।
+    \item[$\blacktriangleright$] ত্রিয়োজী অপদ্রব্য বিশুদ্ধ অর্ধপরিবাহীতে সংযুক্ত করলে হোল সৃষ্টি হয়।
+    \item[$\blacktriangleright$] অর্ধপরিবাহীতে যোজনী ব্যান্ড ও পরিবহন ব্যান্ডের মধ্যে শক্তি ব্যবধান $< 2\text{ eV}$।
+    \item[$\blacktriangleright$] পরিবহন ব্যান্ড পরিবহন ইলেকট্রন দ্বারা গঠিত।
+    \item[$\blacktriangleright$] $\text{NOR}$ ও $\text{NAND}$ গেট দুটিকে সর্বজনীন গেট বলা হয়।
+    \item[$\blacktriangleright$] $\text{p-n}$ জাংশনে ব্যাপন প্রক্রিয়ায় হোল ও ইলেকট্রনের স্থানান্তর ঘটে।
+    \item[$\blacktriangleright$] রোধ একটি নিয়ন্ত্রণযোগ্য প্রক্রিয়া।
+    \item[$\blacktriangleright$] বিপরীতমুখী ঝোঁকের কারণে জাংশন ডায়োডে খালি অঞ্চলের সৃষ্টি হয়।
+    \item[$\blacktriangleright$] $1\text{ k byte} = 1024\text{ byte}$।
+    \item[$\blacktriangleright$] $\text{p-n}$ জাংশনে বিমুখী বায়াস প্রয়োগ করলে জাংশন রোধ বেড়ে যায়।
+    \item[$\blacktriangleright$] জেনার ক্রিয়ায় রোধ কমে যায়।
+    \item[$\blacktriangleright$] যোজন ব্যান্ডে সৃষ্ট গর্ত ধনাত্মক হয়।
+    \item[$\blacktriangleright$] নিষিদ্ধশক্তি অঞ্চলে ইলেকট্রন থাকতে পারে না।
+    \item[$\blacktriangleright$] জার্মেনিয়ামের সর্বশেষ কক্ষপথে চারটি ইলেকট্রন থাকে।
+    \item[$\blacktriangleright$] $\text{LED}$ এর পূর্ণরূপ $\text{Light Emitting Diode}$।
+    \item[$\blacktriangleright$] $\text{n}$-টাইপ সেমিকন্ডাক্টরে ইলেকট্রনের জন্য তড়িৎ পরিবাহিত হয়।
+    \item[$\blacktriangleright$] ইলেকট্রনিক্স সুইচ হিসেবে ট্রানজিস্টর ব্যবহৃত হয়।
+    \item[$\blacktriangleright$] কালেক্টর কারেন্ট এমিটার কারেন্ট থেকে সর্বদা কম।
+    \item[$\blacktriangleright$] $\text{FET}$ এর পূর্ণরূপ $\text{Field Effect Transister}$।
+\end{itemize}
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize প্রতীক ও এককসহ গুরুত্বপূর্ণ সূত্রাবলি | Important Formulas with Symbols \& Units}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & & $\text{R} = \text{জাংশনের রোধ}$ & ওহম ($\Omega$) \\ \cline{3-4} 
+\textbf{১.} & জাংশনের রোধ, $\text{R} = \frac{\Delta\text{V}}{\Delta\text{I}}$ & $\Delta\text{V} = \text{বিভব পার্থক্যের পরিবর্তন}$ & ভোল্ট ($\text{V}$) \\ \cline{3-4} 
+ & & $\Delta\text{I} = \text{তড়িৎ প্রবাহের পরিবর্তন}$ & অ্যাম্পিয়ার ($\text{A}$) \\ \hline
+\textbf{২.} & নিঃসারক প্রবাহ, $\text{I}_\text{E} = \text{I}_\text{B} + \text{I}_\text{C}$ & $\text{I}_\text{B} = \text{পীঠ প্রবাহ, } \text{I}_\text{C} = \text{সংগ্রাহক প্রবাহ}$ & অ্যাম্পিয়ার ($\text{A}$) \\ \hline
+\textbf{৩.} & প্রবাহ লাভ, $\beta = \frac{\Delta\text{I}_\text{C}}{\Delta\text{I}_\text{B}}$ & \begin{tabular}[c]{@{}l@{}}$\Delta\text{I}_\text{C} = \text{সংগ্রাহক প্রবাহের পরিবর্তন, } \Delta\text{I}_\text{B} = \text{পীঠ}$\\ \text{প্রবাহের পরিবর্তন}\end{tabular} & মিলি অ্যাম্পিয়ার ($\text{mA}$) \\ \hline
+\textbf{৪.} & বিবর্ধন গুণক, $\alpha = \frac{\text{I}_\text{C}}{\text{I}_\text{E}}$ & $\text{I}_\text{C} = \text{সংগ্রাহক প্রবাহ, } \text{I}_\text{E} = \text{নিঃসারক প্রবাহ}$ & অ্যাম্পিয়ার ($\text{A}$) \\ \hline
+\end{tabular}
+}
+
+\bigskip
+\bigskip
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize সার-সংক্ষেপ | Summary}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent \textbf{বিগ ব্যাং :} বিগ ব্যাং হচ্ছে মহাবিশ্বের পরিলক্ষিত ক্রমবর্ধমান সম্প্রসারণ। আদিতে ঘনবিন্যস্ত থাকায় পৃথিবী প্রচণ্ড উত্তপ্ত পদার্থের অগ্নিগোলক ছিল যা বিকিরণ বিগ ব্যাং-এর ফলে চতুর্দিকে প্রসারিত হয়, ঠাণ্ডা হয় এবং নির্দিষ্ট তাপমাত্রায় অনুক্রমিত অবস্থানান্তরিত হয়।
+
+\noindent \textbf{সৃষ্টিতত্ত্ব :} মহাবিশ্বের প্রকৃতি, উৎস ও বিবর্তন নিয়ে যে পর্যালোচনা তাকে সৃষ্টিতত্ত্ব বলে।
+
+\noindent \textbf{মহাবিশ্ব :} সূর্য, নক্ষত্র, গ্রহ, উপগ্রহ, উল্কা, নীহারিকা ইত্যাদি নিয়ে মহাবিশ্ব গঠিত। মহাবিশ্ব হলো সকল বস্তু যা আমরা কোনো না কোনোভাবে পর্যবেক্ষণ করতে পারি।
+
+\noindent \textbf{সৌরজগৎ :} সূর্য ও এর গ্রহ ও উপগ্রহ, ধূমকেতু, উল্কা, গ্রহাণু, গ্যাস, ধূলিকণা ইত্যাদি নিয়ে সৌরজগৎ গঠিত।
+
+\noindent \textbf{অ্যান্ড্রোমেডা :} অ্যান্ড্রোমেডা একটি গ্যালাক্সি যাকে খালি চোখে দেখা যায় না।
+
+\noindent \textbf{পালসার :} কোনো নক্ষত্র যখন সুপারনোভা হিসেবে বিস্ফোরিত হয় তখন এর কোর বা মূল বস্তুর চাপ এত বেশি হয় যে প্রোটন ও নিউট্রন একত্রিত হয়ে নিউট্রন গঠন করে। এদেরকে নিউট্রন নক্ষত্র বা পালসার বলে।
+
+\noindent \textbf{মৌলিক কণা :} যে সকল কণা পরম আদি বা প্রাথমিক এবং অবিভাজ্য তাদেরকে মৌলিক কণা বলে।
+
+\noindent \textbf{মিথস্ক্রিয়া :} মিথস্ক্রিয়া বলতে পারস্পরিক ক্রিয়া-প্রতিক্রিয়া অর্থাৎ আকর্ষণ বিকর্ষণকে বুঝায়। অন্যভাবে বলা যায়, দ্বিপাক্ষিক কিছু বিনিময় বা কোনো কিছু ক্ষরণ বা গ্রহণ বিনিময়ে রূপান্তরকে বুঝায়।
+
+\noindent \textbf{আকাশ গঙ্গা :} আমরা যে গ্যালাক্সিতে বা ছায়াপথে বাস করি তার নাম আকাশ গঙ্গা।
+
+\noindent \textbf{চন্দ্র শেখর সীমা :} মৃত্যু পূর্ব শুরুর মুহূর্তে কোনো তারকার ভর $1.4$ সৌর ভরের বেশি হলে তারকাটি কৃষ্ণবিবর বা নিউট্রন তারকায় পরিণত হতে পারে। ভরের এই সীমা চন্দ্রশেখর সীমা নামে পরিচিত।
+
+\noindent \textbf{সুপারনোভা :} নক্ষত্রের ভর যখন দুই থেকে পাঁচ সৌর ভরের মধ্যে থাকে, তখন সংকোচনের সময় এটি এর বহিঃস্থ আস্তরণ ছুঁড়ে দিয়ে অত্যন্ত উজ্জ্বল হয়ে যায়। একে বলা হয় “সুপারনোভা”।
+
+\noindent \textbf{কৃষ্ণবিবর :} সুপারনোভা বিস্ফোরণের পর নক্ষত্রের ভর যদি খুব বেশি হয় তখন এর অন্তর্বস্তু অনির্দিষ্টভাবে সংকুচিত হতে থাকে। এভাবে যে বস্তু তৈরি হয় তাকে কৃষ্ণ বিবর বলে।
+
+\noindent \textbf{কৃষ্ণগহ্বর :} মহাকাশে কোনো বস্তু বা এর আশেপাশে যে অঞ্চল থেকে কোনো তথ্য পাওয়া সম্ভব নয় এবং যেখান থেকে আলো বা কোনো বস্তু বেরিয়ে আসতে পারে না সেই অঞ্চলই হলো কৃষ্ণগহ্বর।
+
+\noindent \textbf{ডার্ক এনার্জি :} মহাবিশ্বের ত্বরান্বিত সম্প্রসারণ কোন এক অদৃশ্য শক্তির কারণেই হচ্ছে। এই অদৃশ্য শক্তিকেই ডার্ক এনার্জি বলে।
+
+\noindent \textbf{সোয়ার্জশাইল্ড ব্যাসার্ধ :} কৃষ্ণবিবরের ঘটনা দিগন্তের ব্যাসার্ধকে সোয়ার্জশাইল্ড ব্যাসার্ধ বলে।
+
+\noindent \textbf{নেবুলা :} মহাকাশে ছড়িয়ে থাকা গ্যাস ও ধুলোর সুবিশাল মেঘের সমারোহই নীহারিকা বা নেবুলা।
+
+\noindent \textbf{কোয়াসার :} কোয়াসার হলো আধানাক্ষত্রিক রেডিও উৎস যাদের গঠন নক্ষত্রের ন্যায় এবং ক্ষমতাশালী বেতার তরঙ্গ নিঃসরণ করে।
+
+\noindent \textbf{হ্যাড্রন কণা :} সে সকল মৌলিক কণা শক্তিশালী নিউক্লীয় বিদ্যুৎ চুম্বকীয় এবং দুর্বল নিউক্লীয় এই তিন প্রক্রিয়াতে অংশগ্রহণ করতে পারে তাদেরকে হ্যাড্রন কণা বলে।
+
+\noindent \textbf{কোয়ার্ক :} কোয়ার্ক হলো অতি পারমাণবিক কণা যা দ্বারা প্রোটন ও নিউট্রনসমূহ গঠিত।
+
+\noindent \textbf{রেডিও টেলিস্কোপ :} রেডিও টেলিস্কোপ এক ধরনের দিক নির্দেশী বেতার এন্টেনা যা বেতার জ্যোতির্বিদ্যায় ব্যবহৃত হয়।
+
+\noindent \textbf{জ্যোতির্বিজ্ঞান :} যে শাস্ত্র আকাশ ও মহাকাশের চন্দ্র, সূর্য, গ্রহ, নক্ষত্র, নীহারিকা ইত্যাদি বিষয়ে তথ্যাদির বিবরণসহ আলোচনা ও অনুসন্ধান করে তাকে জ্যোতির্বিজ্ঞান বলে।
+
+\noindent \textbf{অপটিক্যাল টেলিস্কোপ :} যে টেলিস্কোপের সাহায্যে দৃশ্যমান আলোর সহায়তায় দৃশ্যমান আলো নিঃসরণকারী বা প্রতিফলনকারী বস্তু পর্যবেক্ষণ করা হয় তাকে অপটিক্যাল টেলিস্কোপ বলে।
+
+\noindent \textbf{কৃত্রিম উপগ্রহ :} ভূপৃষ্ঠ হতে একটি নির্দিষ্ট উচ্চতায় নির্দিষ্ট বেগে মনুষ্য নির্মিত কোনো মহাকাশযান উপগ্রহ চাঁদের মতো পৃথিবীকে কেন্দ্র করে বৃত্তাকার পথে ঘুরতে থাকলে তাকে কৃত্রিম উপগ্রহ বলে।
+
+\noindent \textbf{মহাশূন্য প্রোব :} মহাশূন্য প্রোব হলো মহাশূন্যে অনুসন্ধানী যান যা অপটিক্যাল ও রেডিও টেলিস্কোপ ছাড়াও মহাবিশ্ব অনুসন্ধানের জন্য ব্যবহৃত সকল রকম কৌশল অবলম্বন করে।
+
+\bigskip
+\bigskip
+
+
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize একনজরে অধ্যায়ের গুরুত্বপূর্ণ বিষয়াবলি | Important Matters of the Chapter at a Glance}}}\par\vspace{2pt}
+
+\bigskip
+
+\begin{itemize}
+    \item[$\blacktriangleright$] মহাবিশ্ব সম্প্রসারণের সাথে সাথে বিকিরণের তাপমাত্রা কমে যায়।
+    \item[$\blacktriangleright$] মহাবিশ্বে তারকারাজি থেকে নিঃসৃত গ্যাস হাইড্রোজেন।
+    \item[$\blacktriangleright$] মহাকাশে তারকার বিস্ফোরণকে সুপারনোভা বলা হয়।
+    \item[$\blacktriangleright$] মহাবিশ্বের বর্তমান বয়স ১৫ বিলিয়ন বছর। পৃথিবীর বয়স প্রায় ৫০০ কোটি বছর।
+    \item[$\blacktriangleright$] একটি ছায়াপথের লাল বিচ্যুতি আমাদের কাছ থেকে তার দূরত্বের সমানুপাতিক।
+    \item[$\blacktriangleright$] প্রোটন ও নিউট্রন কোয়ার্ক দ্বারা গঠিত।
+    \item[$\blacktriangleright$] $\rho > \rho_\text{c}$ হলে ভবিষ্যতে একসময় মহাবিশ্ব চুপসে যাবে।
+    \item[$\blacktriangleright$] সূর্যের ঘনত্ব পানির তুলনায় 1.4 গুণ।
+    \item[$\blacktriangleright$] $\gamma$-রশ্মির ভেদনক্ষমতা সবচেয়ে বেশি।
+    \item[$\blacktriangleright$] মহাবিশ্বের বর্তমান তাপমাত্রা $\text{3000 K}$।
+    \item[$\blacktriangleright$] সূর্য শ্বেত বামন নক্ষত্র।
+    \item[$\blacktriangleright$] সূর্য একটা ২য় জেনারেশন নক্ষত্র।
+    \item[$\blacktriangleright$] মহাবিশ্ব একদিন তাপীয় সাম্যাবস্থায় পৌঁছাবে।
+    \item[$\blacktriangleright$] মহাবিশ্বের, গড় ঘনত্ব সংকট ঘনত্বের সমান হলে এর আকৃতি সমতল হবে।
+    \item[$\blacktriangleright$] সূর্যের পর পৃথিবীর নিকটতম নক্ষত্র আলফা সেন্টুরি। প্রায় ৪.২ আলোকবর্ষ দূরে।
+    \item[$\blacktriangleright$] কৃত্রিম উপগ্রহ ব্যবহৃত হয় যোগাযোগের ক্ষেত্রে, ভূ-জরিপের কাজে, আবহাওয়ার পূর্বাভাস জানতে।
+    \item[$\blacktriangleright$] মহাবিশ্বে ডার্ক এনার্জি-ম্যাটার সবচেয়ে বেশি।
+    \item[$\blacktriangleright$] হাবলের টেলিস্কোপ একটি অপটিক্যাল টেলিস্কোপ।
+    \item[$\blacktriangleright$] সুপারনোভা'র পরবর্তী ধাপ হলো নিউট্রন স্টার।
+    \item[$\blacktriangleright$] বোল্টজম্যান ধ্রুবকের মান $1.38 \times 10^{-23}\text{ JK}^{-1}$।
+    \item[$\blacktriangleright$] মহাবিশ্ব পুনরায় সংকুচিত হয় স্পন্দনশীল তত্ত্ব অনুসারে।
+    \item[$\blacktriangleright$] উষ্ণ তারকার অভ্যন্তরীণ তাপমাত্রা দশ হাজার ডিগ্রি সেলসিয়াস।
+\end{itemize}
+
+\bigskip
+
+\vspace{6pt}\noindent\colorbox{subsecbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{white}\B{\bfseries\footnotesize প্রতীক ও এককসহ গুরুত্বপূর্ণ সূত্রাবলি | Important Formulas with Symbols \& Units}}}\par\vspace{2pt}
+
+\bigskip
+
+\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{নং} & \multicolumn{1}{c|}{\textbf{সূত্রাবলি}} & \multicolumn{1}{c|}{\textbf{প্রতীক পরিচিতি}} & \multicolumn{1}{c|}{\textbf{একক}} \\ \hline
+ & & $\text{v} = \text{অপসারণ বেগ}$ & মিটার প্রতি সেকেন্ড ($\text{m s}^{-1}$) \\ \cline{3-4} 
+\textbf{১.} & হাবল বিধি অনুসারে অপসারণ বেগ, $\text{v} = \text{HR}$ & $\text{H} = \text{হাবল ধ্রুবক}$ & কিলোমিটার প্রতি সেকেন্ড ($\text{km s}^{-1}$) \\ \cline{3-4} 
+ & & $\text{R} = \text{দূরত্ব}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{২.} & ক্রান্তিক ঘনত্ব, $\rho_\text{c} = \frac{3\text{H}^2}{8\pi\text{G}}$ & $\text{H} = \text{হাবল ধ্রুবক}$ & কিলোমিটার প্রতি সেকেন্ড ($\text{km s}^{-1}$) \\ \cline{3-4} 
+ & & $\text{G} = \text{মহাকর্ষীয় ধ্রুবক}$ & $\text{Nm}^2\text{kg}^{-2}$ \\ \hline
+ & ঘনত্ব, $\rho = \frac{\text{M}}{\text{V}} = \frac{\text{M}}{\frac{4}{3}\pi\text{R}^3}$ & $\text{M} = \text{গ্রহ বা নক্ষত্রের ভর}$ & কিলোগ্রাম ($\text{kg}$) \\ \cline{3-4} 
+\textbf{৩.} & & $\text{V} = \text{আয়তন}$ & ঘনমিটার ($\text{m}^3$) \\ \hline
+\textbf{৪.} & শোয়ার্জশিল্ড ব্যাসার্ধ, $\text{R}_\text{s} = \frac{2\text{GM}}{\text{c}^2}$ & $\text{M} = \text{নক্ষত্রের ভর}$ & কিলোগ্রাম ($\text{kg}$) \\ \cline{3-4} 
+ & & $\text{c} = \text{আলোর বেগ}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{৫.} & কৃত্রিম উপগ্রহের বেগ, $\text{v} = \sqrt{\frac{\text{GM}}{\text{r}}} = \sqrt{\frac{\text{GM}}{\text{R}+\text{h}}}$ & $\text{M} = \text{পৃথিবীর ভর}$ & কিলোগ্রাম ($\text{kg}$) \\ \cline{3-4} 
+ & & $\text{R} = \text{পৃথিবীর ব্যাসার্ধ}$ & মিটার ($\text{m}$) \\ \hline
+\textbf{৬.} & কৃত্রিম উপগ্রহের আবর্তনকাল, & $\text{h} = \text{পৃথিবীর পৃষ্ঠ হতে উপগ্রহের উচ্চতা}$ & মিটার ($\text{m}$) \\ \cline{3-4} 
+ & \centerline{$\text{T} = 2\pi(\text{R}+\text{h})\sqrt{\frac{\text{R}+\text{h}}{\text{GM}}}$} & $\text{M} = \text{পৃথিবীর ভর}$ & কিলোগ্রাম ($\text{kg}$) \\ \hline
+\end{tabular}
+}
+
+\bigskip
+\bigskip
+
+\end{document}
+
+"""
+
+import subprocess, os, shutil, urllib.request, hashlib, sys
 
 def run(cmd):
-    result = subprocess.run(cmd, shell=True, executable="/bin/bash")
-    return result.returncode
+    return subprocess.run(cmd, shell=True, executable="/bin/bash").returncode
 
 os.makedirs("fonts", exist_ok=True)
 os.makedirs("logs", exist_ok=True)
@@ -4333,9 +5882,11 @@ os.makedirs("logs", exist_ok=True)
 font_sources = {
     "NotoSerifBengali-Regular.ttf": [
         "https://github.com/google/fonts/raw/main/ofl/notoserifbengali/NotoSerifBengali%5Bwdth%2Cwght%5D.ttf",
+        "https://github.com/googlefonts/noto-fonts/raw/main/unhinted/slim-variable-ttf/NotoSerifBengali%5Bwdth%2Cwght%5D.ttf",
     ],
     "NotoSerifBengali-Bold.ttf": [
         "https://github.com/google/fonts/raw/main/ofl/notoserifbengali/NotoSerifBengali%5Bwdth%2Cwght%5D.ttf",
+        "https://github.com/googlefonts/noto-fonts/raw/main/unhinted/slim-variable-ttf/NotoSerifBengali%5Bwdth%2Cwght%5D.ttf",
     ],
 }
 
@@ -4344,7 +5895,7 @@ def good_font(path):
         return False
     with open(path, "rb") as fh:
         head = fh.read(4)
-    return head in (b"\x00\x01\x00\x00", b"OTTO", b"ttcf")
+    return head in (b"\x00\x01\x00\x00", b"OTTO", b"ttcf", b"true")
 
 for name, urls in font_sources.items():
     path = os.path.join("fonts", name)
@@ -4359,24 +5910,28 @@ for name, urls in font_sources.items():
             urllib.request.urlretrieve(url, path)
             if good_font(path):
                 break
-        except Exception as e:
-            last_error = e
+        except Exception as exc:
+            last_error = exc
     if not good_font(path):
         raise RuntimeError("font download failed: " + name + " " + str(last_error))
 
-with open("logs/font_hashes.log", "w", encoding="utf-8") as f:
+with open("logs/font_hashes.log", "w", encoding="utf-8") as fh:
     for name in sorted(font_sources):
         path = os.path.join("fonts", name)
         digest = hashlib.sha256(open(path, "rb").read()).hexdigest()
-        f.write(f"{name}\t{os.path.getsize(path)}\t{digest}\n")
+        fh.write(name + "\t" + str(os.path.getsize(path)) + "\t" + digest + "\n")
 
-tex_content = tex_content.replace("\u200d", "")
+tex_content = TEX.replace("\u200d", "")
 
-with open("physics_both_fixed.tex", "w", encoding="utf-8") as f:
-    f.write(tex_content)
+with open("physics_fixed.tex", "w", encoding="utf-8") as fh:
+    fh.write(tex_content)
 
 if not shutil.which("xelatex") and shutil.which("apt-get"):
-    run("apt-get update -qq --allow-unauthenticated >>logs/apt.log 2>&1; apt-get install -y --no-install-recommends texlive-xetex texlive-fonts-recommended texlive-latex-extra texlive-pictures texlive-lang-other lmodern fonts-freefont-otf fonts-dejavu >>logs/apt.log 2>&1")
+    run("apt-get update -qq --allow-unauthenticated >>logs/apt.log 2>&1; "
+        "apt-get install -y --no-install-recommends texlive-xetex texlive-fonts-recommended "
+        "texlive-latex-extra texlive-pictures texlive-lang-other texlive-latex-recommended "
+        "lmodern fonts-freefont-otf fonts-dejavu >>logs/apt.log 2>&1")
+
 run("fc-cache -f ./fonts >>logs/fontcache.log 2>&1")
 
 if not shutil.which("xelatex"):
@@ -4384,9 +5939,10 @@ if not shutil.which("xelatex"):
 
 passes = []
 for i in range(1, 3):
-    code = run(f"xelatex -halt-on-error -file-line-error -interaction=nonstopmode physics_both_fixed.tex >logs/xelatex_pass{i}.log 2>&1")
+    code = run("xelatex -halt-on-error -file-line-error -interaction=nonstopmode "
+               "physics_fixed.tex >logs/xelatex_pass" + str(i) + ".log 2>&1")
     passes.append(code)
     if code != 0:
         raise RuntimeError("xelatex failed; see logs/xelatex_pass" + str(i) + ".log")
 
-print("PDF ready:", os.path.exists("physics_both_fixed.pdf"), "passes:", passes)
+print("PDF ready:", os.path.exists("physics_fixed.pdf"), "passes:", passes)
